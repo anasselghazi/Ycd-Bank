@@ -1,0 +1,15 @@
+        <div class="hero my-3 h-[70vh]">
+            <div class="h-content flex  flex-col-reverse items-center  justify-center content-center sm:flex-row items-center justify-around ">
+                <div class="left relative left-12 flex flex-col gap-5 ml-20 ">
+                    <h1 class="text-center text-[#0A2A4E] font-black text-[50px] leading-[50px] w-full sm:text-start">Votre avenir <br>
+                        commence ici. La <br>
+                        banque qui vous <br>
+                        accompagne.</h1>
+
+                        <p class="font-[18px] text-[#343A40]" >Simplicité, sécurité et innovation pour gérer votre argent au  <br> quotidien.</p>
+                          <button class="text-[15px] bg-[#0A2A4E]  h-[40px] w-[220px] rounded-[23px] text-white font-bold mt-4 ">Ouvrir un compte en ligne</button>
+                </div>
+                <div class="right mr-2 self-center">
+                    <img src="media/home/heroo.png" alt="hero"  class="h-[500px]">
+                </div>
+            </div>
