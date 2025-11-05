@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - YCD BANK</title>
+    <link rel="stylesheet" href="../../styles/style.css">
+</head>
+
+<body>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <header class="h-[10vh] w-full flex items-center shadow-[0_4px_10px_rgba(0,0,100,0.04)]">
+
+        <div class="flex justify-between h-full w-full ">
+            <div class="left flex gap-2 items-center relative left-4">
+                <div class="circle h-[44px] w-[44px] bg-[#E2E8F0] rounded-[100%]"></div>
+                <div class="relative top-1">
+                    <h3 class="text-[#64748B] text-[12Px]">YCD BANK</h3>
+                    <h3 class="text-[#334155] relative bottom-2 text-[18px]">Banking App</h3>
+                </div>
+
+            </div>
+            <div class="right flex items-center relative right-4">
+                <div class="flex gap-2 items-center">
+                    <img src="../../media/dashboard/Icon.svg" alt=""
+                        class="border-2 border-[#E5EAF0] rounded-[100%] shadow-2 h-[40px] w-[40px]">
+                    <div class="circle h-[44px] w-[44px] bg-[#CBD5E1] rounded-[100%]"></div>
+                </div>
+
+
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- top  -->
+        <div class="hero w-full h-[45vh]  ">
+            <div class="content flex flex-col ">
+                <h1 class="text-[#0F172A] font-black text-[30px] ml-4 mt-4">BONJOUR, ILYAS</h1>
+                <div class="flex items-center justify-center flex-col gap-5">
+                    <div class="card bg-[#0B2A4A] h-[15vh] mt-4 rounded-[16px] w-[95%]">
+                        <div class="flex flex-col w-full h-full justify-center">
+                            <div class="flex justify-between ml-5 mr-5 items-center">
+                                <h3 class="text-white/80">Solde du compte courant</h3>
+                                <button id="eye_hidden">
+                                    <img src="../../media/dashboard/Button.svg" alt="">
+                                </button>
+                            </div>
+                            <div class="flex justify-around items-center">
+                                <h3 class="text-white font-black text-[36px] tracking-wide">$1,234.56</h3>
+                                <button id="eye_hidden"
+                                    class="flex gap-2 bg-[#25476B] px-[10px] py-[10px] rounded-[10px]">
+                                    <img src="../../media/dashboard/currency.svg" alt="">
+                                    <h1 class="text-[#C5CFDA] text-[12px]">convertisseur</h1>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card flex flex-col h-[15vh] border-2 w-[95%] rounded-[16px] w-[95%]">
+                        <div class="content flex flex-col justify-center ml-5 mt-5  gap-2">
+                            <h1 class="text-[#0F172A] font-semibold text-[17px]">Mon RIB</h1>
+                            <h3 class="text-[#475569] tracking-[0.7px] text-[18px]">54XX XXXX XXXX XXXX</h3>
+                            <div class="flex gap-4">
+                                <img src="../../media/dashboard/copy.svg" alt="">
+                                <h2 class="text-[#0B2A4A] font-semibold">Copier</h2>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
