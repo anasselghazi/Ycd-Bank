@@ -5,42 +5,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YCD BANK - Homepage</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="styles/style.css">
 
 </head>
 
 <body>
-    <header class="h-[10vh] flex  justify-around items-center ">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <header class="h-[10vh] flex w-full items-center sm:flex-row justify-around">
         <div class="left flex gap-4 text-[18px]">
             <img src="media/home/logo.svg" alt="">
             <h1 class="text-[#0A2A4E] font-bold">YCD Bank</h1>
         </div>
-        <div class="right flex gap-2">
+        <div class="right flex gap-2 flex ">
             <button
-                class="text-[15px] bg-[#0A2A4E]/10  h-[40px] w-[160px] rounded-[23px] text-[#0A2A4E] font-bold">Espace
+                class="hidden text-[15px] bg-[#0A2A4E]/10  h-[40px] w-[160px] rounded-[23px] text-[#0A2A4E] font-bold sm:block">Espace
                 Client</button>
-            <button class="text-[15px] bg-[#0A2A4E]  h-[40px] w-[160px] rounded-[23px] text-white font-bold">Ouvrir un
+            <button class=" hidden text-[15px] bg-[#0A2A4E]  h-[40px] w-[160px] rounded-[23px] text-white font-bold sm:block">Ouvrir un
                 compte</button>
 
         </div>
     </header>
 
     <main>
-        <div class="hero mt-4 h-[70vh]">
-            <div class="h-content flex justify-around items-center">
-                <div class="left">
-                    <h1 class="text-[#0A2A4E] font-black text-[50px]">Votre avenir <br>
+        <div class="hero my-3 h-auto sm:h-[70vh] overflow-hidden">
+            <div class="h-content flex flex-col-reverse items-center justify-center content-center sm:flex-row sm:items-center sm:justify-around ">
+                <div class="left flex flex-col gap-5 items-center text-center sm:items-start sm:text-left sm:relative sm:left-12 sm:ml-20 ">
+                    <h1 class="text-[#0A2A4E] font-black text-[34px] leading-[38px] w-full sm:text-[50px] sm:leading-[50px]">Votre avenir <br>
                         commence ici. La <br>
                         banque qui vous <br>
                         accompagne.</h1>
+
+                        <p class="font-[18px] text-[#343A40]" >Simplicité, sécurité et innovation pour gérer votre argent au  <br> quotidien.</p>
+                          <button class="text-[15px] bg-[#0A2A4E]  h-[40px] w-[220px] rounded-[23px] text-white font-bold mt-4 mx-auto sm:mx-0 ">Ouvrir un compte en ligne</button>
                 </div>
-                <div class="right">
-                    <img src="media/home/hero.png" alt="hero">
+                <div class="right mr-2 self-center">
+                    <img src="media/home/heroo.png" alt="hero"  class="h-[260px] sm:h-[500px] mx-auto">
                 </div>
             </div>
         </div>
     </main>
+
+    <footer class="bg-[#0A2A4E] text-white">
+        <div class="max-w-6xl mx-auto px-6 py-12">
+            <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-8">
+                <div class="col-span-2 sm:col-span-1">
+                    <div class="flex items-center gap-3">
+                        <img src="media/home/logo-white.svg" alt="YCD Bank" class="h-5 w-5">
+                        <span class="font-semibold">YCD Bank</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="uppercase text-xs tracking-wider text-white/70 mb-3">Liens utiles</div>
+                    <ul class="space-y-2 text-white/90 text-sm">
+                        <li><a href="#" class="hover:underline">Tarifs</a></li>
+                        <li><a href="#" class="hover:underline">Sécurité</a></li>
+                        <li><a href="#" class="hover:underline">Recrutement</a></li>
+                        <li><a href="#" class="hover:underline">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="uppercase text-xs tracking-wider text-white/70 mb-3">Légal</div>
+                    <ul class="space-y-2 text-white/90 text-sm">
+                        <li><a href="#" class="hover:underline">Mentions légales</a></li>
+                        <li><a href="#" class="hover:underline">Données personnelles</a></li>
+                        <li><a href="#" class="hover:underline">Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <div class="uppercase text-xs tracking-wider text-white/70 mb-3">Contact</div>
+                    <div class="text-white/90 text-sm space-y-1">
+                        <p>123 Rue de la Banque</p>
+                        <p>75001 Paris, France</p>
+                        <p><a href="mailto:contact@ycbank.com" class="hover:underline">contact@ycbank.com</a></p>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="uppercase text-xs tracking-wider text-white/70 mb-3">Suivez-nous</div>
+                    <div class="flex items-center gap-4">
+                        <a href="#" aria-label="LinkedIn" class="group">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-white/90 group-hover:text-white">
+                                <path d="M19 0H5C2.239 0 0 2.239 0 5v14c0 2.761 2.239 5 5 5h14c2.761 0 5-2.239 5-5V5c0-2.761-2.239-5-5-5zM7.119 18.667H4.444V9.333h2.675v9.334zM5.781 8.111a1.552 1.552 0 1 1 0-3.104 1.552 1.552 0 0 1 0 3.104zM20 18.667h-2.667v-4.889c0-1.165-.021-2.661-1.622-2.661-1.622 0-1.871 1.268-1.871 2.579v4.971H11.2V9.333h2.56v1.279h.036c.357-.676 1.227-1.389 2.527-1.389 2.705 0 3.2 1.781 3.2 4.095v5.349z"/>
+                            </svg>
+                        </a>
+                        <a href="#" aria-label="Twitter" class="group">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-5 w-5 text-white/90 group-hover:text-white">
+                                <path d="M23.954 4.569c-.885.392-1.83.657-2.825.775a4.932 4.932 0 0 0 2.163-2.724 9.864 9.864 0 0 1-3.127 1.195 4.916 4.916 0 0 0-8.384 4.482A13.944 13.944 0 0 1 1.671 3.149a4.916 4.916 0 0 0 1.523 6.557 4.897 4.897 0 0 1-2.229-.616v.062a4.918 4.918 0 0 0 3.946 4.818 4.902 4.902 0 0 1-2.224.085 4.923 4.923 0 0 0 4.596 3.417A9.867 9.867 0 0 1 0 19.54a13.94 13.94 0 0 0 7.548 2.212c9.056 0 14.009-7.506 14.009-14.01 0-.213-.004-.425-.014-.636a10.012 10.012 0 0 0 2.411-2.537z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 border-t border-white/20"></div>
+            <div class="text-center text-white/70 text-xs mt-4">© 2024 YCD Bank. Tous droits réservés.</div>
+        </div>
+    </footer>
 </body>
 
 </html>
