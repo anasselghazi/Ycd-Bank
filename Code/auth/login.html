@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecter</title>
+    <link rel="stylesheet" href="../styles/style.css">
+</head>
+
+<body>
+
+</html>
+<script src="https://cdn.tailwindcss.com"></script>
+<div class="h-screen w-screen bg-[radial-gradient(circle,var(--tw-gradient-stops))] from-blue-800 to-black/90">
+    <div id="container" class="flex flex-row justify-between h-full w-full">
+        <div id="connecter-right" class="flex flex-col justify-center items-center w-1/2">
+            <div id="title_c" class=" text-3xl font-black text-white">
+                <p>Accéder à mon espace</p>
+            </div>
+            <div class="h-[400px] w-[300px] border-2 mt-3">
+                <form id="form-connecter">
+                    <div>
+                        <label for="email" >Adresse E-mail :</label><br>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <br>
+                    <div>
+                        <label for="password">Mot de Passe :</label><br>
+                        <input type="password" id="password" name="password" required>
+                    </div>
+                    <br>
+                    <button type="submit">Se Connecter</button>
+
+                </form>
+            </div>
+        <div id="retour-0" class="">
+          <a href="index.html">Retour à la page d'acceuil</a>
+        </div>
+        <div id="cree" class="">
+          <a href="Register/crée1.html" class="">Pas encore inscrit ?<span class="">Créer un compte</span></a>
+        </div>
+        </div>
+      
+        <div id="connecter-left" class=" w-1/2 h-full sm: invisible sm:visible ">
+            <img src="../media/connecter-cree/Left_pic.png" class="h-full w-full">
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
