@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -12,70 +13,79 @@
 
 <body class="font-[Inter] bg-[#F8FAFC] text-[#0F172A] h-full">
 
-    <div class="sidebar h-[120%] top-0 w-[17%] shadow-sm shadow-black
-     border  border-[#1A1919] fixed hidden sm:block lg:block ">
-        <div class="content w-full">
-            <!-- Top -->
-            <div class="top mt-5 h-[10vh] flex justify-center mr-10">
-                <div class="flex items-center gap-2">
-                    <div class="h-[44px] w-[44px] bg-[#E2E8F0] rounded-full"></div>
-                    <div>
-                        <h3 class="text-[18px] text-[#000000] font-bold ">YCD BANK</h3>
-                        <h2 class="text-[13px] text-[#898E99] font-medium
- -mt-1">
-                            BANKING APP
-                        </h2>
-                    </div>
+    <div
+        class="sidebar fixed top-0 left-0 h-full w-[240px] bg-white border-r border-[#E2E8F0] shadow-sm flex flex-col justify-between font-[Inter] hidden sm:flex">
+        <!-- Top Section -->
+        <div>
+            <!-- Logo -->
+            <div class="flex items-center gap-3 mt-6 px-6">
+                <div class="h-[45px] w-[45px] bg-[#E2E8F0] rounded-full"></div>
+                <div>
+                    <h3 class="text-[17px] text-[#0F172A] font-extrabold">YCD BANK</h3>
+                    <p class="text-[12px] text-[#94A3B8] font-medium -mt-1">BANKING APP</p>
                 </div>
             </div>
 
-            <!-- navigation  -->
+            <!-- Nav Links -->
+            <div class="mt-10 flex flex-col gap-4">
+                <a href="#" class="flex items-center gap-3 px-6 py-3 bg-[#E7F2FD] rounded-lg">
+                    <img src="../../media/dashboard/home.svg" alt="" class="h-[22px]" />
+                    <span class="text-[#137FEC] text-[14px] font-semibold uppercase">ACCEUIL</span>
+                </a>
 
-            <div class="nav h-[50vh] flex w-full mt-[45px] justify-center">
-                <div class="nav-card w-full flex  flex-col items-center gap-4">
-                    <div class="h-[7vh] w-[85%] flex items-center  bg-[#E7F2FD] rounded-[14px]">
-                        <div class="flex gap-3 items-center ml-5">
-                            <img src="../../media/dashboard/home.svg" alt="" class="h-[25px]">
-                            <h1 class="text-[#137FEC] font-semibold text-[15px]">ACCEUIL</h1>
-                        </div>
-                    </div>
-                          <div class="h-[7vh] w-[85%] flex items-center  rounded-[14px]">
-                        <div class="flex gap-3 items-center ml-5">
-                            <img src="../../media/dashboard/virement.svg" alt="" class="h-[25px]">
-                            <h1 class="text-[#454E5D] font-semibold text-[15px]">VIREMENT</h1>
-                        </div>
-                    </div>
-                          <div class="h-[7vh] w-[85%] flex items-center  rounded-[14px]">
-                        <div class="flex gap-3 items-center ml-5">
-                            <img src="../../media/dashboard/card.svg" alt="" class="h-[25px]">
-                            <h1 class="text-[#454E5D] font-semibold text-[15px]">CARTES</h1>
-                        </div>
-                    </div>
-                       <div class="h-[7vh] w-[85%] flex items-center  rounded-[14px]">
-                        <div class="flex gap-3 items-center ml-5">
-                            <img src="../../media/dashboard/wallet.svg" alt="" class="h-[25px]">
-                            <h1 class="text-[#454E5D] font-semibold text-[15px]">TRANSACTION</h1>
-                        </div>
-                    </div>
-                       <div class="h-[7vh] w-[85%] flex items-center  rounded-[14px]">
-                        <div class="flex gap-3 items-center ml-5">
-                            <img src="../../media/dashboard/ben.svg" alt="" class="h-[25px]">
-                            <h1 class="text-[#454E5D] font-semibold text-[15px] uppercase">Bénéficiaires</h1>
-                        </div>
-                    </div>
-                    
+                <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg transition">
+                    <img src="../../media/dashboard/virement.svg" alt="" class="h-[22px]" />
+                    <span class="text-[#1E293B] text-[14px] font-medium uppercase">VIREMENT</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg transition">
+                    <img src="../../media/dashboard/card.svg" alt="" class="h-[22px]" />
+                    <span class="text-[#1E293B] text-[14px] font-medium uppercase">CARTES</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg transition">
+                    <img src="../../media/dashboard/wallet.svg" alt="" class="h-[22px]" />
+                    <span class="text-[#1E293B] text-[14px] font-medium uppercase">TRANSACTION</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg transition">
+                    <img src="../../media/dashboard/ben.svg" alt="" class="h-[22px]" />
+                    <span class="text-[#1E293B] text-[14px] font-medium uppercase">BÉNÉFICIAIRES</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Bottom Section -->
+        <div class="pb-[50%]">
+            <div class="w-[80%] h-[1px] bg-[#E2E8F0] mx-auto mb-5"></div>
+            <div class="flex items-center w-full gap-3 px-6">
+                <div class="h-[40px] w-[40px] bg-[#E2E8F0] rounded-full"></div>
+                <div>
+                    <h3 class="text-[14px] text-[#0F172A] font-semibold leading-tight">DOUGHMI ILYAS</h3>
+                    <p class="text-[12px] text-[#94A3B8] font-medium">doughmi000@gmail.com</p>
                 </div>
             </div>
 
-            <!-- line -->
+            <div class="mt-5 flex flex-col gap-1">
+                <a href="#" class="flex items-center gap-3 px-6 py-2 hover:bg-[#F8FAFC] rounded-lg transition">
+                    <img src="../../media/dashboard/home.svg" alt="" class="h-[20px]" />
+                    <span class="text-[#1E293B] text-[14px] font-medium uppercase">PROFILE</span>
+                </a>
+
+                <a href="#" class="flex items-center gap-3 px-6 py-2 hover:bg-[#F8FAFC] rounded-lg transition">
+                    <img src="../../media/dashboard/virement.svg" alt="" class="h-[20px]" />
+                    <span class="text-[#1E293B] text-[14px] font-medium uppercase">DISCONNECT</span>
+                </a>
+            </div>
         </div>
     </div>
+
     <div class="ml-[350px]">
         <header class="flex items-center justify-between px-4 h-[9vh] shadow-md bg-white md:hidden">
             <div class="flex items-center gap-2">
-                <div class="h-[44px] w-[44px] bg-[#E2E8F0] rounded-full"></div>
+                <div class="h-[57px] w-[57px] bg-[#E2E8F0] rounded-full"></div>
                 <div>
-                    <h3 class="text-[11px] text-[#64748B] font-semibold ">YCD BANK</h3>
+                    <h3 class="text-[20px] text-[#64748B] font-semibold ">Doughmi Ilyas </h3>
                     <h2 class="text-[15px] text-[#334155] font-semibold -mt-1">
                         Banking App
                     </h2>
@@ -93,7 +103,7 @@
         <main class="pb-24">
             <!-- Greeting -->
             <section class="mt-4 px-4">
-                <h1 class="text-[24px] font-black md:text-[35px]">BONJOUR, ILYAS</h1>
+                <h1 class="text-[48px] font-black md:text-[35px]">BONJOUR, ILYAS</h1>
             </section>
 
             <!-- Balance Card -->
@@ -229,6 +239,7 @@
             Bénif.
         </a>
     </nav>
+
 </body>
 
 </html>
