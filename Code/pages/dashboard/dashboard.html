@@ -1,115 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - YCD BANK</title>
-    <link rel="stylesheet" href="../../styles/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard – YCD BANK</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
-<body>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <header class="h-[10vh] w-full flex items-center shadow-[0_4px_10px_rgba(0,0,100,0.04)]">
-
-        <div class="flex justify-between h-full w-full border-2">
-            <div class="left flex gap-2 items-center relative left-4">
-                <div class="circle h-[44px] w-[44px] bg-[#E2E8F0] rounded-[100%]"></div>
-                <div class="relative top-1">
-                    <h3 class="text-[#64748B] text-[12Px]">YCD BANK</h3>
-                    <h3 class="text-[#334155] relative bottom-2 text-[18px]">Banking App</h3>
-                </div>
-
+<body class="font-[Inter] bg-[#F8FAFC] text-[#0F172A]">
+    <!-- Header -->
+    <header class="flex items-center justify-between px-4 h-[9vh] shadow-md bg-white">
+        <div class="flex items-center gap-2">
+            <div class="h-[44px] w-[44px] bg-[#E2E8F0] rounded-full"></div>
+            <div>
+                <h3 class="text-[11px] text-[#64748B] font-semibold">YCD BANK</h3>
+                <h2 class="text-[15px] text-[#334155] font-semibold -mt-1">
+                    Banking App
+                </h2>
             </div>
-            <div class="right flex items-center relative right-4">
-                <div class="flex gap-2 items-center">
-                    <img src="../../media/dashboard/Icon.svg" alt=""
-                        class="border-2 border-[#E5EAF0] rounded-[100%] shadow-2 h-[40px] w-[40px]">
-                    <div class="circle h-[44px] w-[44px] bg-[#CBD5E1] rounded-[100%]"></div>
-                </div>
+        </div>
 
-
-            </div>
+        <div class="flex items-center gap-3">
+            <img src="../../media/dashboard/Icon.svg" class="h-[36px] w-[36px] rounded-full border border-[#E5EAF0]"
+                alt="" />
+            <div class="h-[40px] w-[40px] bg-[#CBD5E1] rounded-full"></div>
         </div>
     </header>
 
-    <main>
-        <!-- top  -->
-        <div class="hero w-full h-[41vh]  ">
-            <div class="content flex flex-col ">
-                <h1 class="text-[#0F172A] font-black text-[30px] ml-4 mt-4">BONJOUR, ILYAS</h1>
-                <div class="flex items-center justify-center flex-col gap-5">
-                    <div class="card bg-[#0B2A4A] h-[15vh] mt-1 rounded-[16px] w-[95%]">
-                        <div class="flex flex-col w-full h-full justify-center">
-                            <div class="flex justify-between ml-5 mr-5 items-center">
-                                <h3 class="text-white/80">Solde du compte courant</h3>
-                                <button id="eye_hidden">
-                                    <img src="../../media/dashboard/Button.svg" alt="">
-                                </button>
-                            </div>
-                            <div class="flex justify-around items-center">
-                                <h3 class="text-white font-black text-[36px] tracking-wide">$1,234.56</h3>
-                                <button id="eye_hidden"
-                                    class="flex gap-2 bg-[#25476B] px-[10px] py-[10px] rounded-[10px]">
-                                    <img src="../../media/dashboard/currency.svg" alt="">
-                                    <h1 class="text-[#C5CFDA] text-[12px]">convertisseur</h1>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card flex flex-col h-[15vh] border-2 w-[95%] rounded-[16px] w-[95%]">
-                        <div class="content flex flex-col justify-center ml-5 mt-5  gap-2">
-                            <h1 class="text-[#0F172A] font-semibold text-[17px]">Mon RIB</h1>
-                            <h3 class="text-[#475569] tracking-[0.7px] text-[18px]">54XX XXXX XXXX XXXX</h3>
-                            <div class="flex gap-4">
-                                <img src="../../media/dashboard/copy.svg" alt="">
-                                <h2 class="text-[#0B2A4A] font-semibold">Copier</h2>
-                            </div>
-                        </div>
+    <!-- Main -->
+    <main class="pb-24">
+        <!-- Greeting -->
+        <section class="mt-4 px-4">
+            <h1 class="text-[24px] font-black">BONJOUR, ILYAS</h1>
+        </section>
 
-                    </div>
+        <!-- Balance Card -->
+        <section class="flex flex-col items-center mt-4">
+            <div class="bg-[#0B2A4A] text-white rounded-2xl w-[92%] py-4 px-5 shadow-sm">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-[13px] text-white/80">
+                        Solde du compte courant
+                    </h3>
+                    <button>
+                        <img src="../../media/dashboard/Button.svg" alt="eye" />
+                    </button>
+                </div>
+
+                <div class="flex justify-between items-center mt-2">
+                    <h2 class="text-[30px] font-black tracking-wide">$1,234.56</h2>
+                    <button class="flex items-center gap-2 bg-[#25476B] px-3 py-2 rounded-lg">
+                        <img src="../../media/dashboard/currency.svg" alt="convert" class="h-[16px]" />
+                        <span class="text-[12px] text-[#C5CFDA]">Convertisseur</span>
+                    </button>
                 </div>
             </div>
-        </div>
-        <!-- Accés rapide  -->
-        <div class="acces w-full flex h-[16vh] flex-col ">
-            <h1 class="text-[#0F172A] text-[24px] font-extrabold ml-5">Accés Rapide</h1>
-            <div class="access w-full h-[19vh] ml-4 flex overflow-x-auto gap-2 scroll-smooth">
 
-                <div class="card h-[10vh] w-[25vh] rounded-[12px] border-2 flex items-center flex-shrink-0">
-                    <div class="content flex items-center gap-5 ml-4">
-                        <img src="../../media/dashboard/eff-virement.svg" alt="" class="h-[30px]">
-                        <h1 class="text-[#0F172A] font-bold ml-4 text-[16px] text-center">Effectuer un <br> Virement
-                        </h1>
-                    </div>
-                </div>
-
-                <div class="card h-[10vh] w-[25vh] rounded-[12px] border-2 flex items-center flex-shrink-0">
-                    <div class="content flex items-center ml-4">
-                        <img src="../../media/dashboard/facture.svg" alt="" class="h-[30px]">
-                        <h1 class="text-[#0F172A] font-bold ml-4 text-[16px] text-center">Payer les factures</h1>
-                    </div>
-                </div>
-
-                <div class="card h-[10vh] w-[25vh] rounded-[12px] border-2 flex items-center flex-shrink-0">
-                    <div class="content flex items-center gap-5 ml-4">
-                        <img src="../../media/dashboard/PHONE.svg" alt="" class="h-[30px]">
-                        <h1 class="text-[#0F172A] font-bold ml-4 text-[16px] text-center">Rechache un <br> mobile</h1>
-                    </div>
+            <!-- RIB Card -->
+            <div class="bg-white border mt-4 w-[92%] rounded-2xl p-4 shadow-sm flex flex-col gap-1">
+                <h2 class="text-[16px] font-semibold">Mon RIB</h2>
+                <p class="text-[#475569] text-[16px] tracking-widest">
+                    54XX XXXX XXXX XXXX
+                </p>
+                <div class="flex items-center gap-2 mt-1">
+                    <img src="../../media/dashboard/copy.svg" class="h-[18px]" alt="" />
+                    <span class="text-[#0B2A4A] font-semibold text-[14px]">Copier</span>
                 </div>
             </div>
-        </div>
+        </section>
 
-        <!-- dérniere transaction -->
-         <div class="flex flex-col mt-3 ml-4 ">
-            <h1 class="text-[#0F172A] text-[24px] font-extrabold">Dernière Transaction</h1>
-            <div class="container flex flex-col">
-                <div class="card h-[9vh] bg-orange-500 w-full">
-
+        <!-- Accès Rapide -->
+        <section class="mt-6 px-4">
+            <h2 class="text-[20px] font-extrabold mb-3">Accès Rapide</h2>
+            <div class="flex gap-3 overflow-x-auto pb-2">
+                <!-- Virement -->
+                <div class="flex items-center gap-4 border rounded-xl px-4 py-3 flex-shrink-0 w-[230px] bg-white">
+                    <img src="../../media/dashboard/eff-virement.svg" class="h-[28px]" alt="" />
+                    <h3 class="font-bold text-[15px] leading-5">
+                        Effectuer un<br />virement
+                    </h3>
+                </div>
+                <!-- Factures -->
+                <div class="flex items-center gap-4 border rounded-xl px-4 py-3 flex-shrink-0 w-[230px] bg-white">
+                    <img src="../../media/dashboard/facture.svg" class="h-[28px]" alt="" />
+                    <h3 class="font-bold text-[15px] leading-5">
+                        Payer les factures
+                    </h3>
+                </div>
+                <!-- Recharge -->
+                <div class="flex items-center gap-4 border rounded-xl px-4 py-3 flex-shrink-0 w-[230px] bg-white">
+                    <img src="../../media/dashboard/PHONE.svg" class="h-[28px]" alt="" />
+                    <h3 class="font-bold text-[15px] leading-5">
+                        Recharger un<br />mobile
+                    </h3>
                 </div>
             </div>
-         </div>
+        </section>
+
+        <!-- Dernière Transaction -->
+        <section class="mt-6 px-4">
+            <h2 class="text-[20px] font-extrabold mb-3">
+                Dernière Transaction
+            </h2>
+
+            <!-- Card 1 -->
+            <div class="flex justify-between items-center bg-white border rounded-xl px-3 py-2 mb-3 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="h-[42px] w-[42px] bg-[#FDE7E7] rounded-full flex justify-center items-center">
+                        <img src="../../media/dashboard/send.svg" alt="" />
+                    </div>
+                    <div>
+                        <h3 class="text-[15px] font-semibold leading-4">
+                            100 DIAMONDS – FREE FIRE
+                        </h3>
+                        <p class="text-[12px] text-[#64748B] mt-1">
+                            03/11/2025 · 14:55
+                        </p>
+                    </div>
+                </div>
+                <h3 class="text-[#F43F5E] font-extrabold text-[18px]">-$1</h3>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="flex justify-between items-center bg-white border rounded-xl px-3 py-2 shadow-sm">
+                <div class="flex items-center gap-4">
+                    <div class="h-[42px] w-[42px] bg-[#D1FAE5] rounded-full flex justify-center items-center">
+                        <img src="../../media/dashboard/send-green.svg" alt="" />
+                    </div>
+                    <div>
+                        <h3 class="text-[15px] font-semibold leading-4">
+                            YOUCODE – BOURSE
+                        </h3>
+                        <p class="text-[12px] text-[#64748B] mt-1">
+                            28/11/2025 · 10:25
+                        </p>
+                    </div>
+                </div>
+                <h3 class="text-[#059669] font-extrabold text-[18px]">+$100</h3>
+            </div>
+        </section>
     </main>
+
+    <!-- Bottom Navigation -->
+    <nav
+        class="fixed bottom-0 inset-x-0 bg-white border-t shadow-md grid grid-cols-5 text-xs text-slate-600 font-semibold">
+        <a href="grid.html" class="flex flex-col items-center py-2 text-[#0B2A4A]">
+            <span class="material-symbols-outlined text-[22px]">home</span>
+            Accueil
+        </a>
+        <a href="virement.html" class="flex flex-col items-center py-2">
+            <span class="material-symbols-outlined text-[22px]">sync_alt</span>
+            Virement
+        </a>
+        <a href="cartes.html" class="flex flex-col items-center py-2">
+            <span class="material-symbols-outlined text-[22px]">credit_card</span>
+            Cartes
+        </a>
+        <a href="transactions.html" class="flex flex-col items-center py-2">
+            <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+            Transac.
+        </a>
+        <a href="profile.html" class="flex flex-col items-center py-2">
+            <span class="material-symbols-outlined">
+                group_add
+            </span>
+            Bénif.
+        </a>
+    </nav>
 </body>
 
 </html>
