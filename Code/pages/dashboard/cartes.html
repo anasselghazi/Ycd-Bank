@@ -66,9 +66,8 @@
     </div>
   </aside>
 
-  <!-- Page wrapper -->
   <div class="lg:pl-[280px] min-h-screen w-full">
-    <!-- Top Header (mobile) -->
+    <!-- Mobile header -->
     <header class="lg:hidden sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-[#E2E8F0]">
       <div class="flex items-center justify-between h-[64px] px-4">
         <div class="flex items-center gap-2">
@@ -87,6 +86,7 @@
       </div>
     </header>
 
+    <!-- Main -->
     <main class="px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-10">
       <div class="max-w-5xl mx-auto">
         <div class="mb-8">
@@ -95,13 +95,31 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
-          <section class="lg:col-span-3" id="left-col"></section>
+          <section class="lg:col-span-3">
+            <div class="w-full bg-[#0A2A4E] text-white p-5 sm:p-6 aspect-[1.586] rounded-xl shadow-lg flex flex-col justify-between">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-[22px] sm:text-[25px] uppercase">YCD Bank</span>
+                <img src="../../media/dashboard/credit-card.svg" alt="Icône carte" class="w-10 sm:w-[50px]">
+              </div>
+              <div class="flex flex-col gap-4">
+                <p class="text-xl sm:text-2xl tracking-[5px] font-light">**** **** **** 1234</p>
+                <div class="flex justify-between items-center gap-3">
+                  <p class="text-[16px] sm:text-[18px] tracking-[3px] uppercase font-light">DOUGHMI ILYAS</p>
+                  <div class="text-right">
+                    <span class="text-[10px] sm:text-xs block text-gray-300 tracking-[2px] uppercase font-light">Expire fin</span>
+                    <span class="text-sm font-light tracking-[2px]">27/30</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
           <section class="lg:col-span-2 space-y-6" id="right-col"></section>
         </div>
       </div>
     </main>
 
-    <!-- Bottom Nav (mobile) -->
+    <!-- Bottom Nav -->
     <nav class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#E2E8F0] shadow-md grid grid-cols-5 text-[11px] font-semibold">
       <a href="#" class="flex flex-col items-center py-2 text-[#0B2A4A]">
         <span class="material-symbols-outlined text-[22px]">home</span>
