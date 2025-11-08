@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body class="font-[Inter] bg-white text-gray-900">
-  <!-- (sidebar identical to previous commit) -->
+  <!-- sidebar unchanged -->
   <aside class="fixed top-0 left-0 hidden lg:flex h-full w-[280px] flex-col justify-between bg-white border-r border-gray-200">
     <div class="pt-6">
       <div class="flex items-center gap-3 px-6">
@@ -91,6 +91,11 @@
         <div class="mb-8">
           <p class="text-3xl sm:text-4xl font-black leading-tight">Gestion de ma carte</p>
           <p class="text-gray-500 mt-1">Gérez la sécurité et les plafonds de votre carte.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+          <section class="lg:col-span-3" id="left-col"></section>
+          <section class="lg:col-span-2 space-y-6" id="right-col"></section>
         </div>
       </div>
     </main>
