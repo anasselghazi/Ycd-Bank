@@ -7,9 +7,29 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="../../styles/style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 <body class="font-[Inter] bg-white text-gray-900">
   <div class="lg:pl-[280px] min-h-screen w-full">
+    <!-- Top Header (mobile) -->
+    <header class="lg:hidden sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-[#E2E8F0]">
+      <div class="flex items-center justify-between h-[64px] px-4">
+        <div class="flex items-center gap-2">
+          <div class="h-[26px] w-[26px] bg-[#E2E8F0] rounded-full"></div>
+          <div>
+            <p class="text-[10px] text-[#94A3B8] tracking-wide">YCD BANK</p>
+            <p class="text-[12px] font-medium -mt-1">Banking App</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="h-9 w-9 rounded-full border border-[#E5EAF0] flex items-center justify-center">
+            <span class="material-symbols-outlined text-[18px]">notifications</span>
+          </button>
+          <div class="h-9 w-9 bg-[#E2E8F0] rounded-full"></div>
+        </div>
+      </div>
+    </header>
+
     <main class="px-4 sm:px-6 lg:px-8 py-6">
       <div class="max-w-5xl mx-auto">
         <h1 class="text-3xl sm:text-4xl font-black">Gestion de ma carte</h1>
