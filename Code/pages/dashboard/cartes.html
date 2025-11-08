@@ -95,6 +95,7 @@
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+          <!-- Left: card + actions -->
           <section class="lg:col-span-3">
             <div class="w-full bg-[#0A2A4E] text-white p-5 sm:p-6 aspect-[1.586] rounded-xl shadow-lg flex flex-col justify-between">
               <div class="flex justify-between items-center">
@@ -129,7 +130,38 @@
             </div>
           </section>
 
-          <section class="lg:col-span-2 space-y-6" id="right-col"></section>
+          <!-- Right: security -->
+          <section class="lg:col-span-2 space-y-6">
+            <div class="bg-white rounded-xl shadow-sm p-2 sm:p-3">
+              <h2 class="text-gray-900 text-[20px] sm:text-[22px] font-bold px-3 sm:px-4 pb-2 pt-2">Sécurité</h2>
+              <div class="flex flex-col divide-y divide-gray-200">
+                <div class="flex items-center gap-4 px-3 sm:px-4 min-h-16 justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center justify-center rounded-lg bg-gray-100 size-10">
+                      <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <p class="text-base">Bloquer la carte</p>
+                  </div>
+                  <label class="relative inline-flex items-center">
+                    <input type="checkbox" class="sr-only peer" checked />
+                    <span class="w-[51px] h-[31px] rounded-full bg-gray-200 peer-checked:bg-teal-400 transition-colors p-0.5 inline-flex items-center">
+                      <span class="h-[27px] w-[27px] bg-white rounded-full shadow transition-transform peer-checked:translate-x-[20px]"></span>
+                    </span>
+                  </label>
+                </div>
+
+                <a href="#" class="flex items-center gap-4 px-3 sm:px-4 min-h-16 justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center justify-center rounded-lg bg-gray-100 size-10">
+                      <span class="material-symbols-outlined">report</span>
+                    </div>
+                    <p class="text-base">Carte perdue/volée</p>
+                  </div>
+                  <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+                </a>
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </main>
