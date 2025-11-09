@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>YCD Bank - Mes Bénéficiaires</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link rel="stylesheet" href="../../styles/style.css" />
+</head>
+<body class="font-[Inter] bg-white text-[#0F172A]">
+  <aside class="fixed top-0 left-0 hidden lg:flex h-full w-[280px] flex-col justify-between bg-white border-r border-[#E2E8F0]">
+    <div class="pt-6">
+      <div class="flex items-center gap-3 px-6">
+        <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
+        <div>
+          <h3 class="text-[16px] font-extrabold leading-tight">YCD BANK</h3>
+          <p class="text-[11px] text-[#94A3B8] font-medium -mt-0.5 tracking-wide">BANKING APP</p>
+        </div>
+      </div>
+      <nav class="mt-8 space-y-2 px-3">
+        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]"><img src="../../media/icons/home.svg" class="h-6" alt=""><span class="text-[14px] font-medium">ACCUEIL</span></a>
+        <a href="virement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]"><img src="../../media/dashboard/virement.svg" class="h-6" alt=""><span class="text-[14px] font-medium">VIREMENT</span></a>
+        <a href="cartes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]"><img src="../../media/dashboard/card.svg" class="h-6" alt=""><span class="text-[14px] font-medium">CARTES</span></a>
+        <a href="transaction.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]"><img src="../../media/icons/wallet.svg" class="h-6" alt=""><span class="text-[14px] font-medium">TRANSACTION</span></a>
+        <a href="benif.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E7F2FD] text-[#1681EC]"><img src="../../media/dashboard/ben.svg" class="h-6" alt=""><span class="text-[14px] font-semibold">BÉNÉFICIAIRES</span></a>
+      </nav>
+    </div>
+    <div class="pb-6">
+      <div class="w-[84%] h-px bg-[#E2E8F0] mx-auto mb-4"></div>
+      <div class="px-6">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
+          <div>
+            <p class="text-[13px] font-semibold leading-tight">DOUGHMI ILYAS</p>
+            <p class="text-[11px] text-[#94A3B8]">doughmi000@gmail.com</p>
+          </div>
+        </div>
+        <div class="mt-4 space-y-2">
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]"><img src="../../media/dashboard/person.svg" class="h-[18px]" alt=""><span class="text-[13px] font-medium">PROFILE</span></a>
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]"><img src="../../media/dashboard/disconn.svg" class="h-[18px]" alt=""><span class="text-[13px] font-medium">DISCONNECT</span></a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="lg:pl-[280px] min-h-screen w-full">
+    <header class="lg:hidden sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-[#E2E8F0]">
+      <div class="flex items-center justify-between h-[64px] px-4">
+        <div class="flex items-center gap-2">
+          <div class="h-[26px] w-[26px] bg-[#E2E8F0] rounded-full"></div>
+          <div>
+            <p class="text-[10px] text-[#94A3B8] tracking-wide">YCD BANK</p>
+            <p class="text-[12px] font-medium -mt-1">Banking App</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="h-9 w-9 rounded-full border border-[#E5EAF0] flex items-center justify-center" aria-label="Notifications"><span class="material-symbols-outlined text-[18px]">notifications</span></button>
+          <div class="h-9 w-9 bg-[#E2E8F0] rounded-full"></div>
+        </div>
+      </div>
+    </header>
+
+    <main class="px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-10">
+      <h1 class="text-3xl sm:text-4xl font-black leading-tight">Mes Bénéficiaires</h1>
+      <p class="text-[#64748B] mt-1">Gérez, ajoutez ou modifiez vos bénéficiaires en toute sécurité.</p>
+    </main>
+
+    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#E2E8F0] shadow-md grid grid-cols-5 text-[11px] font-semibold">
+      <a href="dashboard.html" class="flex flex-col items-center py-2"><span class="material-symbols-outlined text-[22px]">home</span>Accueil</a>
+      <a href="virement.html" class="flex flex-col items-center py-2"><span class="material-symbols-outlined text-[22px]">sync_alt</span>Virement</a>
+      <a href="cartes.html" class="flex flex-col items-center py-2"><span class="material-symbols-outlined text-[22px]">credit_card</span>Cartes</a>
+      <a href="transaction.html" class="flex flex-col items-center py-2"><span class="material-symbols-outlined text-[22px]">receipt_long</span>Transac.</a>
+      <a href="benif.html" class="flex flex-col items-center py-2 text-[#0A2A4E]"><span class="material-symbols-outlined text-[22px]">group_add</span>Bénif.</a>
+    </nav>
+  </div>
+</body>
+</html>
