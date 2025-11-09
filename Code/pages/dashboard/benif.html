@@ -63,8 +63,27 @@
     </header>
 
     <main class="px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-10">
-      <h1 class="text-3xl sm:text-4xl font-black leading-tight">Mes Bénéficiaires</h1>
-      <p class="text-[#64748B] mt-1">Gérez, ajoutez ou modifiez vos bénéficiaires en toute sécurité.</p>
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-black leading-tight">Mes Bénéficiaires</h1>
+        <p class="text-[#64748B] mt-1">Gérez, ajoutez ou modifiez vos bénéficiaires en toute sécurité.</p>
+      </div>
+
+      <div class="mt-6 grid grid-cols-1 gap-3 md:grid-cols-[1fr,auto,auto] items-center">
+        <div class="relative">
+          <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]">search</span>
+          <input type="text" placeholder="Recherche un bénéficiaire" class="w-full h-12 rounded-xl border border-[#E2E8F0] bg-white pl-10 pr-4 text-[14px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20">
+        </div>
+        <label class="h-12 flex items-center px-3 rounded-xl bg-white border border-[#E2E8F0] text-sm font-medium">
+          <span class="material-symbols-outlined text-[#64748B] mr-2">sort</span>
+          <select class="outline-none bg-transparent text-sm">
+            <option>Nom (A–Z)</option>
+            <option>Nom (Z–A)</option>
+            <option>Ajoutés récemment</option>
+            <option>Plus anciens</option>
+          </select>
+        </label>
+        <button class="h-12 px-4 rounded-xl bg-[#0A2A4E] text-white text-sm font-bold flex items-center gap-2 justify-center"><span class="material-symbols-outlined text-[18px]">add</span>Ajouter un bénéficiaire</button>
+      </div>
     </main>
 
     <nav class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#E2E8F0] shadow-md grid grid-cols-5 text-[11px] font-semibold">
