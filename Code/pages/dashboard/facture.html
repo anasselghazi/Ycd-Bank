@@ -1,0 +1,200 @@
+ <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YCD BANK - Nav</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+</head>
+<body class="font-[Inter] bg-[#F8FAFC] text-[#0F172A]">
+
+  <!-- SIDEBAR (desktop) -->
+  <aside class="fixed top-0 left-0 h-full w-[300px] bg-white border-r border-[#E2E8F0] shadow-sm flex flex-col justify-between hidden sm:flex">
+    <div>
+      <div class="flex items-center gap-3 mt-6 px-6">
+        <div class="h-[45px] w-[45px] bg-[#E2E8F0] rounded-full"></div>
+        <div>
+          <h3 class="text-[17px] font-extrabold">YCD BANK</h3>
+          <p class="text-[12px] text-[#94A3B8] font-medium -mt-1">BANKING APP</p>
+        </div>
+      </div>
+
+      <div class="mt-10 flex flex-col gap-4 items-center">
+        <a href="#" class="flex items-center gap-3 px-6 py-3 bg-[#E7F2FD] rounded-lg w-[90%]">
+          <img src="../../media/dashboard/home.svg" class="h-[22px]" />
+          <span class="text-[#137FEC] text-[14px] font-semibold uppercase">ACCEUIL</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg w-[90%]">
+          <img src="../../media/dashboard/virement.svg" class="h-[22px]" />
+          <span class="text-[14px] font-medium uppercase">VIREMENT</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg w-[90%]">
+          <img src="../../media/dashboard/card.svg" class="h-[22px]" />
+          <span class="text-[14px] font-medium uppercase">CARTES</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg w-[90%]">
+          <img src="../../media/dashboard/wallet.svg" class="h-[22px]" />
+          <span class="text-[14px] font-medium uppercase">TRANSACTION</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-6 py-3 hover:bg-[#F8FAFC] rounded-lg w-[90%]">
+          <img src="../../media/dashboard/ben.svg" class="h-[22px]" />
+          <span class="text-[14px] font-medium uppercase">BÉNÉFICIAIRES</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="pb-8">
+      <div class="w-[80%] h-[1px] bg-[#E2E8F0] mx-auto mb-5"></div>
+      <div class="flex items-center gap-3 px-6">
+        <div class="h-[40px] w-[40px] bg-[#E2E8F0] rounded-full"></div>
+        <div>
+          <h3 class="text-[14px] font-semibold leading-tight">DOUGHMI ILYAS</h3>
+          <p class="text-[12px] text-[#94A3B8] font-medium">doughmi000@gmail.com</p>
+        </div>
+      </div>
+
+      <div class="mt-5 flex flex-col gap-4">
+        <a href="#" class="flex items-center gap-3 px-6 py-2 hover:bg-[#F8FAFC] rounded-lg w-[95%]">
+          <img src="../../media/dashboard/person.svg" class="h-[20px]" />
+          <span class="text-[14px] font-medium uppercase">PROFILE</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-6 py-2 hover:bg-[#F8FAFC] rounded-lg w-[95%]">
+          <img src="../../media/dashboard/disconn.svg" class="h-[20px]" />
+          <span class="text-[14px] font-medium uppercase">DISCONNECT</span>
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- TOP NAV (phone) -->
+  <header class="flex items-center justify-between px-4 h-[9vh] shadow-md bg-white sm:hidden">
+    <div class="flex items-center gap-2">
+      <div class="h-[57px] w-[57px] bg-[#E2E8F0] rounded-full"></div>
+      <div>
+        <h2 class="text-[15px] text-[#334155] font-semibold">Banking App</h2>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <img src="../../media/dashboard/Icon.svg" class="h-[36px] w-[36px] rounded-full border border-[#E5EAF0]" />
+      <div class="h-[40px] w-[40px] bg-[#CBD5E1] rounded-full"></div>
+    </div>
+  </header>
+
+  <!-- BOTTOM NAV (phone) -->
+  <nav class="fixed bottom-0 inset-x-0 bg-white border-t shadow-md grid grid-cols-5 text-xs font-semibold sm:hidden">
+    <a href="#" class="flex flex-col items-center py-2 text-[#0B2A4A]">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      Accueil
+    </a>
+    <a href="#" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">sync_alt</span>
+      Virement
+    </a>
+    <a href="#" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">credit_card</span>
+      Cartes
+    </a>
+    <a href="#" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+      Transac.
+    </a>
+    <a href="#" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">group_add</span>
+      Bénif.
+    </a>
+  </nav>
+ 
+
+    <!-- Main -->
+    <main class="  flex-1 sm:ml-[300px]  p-6  md:p-12 pb-[100px] ">
+      <div class="max-w-5xl    px-10 sm:px-0 ">
+        <h1 class="text-3xl font-extrabold">Payer une Facture</h1>
+        <p class="mt-2 text-sm text-slate-600">
+          Payer vos factures d’électricité et d’eau. Choisissez votre distributeur, saisissez la référence client et réglez le montant. 
+        </p>
+
+        <section class="mt-6 ">
+          <div class="p-4 space-y-6">
+
+            <!-- Step 1 -->
+            <div>
+              <h2 class="font-semibold">Étape 1 : Fournisseur</h2>
+              <div class="mt-3 grid grid-cols-2 gap-3 max-w-md">
+               <button class="flex items-center justify-center rounded-xl   border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
+                  <img class="h-6" src="#" alt="inwi">
+                </button>
+                <button class="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
+                  <img class="h-6" src="#" alt="Maroc Telecom">
+                </button>
+              </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div>
+              <h2 class="font-semibold">Étape 2 : Référence client</h2>
+              <div class="mt-3 grid sm:grid-cols-[1fr_auto] gap-3">
+                <input class="h-11 rounded-lg border px-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                       type="text" placeholder="Ex: 1234567890">
+                <button class="h-11 px-4 rounded-lg border hover:bg-slate-50">☆ Ajouter aux favoris</button>
+              </div>
+              <button class="mt-2 text-xs text-rose-600">Effacer tout</button>
+            </div>
+
+            <!-- Step 3 -->
+            <div>
+              <h2 class="font-semibold">Étape 3 : Montant</h2>
+              <div class="mt-3 flex flex-wrap gap-2">
+                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$50</button>
+                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$100</button>
+                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$200</button>
+                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$500</button>
+                <label class="flex items-center gap-2 ps-3 pe-2 h-10 rounded-full border">
+                  <span class="text-slate-500">$</span>
+                  <input class="w-36 bg-transparent outline-none placeholder-slate-400"
+                         type="number" min="0" step="1" placeholder="Montant personnalisé">
+                </label>
+              </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div>
+              <h2 class="font-semibold">Étape 4 : Type de facture</h2>
+              <div class="mt-3 grid sm:grid-cols-2 gap-3">
+                <button class="w-full rounded-xl border p-4 bg-slate-50 text-left">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="font-medium">Électricité (mois courant)</p>
+                      <p class="text-xs text-slate-500 mt-1">Consommation estimée</p>
+                    </div>
+                    <span class="inline-flex rounded-full bg-slate-100 px-3 h-8 items-center text-sm">$200</span>
+                  </div>
+                </button>
+                <button class="w-full rounded-xl border p-4 text-left">
+                  <div class="flex items-center justify-between">
+                    <div>
+                      <p class="font-medium">Eau (mois courant)</p>
+                      <p class="text-xs text-slate-500 mt-1">Inclut assainissement</p>
+                    </div>
+                    <span class="inline-flex rounded-full bg-slate-100 px-3 h-8 items-center text-sm">$100</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- Actions -->
+            <div class="flex items-center justify-end gap-3 pt-2">
+              <button class="px-4 h-11 rounded-lg border hover:bg-slate-50">Annuler</button>
+              <button class="px-6 h-11 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                Payer <span class="ms-2">→</span>
+              </button>
+            </div>
+
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
