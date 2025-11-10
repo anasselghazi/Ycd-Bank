@@ -13,6 +13,69 @@
 </head>
 
 <body class="font-[Inter] bg-white text-[#0F172A] overflow-x-hidden">
-  <!-- Contenu principal -->
+  <!-- Sidebar -->
+<aside class="fixed top-0 left-0 hidden lg:flex h-full w-[280px] flex-col justify-between bg-white border-r border-[#E2E8F0]" aria-label="Navigation latérale">
+  <div class="pt-6">
+    <!-- Logo et nom de la banque -->
+    <div class="flex items-center gap-3 px-6">
+      <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
+      <div>
+        <h3 class="text-[16px] font-extrabold leading-tight">YCD BANK</h3>
+        <p class="text-[11px] text-[#94A3B8] font-medium -mt-0.5 tracking-wide">BANKING APP</p>
+      </div>
+    </div>
+
+    <!-- Navigation principale -->
+    <nav class="mt-8 space-y-2 px-3">
+      <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+        <img src="../../media/icons/home.svg" class="h-6" alt="Icône accueil">
+        <span class="text-[14px] font-medium">ACCUEIL</span>
+      </a>
+      <a href="virement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E7F2FD] text-[#1681EC]">
+        <img src="../../media/dashboard/virement.svg" class="h-6" alt="Icône virement">
+        <span class="text-[14px] font-semibold">VIREMENT</span>
+      </a>
+      <a href="cartes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+        <img src="../../media/dashboard/card.svg" class="h-6" alt="Icône cartes">
+        <span class="text-[14px] font-medium">CARTES</span>
+      </a>
+      <a href="transaction.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+        <img src="../../media/icons/wallet.svg" class="h-6" alt="Icône transactions">
+        <span class="text-[14px] font-medium">TRANSACTION</span>
+      </a>
+      <a href="benif.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+        <img src="../../media/dashboard/ben.svg" class="h-6" alt="Icône bénéficiaires">
+        <span class="text-[14px] font-medium">BÉNÉFICIAIRES</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Section utilisateur et actions -->
+  <div class="pb-6">
+    <div class="w-[84%] h-px bg-[#E2E8F0] mx-auto mb-4"></div>
+    <div class="px-6">
+      <!-- Informations utilisateur -->
+      <div class="flex items-center gap-3">
+        <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
+        <div>
+          <p class="text-[13px] font-semibold leading-tight">DOUGHMI ILYAS</p>
+          <p class="text-[11px] text-[#94A3B8]">doughmi000@gmail.com</p>
+        </div>
+      </div>
+
+      <!-- Actions utilisateur -->
+      <div class="mt-4 space-y-2">
+        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+          <img src="../../media/dashboard/person.svg" class="h-[18px]" alt="Icône profil">
+          <span class="text-[13px] font-medium">PROFILE</span>
+        </a>
+        <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+          <img src="../../media/dashboard/disconn.svg" class="h-[18px]" alt="Icône déconnexion">
+          <span class="text-[13px] font-medium">DISCONNECT</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</aside>
 </body>
 </html>
