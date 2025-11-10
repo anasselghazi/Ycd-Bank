@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>YCD Bank - Nouveau Virement</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/style.css">
+</head>
+
+<body class="font-[Inter] bg-white text-[#0F172A] overflow-x-hidden">
+  <!-- Sidebar -->
+  <aside class="fixed top-0 left-0 hidden lg:flex h-full w-[280px] flex-col justify-between bg-white border-r border-[#E2E8F0]"
+    aria-label="Navigation latérale">
+    <div class="pt-6">
+      <div class="flex items-center gap-3 px-6">
+        <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
+        <div>
+          <h3 class="text-[16px] font-extrabold leading-tight">YCD BANK</h3>
+          <p class="text-[11px] text-[#94A3B8] font-medium -mt-0.5 tracking-wide">BANKING APP</p>
+        </div>
+      </div>
+
+      <nav class="mt-8 space-y-2 px-3">
+        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+          <img src="../../media/icons/home.svg" class="h-6" alt="">
+          <span class="text-[14px] font-medium">ACCUEIL</span>
+        </a>
+        <a href="virement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E7F2FD] text-[#1681EC]">
+          <img src="../../media/icons/virement.svg" class="h-6" alt="">
+          <span class="text-[14px] font-semibold">VIREMENT</span>
+        </a>
+        <a href="cartes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+          <img src="../../media/dashboard/card.svg" class="h-6" alt="">
+          <span class="text-[14px] font-medium">CARTES</span>
+        </a>
+        <a href="transaction.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+          <img src="../../media/dashboard/wallet.svg" class="h-6" alt="">
+          <span class="text-[14px] font-medium">TRANSACTION</span>
+        </a>
+        <a href="benif.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
+          <img src="../../media/dashboard/ben.svg" class="h-6" alt="">
+          <span class="text-[14px] font-medium">BÉNÉFICIAIRES</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="pb-6">
+      <div class="w-[84%] h-px bg-[#E2E8F0] mx-auto mb-4"></div>
+      <div class="px-6">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
+          <div>
+            <p class="text-[13px] font-semibold leading-tight">DOUGHMI ILYAS</p>
+            <p class="text-[11px] text-[#94A3B8]">doughmi000@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="mt-4 space-y-2">
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+            <img src="../../media/dashboard/person.svg" class="h-[18px]" alt="">
+            <span class="text-[13px] font-medium">PROFILE</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+            <img src="../../media/dashboard/disconn.svg" class="h-[18px]" alt="">
+            <span class="text-[13px] font-medium">DISCONNECT</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Page wrapper -->
+  <div class="lg:pl-[280px] lg:ml-6 min-h-screen max-w-full overflow-x-hidden">
+    <header class="lg:hidden sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-[#E2E8F0]">
+      <div class="flex items-center justify-between h-[64px] px-4">
+        <div class="flex items-center gap-2">
+          <div class="h-[26px] w-[26px] bg-[#E2E8F0] rounded-full"></div>
+          <div>
+            <p class="text-[10px] text-[#94A3B8] tracking-wide">YCD BANK</p>
+            <p class="text-[12px] font-medium -mt-1">Banking App</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="h-9 w-9 rounded-full border border-[#E5EAF0] flex items-center justify-center" aria-label="Notifications">
+            <span class="material-symbols-outlined text-[18px]">notifications</span>
+          </button>
+          <div class="h-9 w-9 bg-[#E2E8F0] rounded-full"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="px-4 sm:px-8 lg:px-12 py-8 pb-24 lg:pb-10">
+      <!-- Title -->
+      <div class="mb-8">
+        <h1 class="text-3xl sm:text-4xl font-black leading-tight text-[#0A2A4E]">Nouveau Virement</h1>
+        <p class="text-[#64748B] mt-1">Transférez de l'argent en toute sécurité et en quelques étapes.</p>
+      </div>
+
+      <div>
+        <!-- Étape 1 -->
+        <section class="mb-10">
+          <h3 class="text-[18px] font-bold mb-3 text-[#0A2A4E]">Étape 1 : Depuis quel compte ?</h3>
+          <button class="w-full flex items-center justify-between gap-4 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#0A2A4E33] rounded-xl px-6 py-5 shadow-sm transition">
+            <span class="flex items-center gap-4">
+              <span class="h-12 w-12 rounded-lg grid place-items-center bg-[#0A2A4E0D] text-[#0A2A4E]">
+                <span class="material-symbols-outlined">account_balance_wallet</span>
+              </span>
+              <span class="text-left">
+                <span class="text-[15px] font-semibold block">Compte Courant</span>
+                <span class="text-[13px] text-[#64748B] block">Solde disponible : $12,345.67</span>
+              </span>
+            </span>
+            <span class="material-symbols-outlined text-[#94A3B8]">expand_more</span>
+          </button>
+        </section>
+
+        <!-- Étape 2 -->
+        <section class="mb-10">
+          <h3 class="text-[18px] font-bold mb-3 text-[#0A2A4E]">Étape 2 : Vers qui ?</h3>
+          <div class="flex flex-col sm:flex-row gap-4">
+            <div class="relative flex-1">
+              <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]">search</span>
+              <input type="text" placeholder="Rechercher un bénéficiaire"
+                class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white pl-12 pr-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
+            </div>
+            <a href="benif.html"
+              class="h-[52px] px-5 rounded-xl bg-[#E6E9EE] text-[#0A2A5B] text-sm font-bold flex items-center gap-2 justify-center shadow-sm hover:bg-[#DCE1E8] transition">
+              <span class="material-symbols-outlined text-[18px]">add</span>
+              Ajouter un bénéficiaire
+            </a>
+          </div>
+        </section>
+
+        <!-- Étape 3 -->
+        <section class="mb-10">
+          <h3 class="text-[18px] font-bold mb-3 text-[#0A2A4E]">Étape 3 : Quels détails ?</h3>
+          <div class="rounded-xl bg-[#F8FAFC] p-6 grid grid-cols-1 md:grid-cols-2 gap-8 border border-[#E2E8F0] shadow-sm">
+            <div class="md:col-span-2">
+              <label for="amount" class="block text-[14px] font-medium text-[#64748B] mb-1">Montant</label>
+              <div class="relative">
+                <input id="amount" name="amount" type="text" placeholder="0.00"
+                  class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white pr-10 px-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
+                <span class="absolute right-4 top-1/2 -translate-y-1/2 text-[#64748B] font-medium">$</span>
+              </div>
+            </div>
+
+            <div class="md:col-span-2">
+              <label for="reason" class="block text-[14px] font-medium text-[#64748B] mb-1">Motif du virement (optionnel)</label>
+              <input id="reason" name="reason" type="text" placeholder="Ex : Loyer, Cadeau d'anniversaire..."
+                class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white px-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
+            </div>
+
+            <div>
+              <label for="date" class="block text-[14px] font-medium text-[#64748B] mb-1">Date d'exécution</label>
+              <div class="relative">
+                <input id="date" name="date" type="date"
+                  class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white pl-12 pr-3 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
+                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]">calendar_today</span>
+              </div>
+            </div>
+
+            <div>
+              <label for="reference" class="block text-[14px] font-medium text-[#64748B] mb-1">Référence (optionnel)</label>
+              <input id="reference" name="reference" type="text" placeholder="Référence interne"
+                class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white px-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
+            </div>
+          </div>
+        </section>
+
+        <!-- Actions -->
+        <div class="flex flex-col sm:flex-row items-center justify-end gap-4">
+          <button class="w-full sm:w-auto h-[48px] px-6 rounded-xl text-[#0A2A4E] hover:bg-[#0A2A4E0D] font-semibold transition">Annuler</button>
+          <button class="w-full sm:w-auto h-[48px] px-8 rounded-xl bg-[#0A2A4E] text-white font-bold hover:opacity-90 flex items-center gap-2 justify-center shadow-sm transition">
+            <span>Continuer</span>
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- Bottom Nav (mobile) -->
+  <nav class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#E2E8F0] shadow-md grid grid-cols-5 text-[11px] font-semibold"
+    aria-label="Navigation inférieure">
+    <a href="dashboard.html" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">home</span>
+      Accueil
+    </a>
+    <a href="virement.html" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">sync_alt</span>
+      Virement
+    </a>
+    <a href="cartes.html" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">credit_card</span>
+      Cartes
+    </a>
+    <a href="transaction.html" class="flex flex-col items-center py-2">
+      <span class="material-symbols-outlined text-[22px]">receipt_long</span>
+      Transac.
+    </a>
+    <a href="benif.html" class="flex flex-col items-center py-2 text-[#0A2A4E]">
+      <span class="material-symbols-outlined text-[22px]">group_add</span>
+      Bénif.
+    </a>
+  </nav>
+</body>
+
+</html>
