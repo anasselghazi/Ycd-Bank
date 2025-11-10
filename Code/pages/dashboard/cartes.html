@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fr" class="light">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>YCD Bank - Gestion de ma carte</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../../styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body class="font-[Inter] bg-white text-gray-900">
+  <aside class="fixed top-0 left-0 hidden lg:flex h-full w-[280px] flex-col justify-between bg-white border-r border-gray-200" aria-label="Navigation latérale">
+    <div class="pt-6">
+      <div class="flex items-center gap-3 px-6">
+        <div class="h-10 w-10 bg-gray-200 rounded-full" aria-hidden="true"></div>
+        <div>
+          <h3 class="text-[16px] font-extrabold leading-tight text-gray-900">YCD BANK</h3>
+          <p class="text-[11px] text-gray-400 font-medium -mt-0.5 tracking-wide">BANKING APP</p>
+        </div>
+      </div>
+
+      <nav class="mt-8 space-y-2 px-3" aria-label="Menu principal">
+        <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#0A2A4E]  hover:bg-gray-50" aria-current="page">
+          <img src="../../media/icons/home.svg" class="h-6" alt="Accueil" />
+          <span class="text-[14px] font-medium">ACCUEIL</span>
+        </a>
+        <a href="virement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#0A2A4E] hover:bg-gray-50">
+          <img src="../../media/dashboard/virement.svg" class="h-6" alt="Virement" />
+          <span class="text-[14px] font-medium">VIREMENT</span>
+        </a>
+        <a href="cartes.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E7F2FD] text-[#1681EC]">
+          <img src="../../media/icons/credit-card-blue.svg" class="h-6" alt="Cartes" />
+          <span class="text-[14px] font-semibold">CARTES</span>
+        </a>
+        <a href="transaction.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50">
+          <img src="../../media/dashboard/wallet.svg" class="h-6" alt="Transactions" />
+          <span class="text-[14px] font-medium">TRANSACTION</span>
+        </a>
+        <a href="benif.html" class="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-gray-50">
+          <img src="../../media/dashboard/ben.svg" class="h-6" alt="Bénéficiaires" />
+          <span class="text-[14px] font-medium">BÉNÉFICIAIRES</span>
+        </a>
+      </nav>
+    </div>
+
+    <div class="pb-6">
+      <div class="w-[84%] h-px bg-gray-200 mx-auto mb-4"></div>
+      <div class="px-6">
+        <div class="flex items-center gap-3">
+          <div class="h-10 w-10 bg-gray-200 rounded-full" aria-hidden="true"></div>
+          <div>
+            <p class="text-[13px] font-semibold text-gray-800">DOUGHMI ILYAS</p>
+            <p class="text-[11px] text-gray-400">doughmi000@gmail.com</p>
+          </div>
+        </div>
+
+        <div class="mt-4 space-y-2" aria-label="Compte">
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50">
+            <img src="../../media/dashboard/person.svg" class="h-[18px]" alt="Profil" />
+            <span class="text-[13px] font-medium">PROFILE</span>
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-gray-50">
+            <img src="../../media/dashboard/disconn.svg" class="h-[18px]" alt="Déconnexion" />
+            <span class="text-[13px] font-medium">DISCONNECT</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <div class="lg:pl-[280px] min-h-screen w-full">
+    <!-- Top Header (mobile) -->
+    <header class="lg:hidden sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-[#E2E8F0]" aria-label="En-tête mobile">
+      <div class="flex items-center justify-between h-[64px] px-4">
+        <div class="flex items-center gap-2">
+          <div class="h-[26px] w-[26px] bg-[#E2E8F0] rounded-full" aria-hidden="true"></div>
+          <div>
+            <p class="text-[10px] text-[#94A3B8] tracking-wide">YCD BANK</p>
+            <p class="text-[12px] font-medium -mt-1">Banking App</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <button class="h-9 w-9 rounded-full border border-[#E5EAF0] flex items-center justify-center" aria-label="Notifications">
+            <span class="material-symbols-outlined text-[18px]">notifications</span>
+          </button>
+          <div class="h-9 w-9 bg-[#E2E8F0] rounded-full" aria-hidden="true"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main -->
+    <main class="px-4 sm:px-6 lg:px-8 py-6 pb-24 lg:pb-10">
+      <div class="max-w-5xl mx-auto">
+        <!-- Header -->
+        <div class="mb-8">
+          <p class="text-3xl sm:text-4xl font-black leading-tight">Gestion de ma carte</p>
+          <p class="text-gray-500 mt-1">Gérez la sécurité et les plafonds de votre carte.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
+          <!-- Left column -->
+          <section class="lg:col-span-3">
+            <div class="w-full bg-[#0A2A4E] text-white p-5 sm:p-6 aspect-[1.586] rounded-xl shadow-lg flex flex-col justify-between" aria-label="Carte bancaire">
+              <div class="flex justify-between items-center">
+                <span class="font-bold text-[22px] sm:text-[25px] uppercase">YCD Bank</span>
+                <img src="../../media/dashboard/credit-card.svg" alt="Icône carte" class="w-10 sm:w-[50px]">
+              </div>
+              <div class="flex flex-col gap-4">
+                <p class="text-xl sm:text-2xl tracking-[5px] font-light" aria-label="Numéro de carte masqué">**** **** **** 1234</p>
+                <div class="flex justify-between items-center gap-3">
+                  <p class="text-[16px] sm:text-[18px] tracking-[3px] uppercase font-light">DOUGHMI ILYAS</p>
+                  <div class="text-right">
+                    <span class="text-[10px] sm:text-xs block text-gray-300 tracking-[2px] uppercase font-light">Expire fin</span>
+                    <span class="text-sm font-light tracking-[2px]">27/30</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex w-full flex-col gap-3 sm:gap-4 py-5 items-center">
+              <button class="flex w-[90%] sm:w-[80%] items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Passer à la carte épargne">
+                <img src="../../media/icons/switch.svg" class="w-6" alt="Commuter">
+                <span>Passer à la carte épargne</span>
+              </button>
+              <button class="flex w-full items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Afficher les détails de la carte">
+                <span class="material-symbols-outlined text-lg">visibility</span>
+                <span>Afficher les détails</span>
+              </button>
+              <button class="flex w-full items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Exporter le RIB en PDF">
+                <img src="../../media/icons/chat-dots.png" class="h-5" alt="Exporter">
+                <span>Exporter le RIB en PDF</span>
+              </button>
+            </div>
+          </section>
+
+          <!-- Right column -->
+          <section class="lg:col-span-2 space-y-6">
+            <!-- Sécurité -->
+            <div class="bg-white rounded-xl shadow-sm p-2 sm:p-3">
+              <h2 class="text-gray-900 text-[20px] sm:text-[22px] font-bold px-3 sm:px-4 pb-2 pt-2">Sécurité</h2>
+              <div class="flex flex-col divide-y divide-gray-200">
+                <div class="flex items-center gap-4 px-3 sm:px-4 min-h-16 justify-between">
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center justify-center rounded-lg bg-gray-100 size-10">
+                      <span class="material-symbols-outlined">lock</span>
+                    </div>
+                    <p class="text-base">Bloquer la carte</p>
+                  </div>
+                  <label class="relative inline-flex items-center" aria-label="Activer le blocage de la carte">
+                    <input type="checkbox" class="sr-only peer" checked />
+                    <span class="w-[51px] h-[31px] rounded-full bg-gray-200 peer-checked:bg-teal-400 transition-colors p-0.5 inline-flex items-center">
+                      <span class="h-[27px] w-[27px] bg-white rounded-full shadow transition-transform peer-checked:translate-x-[20px]"></span>
+                    </span>
+                  </label>
+                </div>
+
+                <a href="#" class="flex items-center gap-4 px-3 sm:px-4 min-h-16 justify-between" aria-label="Carte perdue ou volée">
+                  <div class="flex items-center gap-4">
+                    <div class="flex items-center justify-center rounded-lg bg-gray-100 size-10">
+                      <span class="material-symbols-outlined">report</span>
+                    </div>
+                    <p class="text-base">Carte perdue/volée</p>
+                  </div>
+                  <span class="material-symbols-outlined text-gray-400">chevron_right</span>
+                </a>
+              </div>
+            </div>
+
+            <!-- Gestion de money -->
+            <div class="bg-white rounded-xl shadow-sm p-4">
+              <h2 class="text-gray-900 text-[20px] sm:text-[22px] font-bold mb-4">Gestion de money</h2>
+              <div class="space-y-6">
+                <div>
+                  <div class="flex justify-between items-baseline mb-1">
+                    <label for="range-max" class="text-base font-medium">Max of sending</label>
+                    <span class="text-gray-500 text-sm">$1400 / $2000</span>
+                  </div>
+                  <input id="range-max" type="range" min="0" max="2000" value="1400" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#1681EC]" />
+                </div>
+                <button class="w-full h-11 rounded-lg px-4 bg-[#1681EC] text-white text-sm font-bold">
+                  Enregistrer les modifications
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Bottom Nav (mobile) -->
+    <nav class="lg:hidden fixed bottom-0 inset-x-0 z-50 bg-white border-t border-[#E2E8F0] shadow-md grid grid-cols-5 text-[11px] font-semibold" aria-label="Navigation inférieure">
+      <a href="dashboard.html" class="flex flex-col items-center py-2 text-[#0B2A4A]">
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">home</span>
+        Accueil
+      </a>
+      <a href="virement.html" class="flex flex-col items-center py-2">
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">sync_alt</span>
+        Virement
+      </a>
+      <a href="cartes.html" class="flex flex-col items-center py-2">
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">credit_card</span>
+        Cartes
+      </a>
+      <a href="transaction.html" class="flex flex-col items-center py-2">
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">receipt_long</span>
+        Transac.
+      </a>
+      <a href="benif.html" class="flex flex-col items-center py-2">
+        <span class="material-symbols-outlined text-[22px]" aria-hidden="true">group_add</span>
+        Bénif.
+      </a>
+    </nav>
+  </div>
+</body>
+</html>
