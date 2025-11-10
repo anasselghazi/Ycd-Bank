@@ -8,3 +8,15 @@
     box-sizing: border-box;
      font-family: "Roboto", sans-serif;
 }
+.input-icon{ 
+position: relative; }
+.input-icon svg{ 
+position: absolute; 
+left: 0.75rem; 
+top: 50%; 
+transform: translateY(-50%); 
+width: 1rem; 
+height: 1rem; 
+color: #94a3b8; }
+.input-icon input{
+padding-left: 2.5rem; }

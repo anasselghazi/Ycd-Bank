@@ -1,52 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Connecter</title>
-    <link rel="stylesheet" href="../styles/style.css">
-</head>
-
-<body>
-
-</html>
-<script src="https://cdn.tailwindcss.com"></script>
-<div class="h-screen w-screen bg-[radial-gradient(circle,var(--tw-gradient-stops))] from-blue-800 to-black/90">
-    <div id="container" class="flex flex-row justify-between h-full w-full">
-        <div id="connecter-right" class="flex flex-col justify-center items-center w-1/2">
-            <div id="title_c" class=" text-3xl font-black text-white">
-                <p>Accéder à mon espace</p>
+    <link rel="stylesheet" href="../styles/style.css" />
+  </head>
+  <body
+    class="bg-[#E5EAF0] text-slate-100 font-sans min-h-screen flex items-center justify-center"
+  >
+    <script src="https://cdn.tailwindcss.com"></script>
+    <main
+      id="auth-wrapper"
+      class="bg-[#0B2A4A] w-full max-w-md p-8 glass rounded-2xl border border-white/10 shadow-lg"
+    >
+      <div id="loginPage">
+        <div class="flex justify-between">
+          <h1 class="text-2xl font-bold mb-6">YCD BANK</h1>
+          <img src="../media/login/credit-card 2.svg" class="pb-10" alt="">
+        </div>
+        <form id="loginForm" class="space-y-4">
+          <div>
+            <label class="block text-sm text-slate-300">Adresse e-mail</label>
+            <div class="input-icon mt-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-person"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0m4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4m-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10s-3.516.68-4.168 1.332c-.678.678-.83 1.418-.832 1.664z"
+                />
+              </svg>
+              <input
+                name="email"
+                type="email"
+                required
+                class="mt-1 w-full p-3 rounded-md bg-white/5 border border-white/10"
+                placeholder="vous@example.com"
+              />
             </div>
-            <div class="h-[400px] w-[300px] border-2 mt-3">
-                <form id="form-connecter">
-                    <div>
-                        <label for="email" >Adresse E-mail :</label><br>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <br>
-                    <div>
-                        <label for="password">Mot de Passe :</label><br>
-                        <input type="password" id="password" name="password" required>
-                    </div>
-                    <br>
-                    <button type="submit">Se Connecter</button>
-
-                </form>
+          </div>
+          <div>
+            <label class="block text-sm text-slate-300">Mot de passe</label>
+            <div class="input-icon mt-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="16"
+                height="16"
+                fill="currentColor"
+                class="bi bi-lock"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M8 0a4 4 0 0 1 4 4v2.05a2.5 2.5 0 0 1 2 2.45v5a2.5 2.5 0 0 1-2.5 2.5h-7A2.5 2.5 0 0 1 2 13.5v-5a2.5 2.5 0 0 1 2-2.45V4a4 4 0 0 1 4-4M4.5 7A1.5 1.5 0 0 0 3 8.5v5A1.5 1.5 0 0 0 4.5 15h7a1.5 1.5 0 0 0 1.5-1.5v-5A1.5 1.5 0 0 0 11.5 7zM8 1a3 3 0 0 0-3 3v2h6V4a3 3 0 0 0-3-3"
+                />
+              </svg>
+              <input
+                name="password"
+                type="password"
+                required
+                class="w-full p-3 rounded-md bg-white/5 border border-white/10"
+                placeholder="••••••••"
+              />
             </div>
-        <div id="retour-0" class="">
-          <a href="index.html">Retour à la page d'acceuil</a>
-        </div>
-        <div id="cree" class="">
-          <a href="Register/crée1.html" class="">Pas encore inscrit ?<span class="">Créer un compte</span></a>
-        </div>
-        </div>
-      
-        <div id="connecter-left" class=" w-1/2 h-full sm: invisible sm:visible ">
-            <img src="../media/connecter-cree/Left_pic.png" class="h-full w-full">
-        </div>
-    </div>
-</div>
-</body>
-
+          </div>
+          <button
+            type="submit"
+            class="w-full py-2 bg-sky-600 rounded-md font-semibold"
+          >
+            Se connecter
+          </button>
+        </form>
+        <p class="text-center text-sm text-slate-400 mt-4">
+          Pas encore inscrit?
+          <button id="goToSignup" class="text-sky-400 hover:underline">
+            Crée un compte
+          </button>
+        </p>
+      </div>
+    </main>
+  </body>
 </html>
