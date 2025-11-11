@@ -1,11 +1,29 @@
-// // save transaction into an array ... //
-// import {save,load} from "./user.js"
-// import { checklogin } from "./auth.js";
+import { load, save } from "./storage.js";
 
-// export function save_transaction(benif,montant,description){
-//     const user = load();
+export function save_transaction(transactionObject) {
+    const user = load();
 
-//     if(checklogin() === 0){
-//         user.
-//     }
-// }
+    if (user && user.session.isLoggedIn) {
+        if (!Array.isArray(user.transactions)) {
+            user.transactions = [];
+        }
+
+        if (!transactionObject.date) {
+            transactionObject.date = new Date().toISOString();
+        }
+
+        user.transactions.unshift(transactionObject);
+        save(user);
+        console.log("Transaction saved");
+    } else {
+        console.log("Cannot save transaction, user not logged in.");
+    }
+}
+
+export function get_transactions() {
+    const user = load();
+    if (user && user.session.isLoggedIn && Array.isArray(user.transactions)) {
+        return user.transactions;
+    }
+    return [];
+}
