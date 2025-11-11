@@ -10,7 +10,9 @@ const password = document.getElementById('password');
 const selectCard=document.getElementById('selectedcard');
 const gender =document.getElementById('gender');
 const buttoncree = document.getElementById("cree");
-
+const pagelogin=document.getElementById('loginPage');
+const formlogin=document.getElementById('loginForm')
+const buttonconnecter=document.getElementById("connecter");
 buttoncree.addEventListener("click", (e) => {
     register(
         email.value,
@@ -21,4 +23,12 @@ buttoncree.addEventListener("click", (e) => {
         gender.value,
         selectCard.value
     );
+});
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = loginForm.email.value;
+        const password = loginForm.password.value;
+        login(email, password);
 });
