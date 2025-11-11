@@ -122,11 +122,11 @@
             <div>
               <h2 class="font-semibold">Étape 1 :  Fournisseur</h2>
               <div class="mt-3 grid grid-cols-2 gap-3 max-w-md">
-               <button class="flex items-center justify-center rounded-xl   border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
-                  <img class="h-6" src="../../media/facture/image1.png" alt="inwi">
+               <button  id="lydec" class="flex items-center justify-center rounded-xl   border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
+                  <img class="h-6" src="../../media/facture/image1.png" alt="lydec">
                 </button>
-                <button class="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
-                  <img class="h-6" src="../../media/facture/image2.png" alt="Maroc Telecom">
+                <button id="autor"  class="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
+                  <img class="h-6" src="../../media/facture/image2.png" alt="autor">
                 </button>
               </div>
             </div>
@@ -157,32 +157,6 @@
                 </label>
               </div>
             </div>
-
-            <!-- Step 4 -->
-            <div>
-              <h2 class="font-semibold">Étape 4 : Type de facture</h2>
-              <div class="mt-3 grid sm:grid-cols-2 gap-3">
-                <button class="w-full rounded-xl border p-4 bg-slate-50 text-left">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <p class="font-medium">Électricité (mois courant)</p>
-                      <p class="text-xs text-slate-500 mt-1">Consommation estimée</p>
-                    </div>
-                    <span class="inline-flex rounded-full bg-slate-100 px-3 h-8 items-center text-sm">$200</span>
-                  </div>
-                </button>
-                <button class="w-full rounded-xl border p-4 text-left">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <p class="font-medium">Eau (mois courant)</p>
-                      <p class="text-xs text-slate-500 mt-1">Inclut assainissement</p>
-                    </div>
-                    <span class="inline-flex rounded-full bg-slate-100 px-3 h-8 items-center text-sm">$100</span>
-                  </div>
-                </button>
-              </div>
-            </div>
-
             <!-- Actions -->
             <div class="flex items-center justify-end gap-3 pt-2">
               <button class="px-4 h-11 rounded-lg border hover:bg-slate-50">Annuler</button>
@@ -198,3 +172,4 @@
   </div>
 </body>
 </html>
+<script src="../dashboard/facture.js"></script>
