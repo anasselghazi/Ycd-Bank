@@ -3,7 +3,7 @@ import { load, save } from "./storage.js";
 export function addbenif(name, rib) {
     const user = load();
 
-    if (user && user.session.isLoggedIn) {
+    if  (user && user.session.isLoggedIn) {
         if (!Array.isArray(user.beneficiaries)) {
             user.beneficiaries = []; 
         }

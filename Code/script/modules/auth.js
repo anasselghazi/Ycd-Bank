@@ -40,3 +40,17 @@ export function disconnect() {
     location.reload();
 
 }
+
+
+export function checklogin(){
+    const user = load();
+    if(!user & !user.session.isLoggedIn){
+        console.log("you are not logged in ");
+        return false;
+    }
+    else{
+        console.log("you are logged in ");
+        return true;
+    }
+}
+
