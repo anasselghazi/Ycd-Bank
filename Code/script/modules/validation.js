@@ -1,5 +1,4 @@
-
-const nameRegex = /^[a-zA-Z\s\-']{2,50}$/;
+const nameRegex = /^[a-zA-Z\s]{2,50}$/;
 const cinRegex = /^[A-Z]{1,2}\d{6,8}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const phoneRegex = /^(05|06|07)\d{8}$/;
@@ -146,8 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const pinkCard = document.getElementById('pinkCard');
     const cardError = document.getElementById('cardError');
 
-    -
-   
     document.querySelectorAll('#signupForm input[type="text"], #signupForm input[type="email"], #signupForm input[type="tel"]').forEach(input => {
       input.addEventListener('input', function() {
         validateSingleSignupField(this);
@@ -158,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         input.addEventListener('change', validateCivilite);
     });
 
-    // --- Étape 1: Soumission ---
+    
     signupForm.addEventListener('submit', function (e) {
       e.preventDefault();
      
@@ -227,18 +224,13 @@ document.addEventListener('DOMContentLoaded', function() {
       const isMatchValid = validatePasswordMatch();
 
       if (isPasswordValid && isMatchValid) {
-          const finalAccount =createAccountObject(
+          const finalAccount = createAccountObject(
               tempUserData,
               selectedCivilite,
               selectedCard,
               passwordInput.value
           );
-
-          if (saveAccount(finalAccount)) {
-              alert(' Compte créé et sauvegardé localement !');
-          } else {
-              alert(' Échec de la sauvegarde.');
-          }
+          alert('Compte créé avec succès !');
       }
     });
     document.getElementById('backToSignupFromCard').addEventListener('click', () => navigateTo('signupPage'));
