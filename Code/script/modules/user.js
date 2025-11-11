@@ -1,9 +1,7 @@
-
-
 // user default stats
 
 export const account = {
-  user: null,  
+  user: null,
   session: { isLoggedIn: false },
   accounts: {
     courant: { rib: "", balance: 5000 },
@@ -20,14 +18,12 @@ export const account = {
 
 export function generaterib(){
  const rand = Math.random().toString().slice(2,17);
- return `007041${rand}22`.slice(0,25);
-}
+ return `007041${rand}22.slice(0,25)`;
+};
 
 // generate card numbers
 
 export function generatecard_number(){
   const rand = Math.random().toString().slice(2,16);
-  return `5412${rand}`.slice(0,16);
-}
-
-
+  return `5412${rand}.slice(0,16)`;
+};

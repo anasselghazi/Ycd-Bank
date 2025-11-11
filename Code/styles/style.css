@@ -1,10 +1,31 @@
 
+<<<<<<< HEAD
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+=======
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+>>>>>>> c883bd0188b0c955485091a00161008df3718deb
 
 
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+<<<<<<< HEAD
+     font-family: "Roboto", sans-serif;
+}
+.input-icon{ 
+position: relative; }
+.input-icon svg{ 
+position: absolute; 
+left: 0.75rem; 
+top: 50%; 
+transform: translateY(-50%); 
+width: 1rem; 
+height: 1rem; 
+color: #94a3b8; }
+.input-icon input{
+padding-left: 2.5rem; }
+=======
   font-family: "Inter", sans-serif;
 }
+>>>>>>> c883bd0188b0c955485091a00161008df3718deb
