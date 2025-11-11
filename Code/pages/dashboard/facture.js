@@ -40,4 +40,32 @@ m100.addEventListener("click", () => setMontant(100));
 m200.addEventListener("click", () => setMontant(200));
 m500.addEventListener("click", () => setMontant(500));
 
- 
+ // Annuler : réinitialiser tous les champs
+annuler.addEventListener("click", () => {
+  refClient.value = "";
+  montantInput.value = "";
+  lydec.classList.remove("ring-2", "ring-blue-500");
+  autor.classList.remove("ring-2", "ring-blue-500");
+});
+
+// Payer : vérifier les champs et afficher un message
+payer.addEventListener("click", () => {
+  const fournisseur = lydec.classList.contains("ring-2") ? "LYDEC" :
+                      autor.classList.contains("ring-2") ? "AUTOR" : null;
+
+  if (!fournisseur || !refClient.value || !montantInput.value) {
+    alert("Veuillez remplir tous les champs avant de payer !");
+    return;
+  }
+
+  alert(`Paiement de ${montantInput.value}$ à ${fournisseur} effectué !`);
+});
+
+// Ajouter aux favoris (exemple simple)
+ajouterFav.addEventListener("click", () => {
+  if (refClient.value) {
+    alert(`Référence ${refClient.value} ajoutée aux favoris !`);
+  } else {
+    alert("Veuillez saisir une référence client avant d'ajouter aux favoris.");
+  }
+});
