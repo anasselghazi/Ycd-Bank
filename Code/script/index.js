@@ -31,4 +31,5 @@ document.addEventListener('DOMContentLoaded', () => {
         const email = loginForm.email.value;
         const password = loginForm.password.value;
         login(email, password);
+    
 });
