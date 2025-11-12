@@ -1,4 +1,6 @@
- // Sélection des éléments
+ 
+// les variables
+
 const lydec = document.getElementById("lydec");
 const autor = document.getElementById("autor");
 
@@ -15,43 +17,57 @@ const m500 = document.getElementById("m500");
 const annuler = document.getElementById("annuler");
 const payer = document.getElementById("payer");
 
-// Fonction pour sélectionner un fournisseur
+
+// Fonctions
+//666666666
+// sélectionner un fournisseur
 function selectFournisseur(selected, other) {
   selected.classList.add("ring-2", "ring-blue-500");
   other.classList.remove("ring-2", "ring-blue-500");
 }
 
-// Événements fournisseur
-lydec.addEventListener("click", () => selectFournisseur(lydec, autor));
-autor.addEventListener("click", () => selectFournisseur(autor, lydec));
-
-// Effacer la référence client
-effacer.addEventListener("click", () => {
-  refClient.value = "";
-});
-
-// Ajouter montant rapide
+// le  montant 
 function setMontant(value) {
   montantInput.value = value;
 }
 
+// réinitialiser tous les inputs
+function resetForm() {
+  refClient.value = "";
+  montantInput.value = "";
+  lydec.classList.remove("ring-2", "ring-blue-500");
+  autor.classList.remove("ring-2", "ring-blue-500");
+}
+
+// obtenit le fournisseur sélectionné
+function getFournisseur() {
+  if (lydec.classList.contains("ring-2")) return "LYDEC";
+  if (autor.classList.contains("ring-2")) return "AUTOR";
+  return null;
+}
+
+
+// choisirr un fournisseur
+lydec.addEventListener("click", () => selectFournisseur(lydec, autor));
+autor.addEventListener("click", () => selectFournisseur(autor, lydec));
+
+// effacer la référence 
+effacer.addEventListener("click", () => {
+  refClient.value = "";
+});
+
+// selectioner un montant 
 m50.addEventListener("click", () => setMontant(50));
 m100.addEventListener("click", () => setMontant(100));
 m200.addEventListener("click", () => setMontant(200));
 m500.addEventListener("click", () => setMontant(500));
 
- // Annuler : réinitialiser tous les champs
-annuler.addEventListener("click", () => {
-  refClient.value = "";
-  montantInput.value = "";
-  lydec.classList.remove("ring-2", "ring-blue-500");
-  autor.classList.remove("ring-2", "ring-blue-500");
-});
+// annuler 
+annuler.addEventListener("click", resetForm);
 
-// Payer : vérifier les champs et afficher un message
+//  vérifier les champs
 payer.addEventListener("click", () => {
-  const fournisseur = lydec.classList.contains("ring-2") ? "LYDEC" :
-                      autor.classList.contains("ring-2") ? "AUTOR" : null;
+  const fournisseur = getFournisseur();
 
   if (!fournisseur || !refClient.value || !montantInput.value) {
     alert("Veuillez remplir tous les champs avant de payer !");
@@ -59,9 +75,10 @@ payer.addEventListener("click", () => {
   }
 
   alert(`Paiement de ${montantInput.value}$ à ${fournisseur} effectué !`);
+  resetForm();
 });
 
-// Ajouter aux favoris (exemple simple)
+// Ajouter aux favoris
 ajouterFav.addEventListener("click", () => {
   if (refClient.value) {
     alert(`Référence ${refClient.value} ajoutée aux favoris !`);
