@@ -223,15 +223,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const isPasswordValid = validatePassword(passwordInput);
       const isMatchValid = validatePasswordMatch();
 
-      if (isPasswordValid && isMatchValid) {
-          const finalAccount = createAccountObject(
-              tempUserData,
-              selectedCivilite,
-              selectedCard,
-              passwordInput.value
-          );
-          alert('Compte créé avec succès !');
-      }
+
     });
     document.getElementById('backToSignupFromCard').addEventListener('click', () => navigateTo('signupPage'));
     document.getElementById('backToCard').addEventListener('click', () => navigateTo('cardPage'));

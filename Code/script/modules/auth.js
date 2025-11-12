@@ -1,54 +1,77 @@
-import { account, generaterib, generatecard_number } from "./user.js";
-import { KEY, load, save } from "./storage.js";
+import { createAccount, generaterib, generatecard_number } from "./user.js";
+import { load, save, findUserByEmail } from "./storage.js";
 
 // register function
 
 export function register(email, password, fullname, tel, cin) {
-    account.user = { email, password, fullname, tel, cin };
-    account.accounts.courant.rib = generaterib();
-    account.accounts.epargne.rib = generaterib();
-    account.card.number = generatecard_number();
-    localStorage.setItem(KEY, JSON.stringify(account));
-    console.log("acc created");
+    const existing = findUserByEmail(email);
 
-    console.log(account);
+    if (existing) {
+        console.log("Account already exists for this email.");
+        return false;
+    }
+
+    const newAccount = createAccount();
+    newAccount.user = { email, password, fullname, tel, cin };
+    newAccount.accounts.courant.rib = generaterib();
+    newAccount.accounts.epargne.rib = generaterib();
+    newAccount.card.number = generatecard_number();
+    newAccount.session.isLoggedIn = true;
+
+    save(newAccount);
+    console.log("acc created");
+    console.log(newAccount);
+
+    if (typeof window !== "undefined") {
+        window.location.href = "http://127.0.0.1:5501/Code/pages/dashboard/dashboard.html";
+    }
+
+    return true;
 }
 
 // login function 
 
 export function login(email, password) {
-    const user = load();
+    const user = findUserByEmail(email);
 
-    if (user && user.user.email === email && user.user.password === password) {
+    if (user && user.user.password === password) {
         console.log("login succ");
         user.session.isLoggedIn = true;
         console.log(user);
         save(user);
-        location.reload();
+
+        if (typeof window !== "undefined") {
+            window.location.href = "http://127.0.0.1:5501/Code/pages/dashboard/dashboard.html";
+        }
+        return true;
     }
-    else {
-        console.log("Problem");
-    }
+
+    console.log("Problem");
+    return false;
 }
 
 export function disconnect() {
     const user = load();
 
+    if (!user) return;
+
     user.session.isLoggedIn = false;
     save(user);
-    
-    location.reload();
+
+    if (typeof window !== "undefined") {
+        window.location.href = "http://127.0.0.1:5501/Code/auth/login.html";
+    }
 
 }
 
 
-export function checklogin(){
+export function checklogin() {
     const user = load();
-    if(!user & !user.session.isLoggedIn){
+    if (!user || !user.session || !user.session.isLoggedIn) {
         console.log("you are not logged in ");
         return false;
     }
-    else{
+    else {
         console.log("you are logged in ");
         return true;
     }
