@@ -7,6 +7,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"   >
+
+
 </head>
 <body class="font-[Inter] bg-[#F8FAFC] text-[#0F172A]">
 
@@ -122,11 +125,11 @@
             <div>
               <h2 class="font-semibold">Étape 1 :  Fournisseur</h2>
               <div class="mt-3 grid grid-cols-2 gap-3 max-w-md">
-               <button class="flex items-center justify-center rounded-xl   border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
-                  <img class="h-6" src="../../media/facture/image1.png" alt="inwi">
+               <button  id="lydec" class="flex items-center justify-center rounded-xl   border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
+                  <img class="h-6" src="../../media/facture/image1.png" alt="lydec">
                 </button>
-                <button class="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
-                  <img class="h-6" src="../../media/facture/image2.png" alt="Maroc Telecom">
+                <button id="autor"  class="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-4 py-3 shadow-sm hover:shadow transition">
+                  <img class="h-6" src="../../media/facture/image2.png" alt="autor">
                 </button>
               </div>
             </div>
@@ -135,59 +138,35 @@
             <div>
               <h2 class="font-semibold">Étape 2 : Référence client</h2>
               <div class="mt-3 grid sm:grid-cols-[1fr_auto] gap-3">
-                <input class="h-11 rounded-lg border px-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
-                       type="text" placeholder="Ex: 1234567890">
-                <button class="h-11 px-4 rounded-lg border hover:bg-slate-50">☆ Ajouter aux favoris</button>
+                <input id="refClient" class="h-11 rounded-lg border px-3 focus:outline-none focus:ring-2 focus:ring-blue-600"
+                       type="number" placeholder="Ex: 1234567890"  >
+                <button id="ajouterfav" class="h-11 px-4 rounded-lg border hover:bg-slate-50">
+                    <i class="fa-solid fa-star text-yellow-400"></i>
+                     Ajouter aux favoris</button>
               </div>
-              <button class="mt-2 text-xs text-rose-600">Effacer tout</button>
+              <button  id="effacer" class="mt-2 text-xs text-rose-600">Effacer tout</button>
             </div>
 
             <!-- Step 3 -->
             <div>
               <h2 class="font-semibold">Étape 3 : Montant</h2>
               <div class="mt-3 flex flex-wrap gap-2">
-                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$50</button>
-                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$100</button>
-                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$200</button>
-                <button class="px-4 h-10 rounded-full border hover:bg-slate-50">$500</button>
+                <button id="m50" class="px-4 h-10 rounded-full border hover:bg-slate-50">$50</button>
+                <button id="m100" class="px-4 h-10 rounded-full border hover:bg-slate-50">$100</button>
+                <button id="m200" class="px-4 h-10 rounded-full border hover:bg-slate-50">$200</button>
+                <button id="m500" class="px-4 h-10 rounded-full border hover:bg-slate-50">$500</button>
                 <label class="flex items-center gap-2 ps-3 pe-2 h-10 rounded-full border">
                   <span class="text-slate-500">$</span>
-                  <input class="w-36 bg-transparent outline-none placeholder-slate-400"
+                  <input id="montant"  class="w-36 bg-transparent outline-none placeholder-slate-400"
                          type="number" min="0" step="1" placeholder="Montant personnalisé">
                 </label>
               </div>
             </div>
-
-            <!-- Step 4 -->
-            <div>
-              <h2 class="font-semibold">Étape 4 : Type de facture</h2>
-              <div class="mt-3 grid sm:grid-cols-2 gap-3">
-                <button class="w-full rounded-xl border p-4 bg-slate-50 text-left">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <p class="font-medium">Électricité (mois courant)</p>
-                      <p class="text-xs text-slate-500 mt-1">Consommation estimée</p>
-                    </div>
-                    <span class="inline-flex rounded-full bg-slate-100 px-3 h-8 items-center text-sm">$200</span>
-                  </div>
-                </button>
-                <button class="w-full rounded-xl border p-4 text-left">
-                  <div class="flex items-center justify-between">
-                    <div>
-                      <p class="font-medium">Eau (mois courant)</p>
-                      <p class="text-xs text-slate-500 mt-1">Inclut assainissement</p>
-                    </div>
-                    <span class="inline-flex rounded-full bg-slate-100 px-3 h-8 items-center text-sm">$100</span>
-                  </div>
-                </button>
-              </div>
-            </div>
-
             <!-- Actions -->
             <div class="flex items-center justify-end gap-3 pt-2">
-              <button class="px-4 h-11 rounded-lg border hover:bg-slate-50">Annuler</button>
-              <button class="px-6 h-11 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
-                Payer <span class="ms-2">→</span>
+              <button id="annuler" class="px-4 h-11 rounded-lg border hover:bg-slate-50">Annuler</button>
+              <button id="payer" class="px-6 h-11 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                Payer <span class="ms-2"></span>
               </button>
             </div>
 
@@ -198,3 +177,4 @@
   </div>
 </body>
 </html>
+<script src="../../script/modules/facture.js"></script> 
