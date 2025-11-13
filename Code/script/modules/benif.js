@@ -137,12 +137,20 @@ function displayError(inputElement, errorElement, message) {
 
 document.addEventListener("DOMContentLoaded", function() {
 
+    let isInternalBeneficiary = false;
+
     const addBenifBtn = document.getElementById("addBenifBtn");
     const addBenifModal = document.getElementById("addBenifModal");
+    const modalStep1 = document.getElementById("modalStep1");
+    const modalStep2 = document.getElementById("modalStep2");
+    const selectYCD = document.getElementById("selectYCD");
+    const selectExternal = document.getElementById("selectExternal");
+    const modalBackBtn = document.getElementById("modalBackBtn");
     const addBenifForm = document.getElementById("addBenifForm");
     
     const benifNameInput = document.getElementById("benif-name");
     const benifRibInput = document.getElementById("benif-rib");
+    const benifRibLabel = document.getElementById("benif-rib-label");
     const benifNameError = document.getElementById("benif-nameError");
     const benifRibError = document.getElementById("benif-ribError");
     
@@ -198,6 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
         if (addBenifModal) {
             addBenifModal.classList.remove("hidden");
             addBenifModal.classList.add("flex");
+            goToStep(1);
         }
     }
 
@@ -205,9 +214,20 @@ document.addEventListener("DOMContentLoaded", function() {
         if (addBenifModal) {
             addBenifModal.classList.remove("flex");
             addBenifModal.classList.add("hidden");
+            goToStep(1);
             if (addBenifForm) addBenifForm.reset();
             displayError(benifNameInput, benifNameError, null);
             displayError(benifRibInput, benifRibError, null);
+        }
+    }
+
+    function goToStep(stepNumber) {
+        if (stepNumber === 1) {
+            if (modalStep1) modalStep1.classList.remove("hidden");
+            if (modalStep2) modalStep2.classList.add("hidden");
+        } else if (stepNumber === 2) {
+            if (modalStep1) modalStep1.classList.add("hidden");
+            if (modalStep2) modalStep2.classList.remove("hidden");
         }
     }
 
@@ -300,20 +320,67 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
+    if (selectYCD) {
+        selectYCD.addEventListener("click", () => {
+            isInternalBeneficiary = true;
+            if (benifRibLabel) benifRibLabel.textContent = "Numéro de compte (16 chiffres)";
+            if (benifRibInput) benifRibInput.placeholder = "1234567890123456";
+            goToStep(2);
+        });
+    }
+    
+    if (selectExternal) {
+        selectExternal.addEventListener("click", () => {
+            isInternalBeneficiary = false;
+            if (benifRibLabel) benifRibLabel.textContent = "RIB (IBAN)";
+            if (benifRibInput) benifRibInput.placeholder = "FR76 XXXX XXXX XXXX XXXX";
+            goToStep(2);
+        });
+    }
+
+    if (modalBackBtn) {
+        modalBackBtn.addEventListener("click", () => goToStep(1));
+    }
+
     if (addBenifForm) {
         addBenifForm.addEventListener("submit", function(e) {
             e.preventDefault();
             console.log("Form submitted");
             
+            let isValid = true;
             const name = benifNameInput.value;
             const rib = benifRibInput.value.replace(/[\s-]/g, '').toUpperCase();
+            let fullRib = rib;
 
-            if (name && rib) {
+            if (!/^[a-zA-Z\s]{2,50}$/.test(name)) {
+                displayError(benifNameInput, benifNameError, "Nom invalide (lettres et espaces, 2-50).");
+                isValid = false;
+            } else {
+                displayError(benifNameInput, benifNameError, null);
+            }
+
+            if (isInternalBeneficiary) {
+                if (!/^\d{16}$/.test(rib)) {
+                    displayError(benifRibInput, benifRibError, "Doit contenir 16 chiffres.");
+                    isValid = false;
+                } else {
+                    fullRib = "007041" + rib + "22";
+                    displayError(benifRibInput, benifRibError, null);
+                }
+            } else {
+                if (!/^[A-Z0-9]{10,34}$/.test(rib)) {
+                    displayError(benifRibInput, benifRibError, "RIB/IBAN invalide (10-34 chiffres/lettres).");
+                    isValid = false;
+                } else {
+                    displayError(benifRibInput, benifRibError, null);
+                }
+            }
+
+            if (isValid) {
                 console.log("Form is valid");
-                addbenif(name, rib);
+                addbenif(name, fullRib);
             } else {
                 console.log("Form is invalid");
-                alert("Veuillez remplir le nom et le RIB.");
             }
         });
     }
