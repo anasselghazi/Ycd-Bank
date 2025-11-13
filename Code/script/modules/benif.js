@@ -29,6 +29,23 @@ export function addbenif(name, rib) {
     }
 }
 
+export function deletebenif(rib) {
+    const user = load();
+    if (!user || !user.session.isLoggedIn) {
+        console.log("Cannot delete, user not logged in.");
+        return;
+    }
+
+    if (user.beneficiaries) {
+        user.beneficiaries = user.beneficiaries.filter(b => b.rib !== rib);
+        save(user);
+        console.log(`Beneficiary deleted: ${rib}`);
+        location.reload();
+    } else {
+        console.log("No beneficiaries array found to delete from.");
+    }
+}
+
 function displayBeneficiaries(benefs, gridElement) {
     if (!gridElement) return;
     gridElement.innerHTML = "";
@@ -55,8 +72,8 @@ function displayBeneficiaries(benefs, gridElement) {
               <p class="text-[12px] text-[#64748B]">${rib}</p>
             </div>
           </div>
-          <button class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9] shrink-0" data-rib="${rib}">
-            <span class="material-symbols-outlined text-[#64748B]">more_vert</span>
+          <button class="delete-benif-btn h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9] shrink-0" data-rib="${rib}">
+            <span class="material-symbols-outlined text-[#F43F5E]">delete</span>
           </button>
         </div>
         `;
@@ -93,6 +110,11 @@ document.addEventListener("DOMContentLoaded", function() {
     
     const closeButtons = document.querySelectorAll('[data-dismiss="modal"]');
 
+    const deleteBenifModal = document.getElementById("deleteBenifModal");
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+    const cancelDeleteBtns = document.querySelectorAll('[data-dismiss="modal-delete"]');
+    let ribToDelete = null;
+
     const sidebarUserName = document.getElementById("sidebar-user-name");
     const sidebarUserEmail = document.getElementById("sidebar-user-email");
     const disconnectLinkSidebar = document.getElementById("disconnect-link-sidebar");
@@ -119,11 +141,8 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
     } else {
-        console.log("User not logged in or session expired.");
-        if (typeof window !== "undefined") {
-            window.location.href = "../../auth/login.html";
-        }
-        return;
+        console.log("User not logged in");
+        window.location.href = "../../auth/login.html";
     }
 
     function showModal() {
@@ -143,6 +162,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    function showDeleteModal(rib) {
+        ribToDelete = rib;
+        if (deleteBenifModal) {
+            deleteBenifModal.classList.remove("hidden");
+            deleteBenifModal.classList.add("flex");
+        }
+    }
+
+    function hideDeleteModal() {
+        ribToDelete = null;
+        if (deleteBenifModal) {
+            deleteBenifModal.classList.remove("flex");
+            deleteBenifModal.classList.add("hidden");
+        }
+    }
+
     if (addBenifBtn) {
         addBenifBtn.addEventListener("click", showModal);
     }
@@ -151,34 +186,33 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener("click", hideModal);
     });
 
+    cancelDeleteBtns.forEach(button => {
+        button.addEventListener("click", hideDeleteModal);
+    });
+
+    if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener("click", () => {
+            if (ribToDelete) {
+                deletebenif(ribToDelete);
+            }
+            hideDeleteModal();
+        });
+    }
+
     if (addBenifForm) {
         addBenifForm.addEventListener("submit", function(e) {
             e.preventDefault();
             console.log("Form submitted");
             
-            let isValid = true;
             const name = benifNameInput.value;
             const rib = benifRibInput.value.replace(/[\s-]/g, '').toUpperCase();
 
-            if (!/^[a-zA-Z\s]{2,50}$/.test(name)) {
-                displayError(benifNameInput, benifNameError, "Nom invalide (lettres et espaces, 2-50).");
-                isValid = false;
-            } else {
-                displayError(benifNameInput, benifNameError, null);
-            }
-
-            if (!/^[A-Z0-9]{10,34}$/.test(rib)) {
-                displayError(benifRibInput, benifRibError, "RIB/IBAN invalide (10-34 chiffres/lettres).");
-                isValid = false;
-            } else {
-                displayError(benifRibInput, benifRibError, null);
-            }
-
-            if (isValid) {
+            if (name && rib) {
                 console.log("Form is valid");
                 addbenif(name, rib);
             } else {
                 console.log("Form is invalid");
+                alert("Veuillez remplir le nom et le RIB.");
             }
         });
     }
@@ -196,6 +230,15 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
         displayBeneficiaries(benefs, benefGrid);
+
+        document.querySelectorAll('.delete-benif-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const rib = e.currentTarget.getAttribute('data-rib');
+                if (rib) {
+                    showDeleteModal(rib);
+                }
+            });
+        });
     }
 
     if (searchInput) {
