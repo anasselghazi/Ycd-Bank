@@ -10,6 +10,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
   <link rel="stylesheet" href="../../styles/style.css">
+  <style>
+    #account-select-modal-panel {
+      transition: transform 0.3s ease-out;
+      transform: translateY(100%);
+    }
+    #account-select-modal.flex #account-select-modal-panel {
+      transform: translateY(0);
+    }
+  </style>
 </head>
 
 <body class="font-[Inter] bg-white text-[#0F172A] overflow-x-hidden">
@@ -55,8 +64,8 @@
         <div id="user-profile" class="flex items-center gap-3">
           <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
           <div>
-            <p class="text-[13px] font-semibold leading-tight">DOUGHMI ILYAS</p>
-            <p class="text-[11px] text-[#94A3B8]">doughmi000@gmail.com</p>
+            <p id="sidebar-user-name" class="text-[13px] font-semibold leading-tight">UTILISATEUR</p>
+            <p id="sidebar-user-email" class="text-[11px] text-[#94A3B8]">email@exemple.com</p>
           </div>
         </div>
 
@@ -65,7 +74,7 @@
             <img src="../../media/dashboard/person.svg" class="h-[18px]" alt="">
             <span class="text-[13px] font-medium">PROFILE</span>
           </a>
-          <a href="../../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+          <a id="disconnect-link-sidebar" href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
             <img src="../../media/dashboard/disconn.svg" class="h-[18px]" alt="">
             <span class="text-[13px] font-medium">DISCONNECT</span>
           </a>
@@ -106,14 +115,14 @@
         <!-- Étape 1 -->
         <section class="mb-10">
           <h3 class="text-[18px] font-bold mb-3 text-[#0A2A4E]">Étape 1 : Depuis quel compte ?</h3>
-          <button class="w-full flex items-center justify-between gap-4 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#0A2A4E33] rounded-xl px-6 py-5 shadow-sm transition">
+          <button id="select-account-btn" type="button" class="w-full flex items-center justify-between gap-4 bg-[#F8FAFC] border border-[#E2E8F0] hover:border-[#0A2A4E33] rounded-xl px-6 py-5 shadow-sm transition">
             <span class="flex items-center gap-4">
               <span class="h-12 w-12 rounded-lg grid place-items-center bg-[#0A2A4E0D] text-[#0A2A4E]">
-                <span class="material-symbols-outlined">account_balance_wallet</span>
+                <span id="selected-account-icon" class="material-symbols-outlined">account_balance_wallet</span>
               </span>
               <span class="text-left">
-                <span class="text-[15px] font-semibold block">Compte Courant</span>
-                <span class="text-[13px] text-[#64748B] block">Solde disponible : $12,345.67</span>
+                <span id="selected-account-name" class="text-[15px] font-semibold block">Compte Courant</span>
+                <span id="selected-account-balance" class="text-[13px] text-[#64748B] block">Solde disponible : $0.00</span>
               </span>
             </span>
             <span class="material-symbols-outlined text-[#94A3B8]">expand_more</span>
@@ -142,7 +151,7 @@
           <h3 class="text-[18px] font-bold mb-3 text-[#0A2A4E]">Étape 3 : Quels détails ?</h3>
           <div class="rounded-xl bg-[#F8FAFC] p-6 grid grid-cols-1 md:grid-cols-2 gap-8 border border-[#E2E8F0] shadow-sm">
             <div class="md:col-span-2">
-              <label for="amount" class="block text-[14px] font-medium text-[#64748B] mb-1">Montant</label>
+              <label for="amount" class="block text-[14px] font-medium text-[#64748B] mb-1">Montant</to-label>
               <div class="relative">
                 <input id="amount" name="amount" type="text" placeholder="0.00"
                   class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white pr-10 px-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
@@ -192,7 +201,7 @@
       <span class="material-symbols-outlined text-[22px]">home</span>
       Accueil 
     </a>
-    <a href="virement.html" class="flex flex-col items-center py-2">
+    <a href="virement.html" class="flex flex-col items-center py-2 text-[#1681EC]">
       <span class="material-symbols-outlined text-[22px]">sync_alt</span>
       Virement
     </a>
@@ -204,11 +213,54 @@
       <span class="material-symbols-outlined text-[22px]">receipt_long</span>
       Transac.
     </a>
-    <a href="benif.html" class="flex flex-col items-center py-2 text-[#0A2A4E]">
+    <a href="benif.html" class="flex flex-col items-center py-2">
       <span class="material-symbols-outlined text-[22px]">group_add</span>
       Bénif.
     </a>
   </nav>
+
+  <!-- Account Select Modal -->
+  <div id="account-select-modal" class="hidden fixed inset-0 z-50 items-end bg-black/50 lg:items-center lg:justify-center">
+    
+    <!-- Modal Backdrop -->
+    <div id="modal-backdrop" class="fixed inset-0"></div>
+    
+    <!-- Modal Panel -->
+    <div id="account-select-modal-panel" class="relative z-10 w-full bg-white rounded-t-2xl lg:rounded-2xl lg:max-w-md">
+      
+      <!-- Header -->
+      <div class="flex items-center justify-between p-4 border-b">
+        <h3 class="text-lg font-bold">Sélectionner un compte</h3>
+        <button id="close-modal-btn" type="button" class="h-8 w-8 rounded-full grid place-items-center hover:bg-gray-100">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Account List -->
+      <div class="p-4 space-y-3">
+        <button id="select-courant-btn" type="button" class="w-full flex items-center gap-4 p-4 rounded-lg border border-blue-500 bg-blue-50 ring-2 ring-blue-300">
+          <span class="h-10 w-10 rounded-full grid place-items-center bg-blue-100 text-blue-600">
+            <span class="material-symbols-outlined">account_balance_wallet</span>
+          </span>
+          <span class="text-left">
+            <span class="font-semibold block">Compte Courant</span>
+            <span id="modal-courant-balance" class="text-sm text-gray-600 block">Solde: $0.00</span>
+          </span>
+        </button>
+        <button id="select-epargne-btn" type="button" class="w-full flex items-center gap-4 p-4 rounded-lg border border-gray-200 hover:bg-gray-50">
+          <span class="h-10 w-10 rounded-full grid place-items-center bg-gray-100 text-gray-600">
+            <span class="material-symbols-outlined">savings</span>
+          </span>
+          <span class="text-left">
+            <span class="font-semibold block">Compte Épargne</span>
+            <span id="modal-epargne-balance" class="text-sm text-gray-600 block">Solde: $0.00</span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="../../script/modules/virement.js"></script>
 </body>
 
 </html>
