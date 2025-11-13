@@ -324,7 +324,7 @@ document.addEventListener("DOMContentLoaded", function() {
         selectYCD.addEventListener("click", () => {
             isInternalBeneficiary = true;
             if (benifRibLabel) benifRibLabel.textContent = "Numéro de compte (16 chiffres)";
-            if (benifRibInput) benifRibInput.placeholder = "1234567890123456";
+            if (benifRibInput) benifRibInput.placeholder = "XXXX XXXX XXXX XXXX";
             goToStep(2);
         });
     }
@@ -333,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function() {
         selectExternal.addEventListener("click", () => {
             isInternalBeneficiary = false;
             if (benifRibLabel) benifRibLabel.textContent = "RIB (IBAN)";
-            if (benifRibInput) benifRibInput.placeholder = "FR76 XXXX XXXX XXXX XXXX";
+            if (benifRibInput) benifRibInput.placeholder = "XXXX XXXX XXXX XXXX XXXX";
             goToStep(2);
         });
     }
