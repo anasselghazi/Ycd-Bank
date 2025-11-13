@@ -202,6 +202,26 @@
     </div>
   </div>
 
+  <!-- BLOCK/UNBLOCK CONFIRMATION MODAL -->
+  <div id="blockBenifModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden transition-all">
+      <div class="p-6">
+        <h3 id="blockModalTitle" class="text-lg font-bold text-center">Confirmer le blocage</h3>
+        <p id="blockModalText" class="text-sm text-gray-600 text-center mt-2">
+          Êtes-vous sûr de vouloir bloquer ce bénéficiaire ?
+        </p>
+      </div>
+      <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+        <button data-dismiss="modal-block" type="button" class="h-10 px-4 rounded-lg border text-sm font-semibold hover:bg-gray-100">
+          Annuler
+        </button>
+        <button id="confirmBlockBtn" type="button" class="h-10 px-4 rounded-lg bg-[#F59E0B] text-white text-sm font-bold">
+          Confirmer
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="../../script/modules/benif.js"></script>
 </body>
 </html>
