@@ -182,6 +182,26 @@
     </div>
   </div>
 
+  <!-- DELETE CONFIRMATION MODAL -->
+  <div id="deleteBenifModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden transition-all">
+      <div class="p-6">
+        <h3 class="text-lg font-bold text-center">Confirmer la suppression</h3>
+        <p class="text-sm text-gray-600 text-center mt-2">
+          Êtes-vous sûr de vouloir supprimer ce bénéficiaire ? Cette action est irréversible.
+        </p>
+      </div>
+      <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+        <button data-dismiss="modal-delete" type="button" class="h-10 px-4 rounded-lg border text-sm font-semibold hover:bg-gray-100">
+          Annuler
+        </button>
+        <button id="confirmDeleteBtn" type="button" class="h-10 px-4 rounded-lg bg-[#F43F5E] text-white text-sm font-bold">
+          Supprimer
+        </button>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="../../script/modules/benif.js"></script>
 </body>
 </html>
