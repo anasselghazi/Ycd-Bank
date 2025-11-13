@@ -18,7 +18,6 @@ const annuler = document.getElementById("annuler");
 const payer = document.getElementById("payer");
 
 
-// Fonctions
 //666666666
 // sélectionner un fournisseur
 function selectFournisseur(selected, other) {
