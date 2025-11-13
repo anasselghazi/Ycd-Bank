@@ -12,12 +12,12 @@ export function toggleBalance(displayEl, buttonEl) {
     isVisible = !isVisible; 
 
     if (isVisible) {
-        displayEl.textContent = `${user.accounts.courant.balance} MAD`;
-        buttonEl.textContent = "Masquer";
+        displayEl.textContent = `$${user.accounts.courant.balance}`;
+        buttonEl.textContent = "";
         console.log("balance shown");
     } else {
         displayEl.textContent = "$ *** ***";
-        buttonEl.textContent = "Afficher";
+        buttonEl.textContent = "";
         console.log("balance hidden");
     }
 }
@@ -26,8 +26,8 @@ export function initBalanceView(displayEl, buttonEl) {
      const user = load();
      if (user && user.session.isLoggedIn) {
         isVisible = false; 
-        displayEl.textContent = "*** *** MAD";
-        buttonEl.textContent = "Afficher";
+        displayEl.textContent = "$ *** ***";
+        buttonEl.textContent = "";
         buttonEl.hidden = false;
      } else {
         displayEl.textContent = "";

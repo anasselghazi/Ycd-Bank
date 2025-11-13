@@ -188,7 +188,6 @@
             <div class="flex gap-6">
               <label class="flex items-center gap-2">
                 <input
-                  id="gender"
                   type="radio"
                   name="civilite"
                   value="M."
@@ -407,8 +406,7 @@
               Retour
             </button>
             <button
-            id="cree"
-              type="submit"
+              type="submit" id="cree"
               class="flex-1 py-3 bg-sky-600 hover:bg-sky-700 rounded-md font-semibold transition"
             >
               Créer le compte
@@ -417,7 +415,9 @@
         </form>
       </div>
     </main>
-   
     <script type="module" src="../../script/index.js"></script>
+    <script type="module" src="../../script/modules/user.js"></script>
+    <script type="module" src="../../script/modules/storage.js"></script>
+    <script type="module" src="../../script/modules/validation.js"></script>
   </body>
 </html>
