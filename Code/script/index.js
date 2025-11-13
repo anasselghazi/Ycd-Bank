@@ -8,7 +8,8 @@ import {
     isFieldRequired,
     isValid
 } from './modules/validation.js';
-
+import './modules/devices.js';
+import { convertWithAPI, formatResult } from './conversion.js';
 const signuppage = document.getElementById("signupPage");
 const signupform = document.getElementById("signupForm"); // Make sure ID matches HTML
 const fullname = document.getElementById("name"); // use ID to avoid ambiguity
@@ -68,3 +69,4 @@ document.addEventListener('DOMContentLoaded', () => {
         login(emailValue, passwordValue);
     });
 });
+
