@@ -20,6 +20,32 @@ let operateur = "";
 let offreChoisie = "";
 let favoris = [];
 
+//  L OPÉRATEUR (ANIMATION)
+
+function resetOperateurs() {
+  [btnInwi, btnMtel, btnOrnge].forEach((btn) => {
+    btn.classList.remove("ring-2", "ring-indigo-500", "shadow-md");
+  });
+}
+
+btnInwi.addEventListener("click", () => {
+  resetOperateurs();
+  btnInwi.classList.add("ring-2", "ring-indigo-500", "shadow-md");
+  operateur = "inwi";
+});
+
+btnMtel.addEventListener("click", () => {
+  resetOperateurs();
+  btnMtel.classList.add("ring-2", "ring-indigo-500", "shadow-md");
+  operateur = "maroc telecom";
+});
+
+btnOrnge.addEventListener("click", () => {
+  resetOperateurs();
+  btnOrnge.classList.add("ring-2", "ring-indigo-500", "shadow-md");
+  operateur = "orange";
+});
+
 
 
  

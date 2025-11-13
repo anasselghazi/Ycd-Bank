@@ -32,4 +32,4 @@ document.addEventListener('DOMContentLoaded', () => {
         const password = loginForm.password.value;
         login(email, password);
     
-});
+})
