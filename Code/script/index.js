@@ -9,6 +9,8 @@ const confirmPassword = document.getElementById("confirmPassword");
 const buttonCree = document.getElementById("cree");
 const goToLoginBtn = document.getElementById("goToLogin");
 
+localStorage.clear();
+
 function getSelectedGender() {
   const selected = document.querySelector('input[name="civilite"]:checked');
   return selected ? selected.value : null;
@@ -70,8 +72,10 @@ if (buttonCree) {
 
     if (created) {
       alert("Compte créé avec succès !");
-    } else {
-      alert("Un compte existe déjà avec cet email.");
+      window.location.href = "../../pages/dashboard/dashboard.html";
+      return;
     }
+
+    alert("Un compte existe déjà avec cet email.");
   });
 }

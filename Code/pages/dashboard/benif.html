@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="fr" class="light">
 <head>
   <meta charset="utf-8" />
@@ -52,8 +52,8 @@
         <div id="user-profile" class="flex items-center gap-3">
           <div class="h-10 w-10 bg-[#E2E8F0] rounded-full"></div>
           <div>
-            <p class="text-[13px] font-semibold leading-tight">DOUGHMI ILYAS</p>
-            <p class="text-[11px] text-[#94A3B8]">doughmi000@gmail.com</p>
+            <p id="sidebar-user-name" class="text-[13px] font-semibold leading-tight">UTILISATEUR</p>
+            <p id="sidebar-user-email" class="text-[11px] text-[#94A3B8]">email@exemple.com</p>
           </div>
         </div>
 
@@ -62,7 +62,7 @@
             <img src="../../media/dashboard/person.svg" class="h-[18px]" alt="">
             <span class="text-[13px] font-medium">PROFILE</span>
           </a>
-          <a href="../../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+          <a id="disconnect-link-sidebar" href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
             <img src="../../media/dashboard/disconn.svg" class="h-[18px]" alt="">
             <span class="text-[13px] font-medium">DISCONNECT</span>
           </a>
@@ -100,26 +100,15 @@
         <p class="text-[#64748B] mt-1">Gérez, ajoutez ou modifiez vos bénéficiaires en toute sécurité.</p>
       </div>
 
-      <!-- Search + Sort + Add -->
-      <div class="mt-6 grid grid-cols-1 gap-3 md:grid-cols-[1fr,auto,auto] items-center">
+      <!-- Search + Add -->
+      <div class="mt-6 grid grid-cols-1 gap-3 md:grid-cols-[1fr,auto] items-center">
         <div class="relative">
           <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#94A3B8]">search</span>
-          <input type="text" placeholder="Recherche un bénéficiaire"
+          <input id="searchBenef" type="text" placeholder="Recherche un bénéficiaire"
                  class="w-full h-12 rounded-xl border border-[#E2E8F0] bg-white pl-10 pr-4 text-[14px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20">
         </div>
 
-        <!-- SORT SELECT -->
-        <label class="h-12 flex items-center px-3 rounded-xl bg-white border border-[#E2E8F0] text-sm font-medium">
-          <span class="material-symbols-outlined text-[#64748B] mr-2">sort</span>
-          <select id="sortBenef" class="outline-none bg-transparent text-sm">
-            <option value="name-asc" selected>Nom (A–Z)</option>
-            <option value="name-desc">Nom (Z–A)</option>
-            <option value="recent">Ajoutés récemment</option>
-            <option value="oldest">Plus anciens</option>
-          </select>
-        </label>
-
-        <button class="h-12 px-4 rounded-xl bg-[#0A2A4E] text-white text-sm font-bold flex items-center gap-2 justify-center">
+        <button id="addBenifBtn" class="h-12 px-4 rounded-xl bg-[#0A2A4E] text-white text-sm font-bold flex items-center gap-2 justify-center">
           <span class="material-symbols-outlined text-[18px]">add</span>
           Ajouter un bénéficiaire
         </button>
@@ -127,62 +116,7 @@
 
       <!-- Cards -->
       <div id="benefGrid" class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <!-- Each card has data-name and data-added (ISO date) for sorting -->
-        <div class="beneficiary-card rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 flex items-center justify-between"
-             data-name="Anass Elghazi" data-added="2025-01-15">
-          <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-[#0A2A4E] text-white grid place-items-center text-[13px] font-extrabold">AE</div>
-            <div>
-              <p class="text-[15px] font-semibold">Anass Elghazi</p>
-              <p class="text-[12px] text-[#64748B]">FR76 •••• •••• •••• 5678</p>
-            </div>
-          </div>
-          <button class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9]">
-            <span class="material-symbols-outlined text-[#64748B]">more_vert</span>
-          </button>
-        </div>
-
-        <div class="beneficiary-card rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 flex items-center justify-between"
-             data-name="Aya Nakkabi" data-added="2025-01-18">
-          <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-[#0A2A4E] text-white grid place-items-center text-[13px] font-extrabold">AN</div>
-            <div>
-              <p class="text-[15px] font-semibold">Aya Nakkabi</p>
-              <p class="text-[12px] text-[#64748B]">FR76 •••• •••• •••• 5678</p>
-            </div>
-          </div>
-          <button class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9]">
-            <span class="material-symbols-outlined text-[#64748B]">more_vert</span>
-          </button>
-        </div>
-
-        <div class="beneficiary-card rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 flex items-center justify-between"
-             data-name="Mouad Gourita" data-added="2025-01-12">
-          <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-[#0A2A4E] text-white grid place-items-center text-[13px] font-extrabold">MG</div>
-            <div>
-              <p class="text-[15px] font-semibold">Mouad Gourita</p>
-              <p class="text-[12px] text-[#64748B]">FR76 •••• •••• •••• 5678</p>
-            </div>
-          </div>
-          <button class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9]">
-            <span class="material-symbols-outlined text-[#64748B]">more_vert</span>
-          </button>
-        </div>
-
-        <div class="beneficiary-card rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 flex items-center justify-between"
-             data-name="Brahim El Bahloul" data-added="2025-01-10">
-          <div class="flex items-center gap-3">
-            <div class="h-10 w-10 rounded-full bg-[#0A2A4E] text-white grid place-items-center text-[13px] font-extrabold">BB</div>
-            <div>
-              <p class="text-[15px] font-semibold">Brahim El Bahloul</p>
-              <p class="text-[12px] text-[#64748B]">FR76 •••• •••• •••• 5678</p>
-            </div>
-          </div>
-          <button class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9]">
-            <span class="material-symbols-outlined text-[#64748B]">more_vert</span>
-          </button>
-        </div>
+        <!-- Beneficiary cards will be loaded here by benif.js -->
       </div>
     </main>
 
@@ -210,6 +144,44 @@
       </a>
     </nav>
   </div>
+
+  <!-- ADD BENEFICIARY MODAL -->
+  <div id="addBenifModal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+    
+    <!-- Modal Panel -->
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-lg overflow-hidden transition-all">
+
+      <!-- Form -->
+      <div>
+        <form id="addBenifForm" novalidate>
+          <div class="flex items-center justify-between p-4 border-b">
+            <h3 class="text-lg font-bold">Nouveau bénéficiaire</h3>
+            <button data-dismiss="modal" type="button" class="h-8 w-8 rounded-full grid place-items-center hover:bg-gray-100">
+              <span class="material-symbols-outlined text-[20px]">close</span>
+            </button>
+          </div>
+          <div class="p-6 space-y-4">
+            <div>
+              <label for="benif-name" class="block text-sm font-medium text-gray-700 mb-1">Nom complet</label>
+              <input type="text" id="benif-name" name="benif-name" placeholder="Ex: Anass Elghazi" class="w-full h-11 rounded-lg border border-[#CBD5E1] px-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <p id="benif-nameError" class="error-message hidden h-4"></p>
+            </div>
+            <div>
+              <label for="benif-rib" class="block text-sm font-medium text-gray-700 mb-1">RIB / IBAN</label>
+              <input type="text" id="benif-rib" name="benif-rib" placeholder="Entrez le RIB" class="w-full h-11 rounded-lg border border-[#CBD5E1] px-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+              <p id="benif-ribError" class="error-message hidden h-4"></p>
+            </div>
+          </div>
+          <div class="p-4 bg-gray-50 border-t flex justify-end gap-3">
+            <button data-dismiss="modal" type="button" class="h-10 px-4 rounded-lg border text-sm font-semibold hover:bg-gray-100">Annuler</button>
+            <button type="submit" class="h-10 px-4 rounded-lg bg-[#0A2A4E] text-white text-sm font-bold">Ajouter</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
   <script type="module" src="../../script/modules/benif.js"></script>
 </body>
 </html>

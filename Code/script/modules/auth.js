@@ -17,15 +17,10 @@ export function register(email, password, fullname, tel, cin) {
     newAccount.accounts.epargne.rib = generaterib();
     newAccount.card.number = generatecard_number();
     newAccount.session.isLoggedIn = true;
-
+    
     save(newAccount);
     console.log("acc created");
     console.log(newAccount);
-
-    if (typeof window !== "undefined") {
-        window.location.href = "http://127.0.0.1:5501/Code/pages/dashboard/dashboard.html";
-    }
-
     return true;
 }
 
@@ -39,10 +34,6 @@ export function login(email, password) {
         user.session.isLoggedIn = true;
         console.log(user);
         save(user);
-
-        if (typeof window !== "undefined") {
-            window.location.href = "http://127.0.0.1:5501/Code/pages/dashboard/dashboard.html";
-        }
         return true;
     }
 
@@ -59,21 +50,20 @@ export function disconnect() {
     save(user);
 
     if (typeof window !== "undefined") {
-        window.location.href = "http://127.0.0.1:5501/Code/auth/login.html";
+        window.location.href = "../../auth/login.html";
     }
 
 }
 
 
-export function checklogin() {
+export function checklogin(){
     const user = load();
-    if (!user || !user.session || !user.session.isLoggedIn) {
+    if(!user || !user.session || !user.session.isLoggedIn){
         console.log("you are not logged in ");
         return false;
     }
-    else {
+    else{
         console.log("you are logged in ");
         return true;
     }
 }
-

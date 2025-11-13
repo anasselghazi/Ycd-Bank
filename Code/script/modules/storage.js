@@ -1,89 +1,91 @@
+export const KEY = "ycd_bank";
 
-    export const KEY = "ycd_bank";
+function createEmptyStore() {
+  return { 
+    users: [], 
+    activeUserEmail: null 
+  };
+}
 
-    const defaultState = () => ({ users: [], activeUserEmail: null });
+function readStore() {
+  const dataString = localStorage.getItem(KEY);
 
-    function readState() {
-        const raw = localStorage.getItem(KEY);
+  if (!dataString) {
+    console.log("No data found, create new store");
+    return createEmptyStore();
+  }
 
-        try {
-            const parsed = JSON.parse(raw);
+  try {
+    const data = JSON.parse(dataString);
 
-            if (parsed && Array.isArray(parsed.users)) {
-                return {
-                    users: parsed.users,
-                    activeUserEmail: parsed.activeUserEmail ?? null
-                };
-            }
-
-            if (parsed && parsed.user) {
-                return {
-                    users: [parsed],
-                    activeUserEmail: parsed.session?.isLoggedIn ? parsed.user.email : null
-                };
-            }
-
-            return defaultState();
-        } catch (error) {
-            console.log("No Users");
-            return defaultState();
-        }
-
+    if (data && data.users) {
+      // console.log("Data loaded");
+      return data;
+    } else {
+      console.log("Bad data, create new store");
+      return createEmptyStore();
     }
+  } catch (error) {
+    console.log("Problem reading data");
+    return createEmptyStore();
+  }
+}
 
-    function writeState(state) {
-        localStorage.setItem(KEY, JSON.stringify(state));
-    }
+function writeStore(data) {
+  localStorage.setItem(KEY, JSON.stringify(data));
+}
 
-    export function findUserByEmail(email) {
-        if (!email) return null;
-        const state = readState();
-        return state.users.find((user) => user?.user?.email === email) || null;
-    }
+// --- Exported Functions ---
 
-    export function setActiveUser(email) {
-        const state = readState();
+export function findUserByEmail(email) {
+  if (!email) {
+    return null;
+  }
+  const store = readStore();
+  const foundUser = store.users.find(
+    (userObject) => userObject.user.email === email
+  );
+  return foundUser || null;
+}
 
-        if (!email) {
-            state.activeUserEmail = null;
-            writeState(state);
-            return null;
-        }
+export function load() {
+  const store = readStore();
+  const email = store.activeUserEmail;
 
-        const selected = state.users.find((user) => user?.user?.email === email) || null;
+  if (!email) {
+    return null; 
+  }
 
-        if (selected) {
-            state.activeUserEmail = email;
-            writeState(state);
-        }
+  const activeUser = store.users.find(
+    (userObject) => userObject.user.email === email
+  );
 
-        return selected;
-    }
+  return activeUser || null;
+}
 
-    export function load() {
-        const state = readState();
+export function save(userToSave) {
+  const email = userToSave.user.email;
 
-        if (!state.activeUserEmail) return null;
+  if (!email) {
+    console.log("Problem: Cannot save user no email");
+    return;
+  }
 
-        return state.users.find((user) => user?.user?.email === state.activeUserEmail) || null;
-    }
+  const store = readStore();
 
-    export function save(user) {
-        if (!user?.user?.email) {
-            console.warn("Cannot save user without an email");
-            return;
-        }
+  const index = store.users.findIndex(
+    (userObject) => userObject.user.email === email
+  );
 
-        const state = readState();
-        const userEmail = user.user.email;
-        const index = state.users.findIndex((item) => item?.user?.email === userEmail);
+  if (index === -1) {
+    store.users.push(userToSave);
+    console.log("New user saved");
+  } else {
+    store.users[index] = userToSave;
+    console.log("User data updated");
+  }
 
-        if (index === -1) {
-            state.users.push(user);
-        } else {
-            state.users[index] = user;
-        }
+  store.activeUserEmail = email;
 
-        state.activeUserEmail = userEmail;
-        writeState(state);
-    }
+  writeStore(store);
+}

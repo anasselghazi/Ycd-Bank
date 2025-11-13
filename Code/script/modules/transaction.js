@@ -6,6 +6,7 @@ export function save_transaction(transactionObject) {
     if (user && user.session.isLoggedIn) {
         if (!Array.isArray(user.transactions)) {
             user.transactions = [];
+            document.getElementById
         }
 
         if (!transactionObject.date) {

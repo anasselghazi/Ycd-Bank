@@ -16,9 +16,12 @@ if (loginForm) {
 
     const success = login(email, password);
 
-    if (!success) {
-      alert("Email ou mot de passe incorrect.");
+    if (success) {
+      window.location.href = "../pages/dashboard/dashboard.html";
+      return;
     }
+
+    alert("Email ou mot de passe incorrect.");
   });
 }
 
