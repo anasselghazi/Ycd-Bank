@@ -19,7 +19,8 @@ export function addbenif(name, rib) {
         user.beneficiaries.push({ 
             name: name, 
             rib: rib,
-            added: new Date().toISOString()
+            added: new Date().toISOString(),
+            isBlocked: false 
         });
         save(user);
         console.log(`Beneficiary added: ${name} (${rib})`);
@@ -46,6 +47,34 @@ export function deletebenif(rib) {
     }
 }
 
+export function blockbenif(rib) {
+    const user = load();
+    if (!user || !user.session.isLoggedIn) return;
+    if (user.beneficiaries) {
+        const index = user.beneficiaries.findIndex(b => b.rib === rib);
+        if (index !== -1) {
+            user.beneficiaries[index].isBlocked = true;
+            save(user);
+            console.log(`Beneficiary blocked: ${rib}`);
+            location.reload();
+        }
+    }
+}
+
+export function unblockbenif(rib) {
+    const user = load();
+    if (!user || !user.session.isLoggedIn) return;
+    if (user.beneficiaries) {
+        const index = user.beneficiaries.findIndex(b => b.rib === rib);
+        if (index !== -1) {
+            user.beneficiaries[index].isBlocked = false;
+            save(user);
+            console.log(`Beneficiary unblocked: ${rib}`);
+            location.reload();
+        }
+    }
+}
+
 function displayBeneficiaries(benefs, gridElement) {
     if (!gridElement) return;
     gridElement.innerHTML = "";
@@ -59,11 +88,15 @@ function displayBeneficiaries(benefs, gridElement) {
         const name = benif.name || "Sans Nom";
         const rib = benif.rib || "RIB INCONNU";
         const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
-            
         const addedDate = benif.added || "2025-01-01T00:00:00.000Z";
+        
+        const isBlocked = benif.isBlocked || false;
+        const blockIcon = isBlocked ? "lock_open" : "lock";
+        const blockColor = isBlocked ? "text-[#16A34A]" : "text-[#F59E0B]";
+        const cardOpacity = isBlocked ? "opacity-50" : "";
 
         const cardHtml = `
-        <div class="beneficiary-card rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 flex items-center justify-between"
+        <div class="beneficiary-card rounded-xl border border-[#E2E8F0] bg-white px-4 py-3 flex items-center justify-between ${cardOpacity}"
              data-name="${name}" data-added="${addedDate}">
           <div class="flex items-center gap-3 overflow-hidden">
             <div class="h-10 w-10 rounded-full bg-[#0A2A4E] text-white grid place-items-center text-[13px] font-extrabold shrink-0">${initials}</div>
@@ -72,9 +105,14 @@ function displayBeneficiaries(benefs, gridElement) {
               <p class="text-[12px] text-[#64748B]">${rib}</p>
             </div>
           </div>
-          <button class="delete-benif-btn h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9] shrink-0" data-rib="${rib}">
-            <span class="material-symbols-outlined text-[#F43F5E]">delete</span>
-          </button>
+          <div class="flex shrink-0">
+            <button class="block-benif-btn h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9]" data-rib="${rib}" data-blocked="${isBlocked}">
+              <span class="material-symbols-outlined ${blockColor}">${blockIcon}</span>
+            </button>
+            <button class="delete-benif-btn h-9 w-9 grid place-items-center rounded-lg hover:bg-[#F1F5F9]" data-rib="${rib}">
+              <span class="material-symbols-outlined text-[#F43F5E]">delete</span>
+            </button>
+          </div>
         </div>
         `;
         gridElement.innerHTML += cardHtml;
@@ -115,6 +153,14 @@ document.addEventListener("DOMContentLoaded", function() {
     const cancelDeleteBtns = document.querySelectorAll('[data-dismiss="modal-delete"]');
     let ribToDelete = null;
 
+    const blockBenifModal = document.getElementById("blockBenifModal");
+    const confirmBlockBtn = document.getElementById("confirmBlockBtn");
+    const cancelBlockBtns = document.querySelectorAll('[data-dismiss="modal-block"]');
+    const blockModalTitle = document.getElementById("blockModalTitle");
+    const blockModalText = document.getElementById("blockModalText");
+    let ribToToggleBlock = null;
+    let willBeBlocked = true;
+
     const sidebarUserName = document.getElementById("sidebar-user-name");
     const sidebarUserEmail = document.getElementById("sidebar-user-email");
     const disconnectLinkSidebar = document.getElementById("disconnect-link-sidebar");
@@ -141,8 +187,11 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         
     } else {
-        console.log("User not logged in");
-        window.location.href = "../../auth/login.html";
+        console.log("User not logged in or session expired.");
+        if (typeof window !== "undefined") {
+            window.location.href = "../../auth/login.html";
+        }
+        return;
     }
 
     function showModal() {
@@ -178,6 +227,41 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 
+    function showBlockModal(rib, isCurrentlyBlocked) {
+        ribToToggleBlock = rib;
+        willBeBlocked = !isCurrentlyBlocked;
+
+        if (blockBenifModal) {
+            if (willBeBlocked) {
+                if (blockModalTitle) blockModalTitle.textContent = "Confirmer le blocage";
+                if (blockModalText) blockModalText.textContent = "Êtes-vous sûr de vouloir bloquer ce bénéficiaire ?";
+                if (confirmBlockBtn) {
+                    confirmBlockBtn.textContent = "Bloquer";
+                    confirmBlockBtn.classList.remove("bg-[#16A34A]");
+                    confirmBlockBtn.classList.add("bg-[#F59E0B]");
+                }
+            } else {
+                if (blockModalTitle) blockModalTitle.textContent = "Confirmer le déblocage";
+                if (blockModalText) blockModalText.textContent = "Êtes-vous sûr de vouloir débloquer ce bénéficiaire ?";
+                if (confirmBlockBtn) {
+                    confirmBlockBtn.textContent = "Débloquer";
+                    confirmBlockBtn.classList.remove("bg-[#F59E0B]");
+                    confirmBlockBtn.classList.add("bg-[#16A34A]");
+                }
+            }
+            blockBenifModal.classList.remove("hidden");
+            blockBenifModal.classList.add("flex");
+        }
+    }
+
+    function hideBlockModal() {
+        ribToToggleBlock = null;
+        if (blockBenifModal) {
+            blockBenifModal.classList.remove("flex");
+            blockBenifModal.classList.add("hidden");
+        }
+    }
+
     if (addBenifBtn) {
         addBenifBtn.addEventListener("click", showModal);
     }
@@ -190,12 +274,29 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener("click", hideDeleteModal);
     });
 
+    cancelBlockBtns.forEach(button => {
+        button.addEventListener("click", hideBlockModal);
+    });
+
     if (confirmDeleteBtn) {
         confirmDeleteBtn.addEventListener("click", () => {
             if (ribToDelete) {
                 deletebenif(ribToDelete);
             }
             hideDeleteModal();
+        });
+    }
+
+    if (confirmBlockBtn) {
+        confirmBlockBtn.addEventListener("click", () => {
+            if (ribToToggleBlock) {
+                if (willBeBlocked) {
+                    blockbenif(ribToToggleBlock);
+                } else {
+                    unblockbenif(ribToToggleBlock);
+                }
+            }
+            hideBlockModal();
         });
     }
 
@@ -236,6 +337,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 const rib = e.currentTarget.getAttribute('data-rib');
                 if (rib) {
                     showDeleteModal(rib);
+                }
+            });
+        });
+
+        document.querySelectorAll('.block-benif-btn').forEach(button => {
+            button.addEventListener('click', (e) => {
+                const rib = e.currentTarget.getAttribute('data-rib');
+                const isBlocked = e.currentTarget.getAttribute('data-blocked') === 'true';
+                if (rib) {
+                    showBlockModal(rib, isBlocked);
                 }
             });
         });
