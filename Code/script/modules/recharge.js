@@ -46,6 +46,26 @@ btnOrnge.addEventListener("click", () => {
   operateur = "orange";
 });
 
+// NUMÉRO AUX FAVORIS
+
+ajouterFav.addEventListener("click", () => {
+  const numero = phoneInput.value.trim();
+
+  if (!numero.match(/^(05|06|07|08)\d{8}$/)) {
+    alert("❌ Numéro invalide !");
+    return;
+  }
+
+  if (favoris.includes(numero)) {
+    alert("⚠️ Ce numéro est déjà dans vos favoris !");
+    return;
+  }
+
+  favoris.push(numero);
+  alert(`⭐ Numéro ${numero} ajouté aux favoris !`);
+  console.log("Favoris actuels:", favoris);
+});
+
 
 
  
