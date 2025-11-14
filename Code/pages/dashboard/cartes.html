@@ -101,33 +101,40 @@
         <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 lg:gap-8">
           <!-- Left column -->
           <section class="lg:col-span-3">
-            <div class="w-full bg-[#0A2A4E] text-white p-5 sm:p-6 aspect-[1.586] rounded-xl shadow-lg flex flex-col justify-between" aria-label="Carte bancaire">
+            <div id="card-visual" class="w-full bg-[#0A2A4E] text-white p-5 sm:p-6 aspect-[1.586] rounded-xl shadow-lg flex flex-col justify-between transition-colors" aria-label="Carte bancaire">
               <div class="flex justify-between items-center">
-                <span class="font-bold text-[22px] sm:text-[25px] uppercase">YCD Bank</span>
+                <div>
+                  <span class="font-bold text-[22px] sm:text-[25px] uppercase">YCD Bank</span>
+                  <p id="card-type-label" class="text-[11px] uppercase tracking-[2px] text-white/70">Carte principale</p>
+                </div>
                 <img src="../../media/dashboard/credit-card.svg" alt="Icône carte" class="w-10 sm:w-[50px]">
               </div>
               <div class="flex flex-col gap-4">
-                <p class="text-xl sm:text-2xl tracking-[5px] font-light" aria-label="Numéro de carte masqué">**** **** **** 1234</p>
+                <p id="card-number" class="text-xl sm:text-2xl tracking-[5px] font-light" aria-label="Numéro de carte">**** **** **** 1234</p>
                 <div class="flex justify-between items-center gap-3">
-                  <p class="text-[16px] sm:text-[18px] tracking-[3px] uppercase font-light">DOUGHMI ILYAS</p>
+                  <p id="card-holder" class="text-[16px] sm:text-[18px] tracking-[3px] uppercase font-light">DOUGHMI ILYAS</p>
                   <div class="text-right">
                     <span class="text-[10px] sm:text-xs block text-gray-300 tracking-[2px] uppercase font-light">Expire fin</span>
-                    <span class="text-sm font-light tracking-[2px]">27/30</span>
+                    <span id="card-expiry" class="text-sm font-light tracking-[2px]">27/30</span>
                   </div>
                 </div>
               </div>
             </div>
 
             <div class="flex w-full flex-col gap-3 sm:gap-4 py-5 items-center">
-              <button class="flex w-[90%] sm:w-[80%] items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Passer à la carte épargne">
+              <button id="show-epargne-card" class="flex w-[90%] sm:w-[80%] items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Passer à la carte épargne">
                 <img src="../../media/icons/switch.svg" class="w-6" alt="Commuter">
                 <span>Passer à la carte épargne</span>
               </button>
-              <button class="flex w-full items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Afficher les détails de la carte">
-                <span class="material-symbols-outlined text-lg">visibility</span>
-                <span>Afficher les détails</span>
+              <button id="show-courant-card" class="flex w-[90%] sm:w-[80%] items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#0A2A4E] text-white text-sm font-bold" aria-label="Passer à la carte principale">
+                <span class="material-symbols-outlined text-lg">swap_horiz</span>
+                <span>Passer à la carte principale</span>
               </button>
-              <button class="flex w-full items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Exporter le RIB en PDF">
+              <button id="toggle-card-details" class="flex w-full items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Afficher les détails de la carte">
+                <span id="toggle-card-details-icon" class="material-symbols-outlined text-lg">visibility</span>
+                <span id="toggle-card-details-text">Afficher les détails</span>
+              </button>
+              <button id="export-rib-pdf" class="flex w-full items-center justify-center gap-2 rounded-lg h-11 px-4 bg-[#E7F2FD] text-[#137FEC] text-sm font-bold" aria-label="Exporter le RIB en PDF">
                 <img src="../../media/icons/chat-dots.png" class="h-5" alt="Exporter">
                 <span>Exporter le RIB en PDF</span>
               </button>
@@ -148,7 +155,7 @@
                     <p class="text-base">Bloquer la carte</p>
                   </div>
                   <label class="relative inline-flex items-center" aria-label="Activer le blocage de la carte">
-                    <input type="checkbox" class="sr-only peer" checked />
+                    <input id="card-block-toggle" type="checkbox" class="sr-only peer" checked />
                     <span class="w-[51px] h-[31px] rounded-full bg-gray-200 peer-checked:bg-teal-400 transition-colors p-0.5 inline-flex items-center">
                       <span class="h-[27px] w-[27px] bg-white rounded-full shadow transition-transform peer-checked:translate-x-[20px]"></span>
                     </span>
@@ -174,11 +181,11 @@
                 <div>
                   <div class="flex justify-between items-baseline mb-1">
                     <label for="range-max" class="text-base font-medium">Max of sending</label>
-                    <span class="text-gray-500 text-sm">$1400 / $2000</span>
+                    <span id="range-max-display" class="text-gray-500 text-sm">$0 / $0</span>
                   </div>
-                  <input id="range-max" type="range" min="0" max="2000" value="1400" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#1681EC]" />
+                  <input id="range-max" type="range" min="0" max="5000" value="0" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#1681EC]" />
                 </div>
-                <button class="w-full h-11 rounded-lg px-4 bg-[#1681EC] text-white text-sm font-bold">
+                <button id="save-range-max" class="w-full h-11 rounded-lg px-4 bg-[#1681EC] text-white text-sm font-bold">
                   Enregistrer les modifications
                 </button>
               </div>
@@ -212,5 +219,39 @@
       </a>
     </nav>
   </div>
+  <script type="module" src="../../script/modules/cards.js"></script>
 </body>
 </html>
+      <!-- Block card modal -->
+      <div id="card-block-modal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden">
+          <div class="p-6 text-center space-y-3">
+            <div class="mx-auto h-12 w-12 rounded-full bg-red-100 text-red-500 grid place-items-center">
+              <span class="material-symbols-outlined text-[26px]">report</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Bloquer votre carte ?</h3>
+            <p class="text-sm text-gray-600">Votre carte ne pourra plus être utilisée tant que vous ne la débloquez pas.</p>
+          </div>
+          <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+            <button id="cancel-block-card" type="button" class="h-10 rounded-lg border text-sm font-semibold hover:bg-gray-100">Annuler</button>
+            <button id="confirm-block-card" type="button" class="h-10 rounded-lg bg-red-600 text-white text-sm font-bold">Confirmer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unblock card modal -->
+      <div id="card-unblock-modal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden">
+          <div class="p-6 text-center space-y-3">
+            <div class="mx-auto h-12 w-12 rounded-full bg-emerald-100 text-emerald-500 grid place-items-center">
+              <span class="material-symbols-outlined text-[26px]">lock_open</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Débloquer votre carte ?</h3>
+            <p class="text-sm text-gray-600">Vous pourrez immédiatement régler vos achats avec cette carte.</p>
+          </div>
+          <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+            <button id="cancel-unblock-card" type="button" class="h-10 rounded-lg border text-sm font-semibold hover:bg-gray-100">Annuler</button>
+            <button id="confirm-unblock-card" type="button" class="h-10 rounded-lg bg-emerald-600 text-white text-sm font-bold">Confirmer</button>
+          </div>
+        </div>
+      </div>
