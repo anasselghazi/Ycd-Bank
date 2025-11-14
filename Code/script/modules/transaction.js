@@ -71,6 +71,9 @@ export function makeTransfer(type, amount, description, options) {
     let finalAmount = money;
     if (transType === "expense") {
         finalAmount = -money;
+        if (account.balance < money) {
+            return null;
+        }
     }
 
     account.balance = account.balance + finalAmount;
