@@ -2,145 +2,167 @@ import { load } from "./storage.js";
 import { disconnect } from "./auth.js";
 import { get_transactions } from "./transaction.js";
 
-const formatter = new Intl.NumberFormat("fr-FR", {
+const numberFormat = new Intl.NumberFormat("fr-FR", {
   minimumFractionDigits: 2,
   maximumFractionDigits: 2,
 });
 
-function formatCurrency(value) {
-  const amount = Number.isFinite(value) ? Math.abs(value) : 0;
-  return formatter.format(amount);
+const LIMIT = 5;
+let transactions = [];
+let currentPage = 1;
+
+function formatMoney(value) {
+  return numberFormat.format(Math.abs(Number(value) || 0));
 }
 
-function extractDateParts(value) {
-  const fallback = { month: "--", day: "--" };
-  if (!value) {
-    return fallback;
-  }
-
-  const parsed = new Date(value);
-  if (Number.isNaN(parsed.getTime())) {
-    return fallback;
-  }
+function splitDate(value) {
+  const d = new Date(value);
+  if (isNaN(d)) return { month: "--", day: "--" };
 
   return {
-    month: parsed.toLocaleString("en-US", { month: "short" }).toUpperCase(),
-    day: String(parsed.getDate()).padStart(2, "0"),
+    month: d.toLocaleString("en-US", { month: "short" }).toUpperCase(),
+    day: String(d.getDate()).padStart(2, "0")
   };
 }
 
-function createTransactionCard(transaction) {
-  const isExpense =
-    transaction.type === "expense" || (transaction.amount || 0) < 0;
-  const badgeClasses = isExpense
+function createCard(item) {
+  const isExpense = item.type === "expense" || item.amount < 0;
+
+  const card = document.createElement("article");
+  card.className = "flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]";
+
+  const leftBox = document.createElement("div");
+  leftBox.className = "flex items-center gap-3 flex-1";
+  card.appendChild(leftBox);
+
+  const dateBox = document.createElement("div");
+  dateBox.className = "w-14 shrink-0";
+  leftBox.appendChild(dateBox);
+
+  const dateWrap = document.createElement("div");
+  dateWrap.className = "rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none";
+  dateBox.appendChild(dateWrap);
+
+  const { month, day } = splitDate(item.date);
+
+  const monthEl = document.createElement("p");
+  monthEl.className = "text-[10px] font-bold text-[#0A2A4E] tracking-wide uppercase";
+  monthEl.textContent = month;
+  dateWrap.appendChild(monthEl);
+
+  const dayEl = document.createElement("p");
+  dayEl.className = "text-2xl font-black";
+  dayEl.textContent = day;
+  dateWrap.appendChild(dayEl);
+
+  const infoBox = document.createElement("div");
+  infoBox.className = "flex-1";
+  leftBox.appendChild(infoBox);
+
+  const title = document.createElement("p");
+  title.className = "text-[15px] font-semibold leading-snug break-words";
+  title.textContent = item.description || "Transaction";
+  infoBox.appendChild(title);
+
+  const tag = document.createElement("span");
+  tag.className = isExpense
     ? "inline-flex items-center rounded-full bg-[#F3F4F6] text-[#424B57] px-2.5 py-0.5 text-[11px] font-medium mt-1"
     : "inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-[11px] font-medium mt-1";
+  tag.textContent = isExpense ? "Expense" : "Revenu";
+  infoBox.appendChild(tag);
 
-  const amountClasses = isExpense
+  const price = document.createElement("p");
+  price.className = isExpense
     ? "font-bold text-[18px] whitespace-nowrap"
     : "text-emerald-600 font-bold text-[18px] whitespace-nowrap";
+  price.textContent = `${isExpense ? "-" : "+"}${formatMoney(item.amount)} $`;
+  card.appendChild(price);
 
-  const article = document.createElement("article");
-  article.className =
-    "flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]";
-
-  const left = document.createElement("div");
-  left.className = "flex items-center gap-3 flex-1";
-  article.appendChild(left);
-
-  const dateWrapper = document.createElement("div");
-  dateWrapper.className = "w-14 shrink-0";
-  left.appendChild(dateWrapper);
-
-  const dateCard = document.createElement("div");
-  dateCard.className =
-    "rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none";
-  dateWrapper.appendChild(dateCard);
-
-  const { month, day } = extractDateParts(transaction.date);
-  const monthLabel = document.createElement("p");
-  monthLabel.className =
-    "text-[10px] font-bold text-[#0A2A4E] tracking-wide uppercase";
-  monthLabel.textContent = month;
-  dateCard.appendChild(monthLabel);
-
-  const dayLabel = document.createElement("p");
-  dayLabel.className = "text-2xl font-black";
-  dayLabel.textContent = day;
-  dateCard.appendChild(dayLabel);
-
-  const details = document.createElement("div");
-  details.className = "flex-1";
-  left.appendChild(details);
-
-  const description = document.createElement("p");
-  description.className =
-    "text-[15px] font-semibold leading-snug break-words";
-  description.textContent = transaction.description || "Transaction";
-  details.appendChild(description);
-
-  const badge = document.createElement("span");
-  badge.className = badgeClasses;
-  badge.textContent = isExpense ? "Expense" : "Revenu";
-  details.appendChild(badge);
-
-  const amountEl = document.createElement("p");
-  amountEl.className = amountClasses;
-  const symbol = isExpense ? "-" : "+";
-  amountEl.textContent = `${symbol}${formatCurrency(transaction.amount)} $`;
-  article.appendChild(amountEl);
-
-  return article;
+  return card;
 }
 
-function renderTransactions(transactions) {
+function showList(listItems, total) {
   const list = document.getElementById("transactions-list");
-  const emptyState = document.getElementById("transactions-empty");
+  const empty = document.getElementById("transactions-empty");
 
-  if (!list || !emptyState) {
+  if (total === 0) {
+    list.innerHTML = "";
+    empty.classList.remove("hidden");
     return;
   }
 
+  empty.classList.add("hidden");
   list.innerHTML = "";
+  listItems.forEach(item => list.appendChild(createCard(item)));
+}
 
-  if (!transactions || transactions.length === 0) {
-    emptyState.classList.remove("hidden");
+function toggleBtn(btn, disabled) {
+  btn.disabled = disabled;
+  btn.classList.toggle("opacity-40", disabled);
+  btn.classList.toggle("cursor-not-allowed", disabled);
+  btn.classList.toggle("pointer-events-none", disabled);
+}
+
+function showPagination(totalPages) {
+  const box = document.getElementById("transactions-pagination");
+  const btnPrev = document.getElementById("transactions-prev");
+  const btnNext = document.getElementById("transactions-next");
+  const pagesBox = document.getElementById("transactions-pages");
+
+  if (totalPages <= 1) {
+    box.classList.add("hidden");
+    pagesBox.innerHTML = "";
     return;
   }
 
-  emptyState.classList.add("hidden");
-  transactions.forEach((transaction) => {
-    list.appendChild(createTransactionCard(transaction));
-  });
+  box.classList.remove("hidden");
+  pagesBox.innerHTML = "";
+
+  for (let i = 1; i <= totalPages; i++) {
+    const p = document.createElement("button");
+    p.textContent = i;
+    p.className =
+      i === currentPage
+        ? "h-9 w-9 grid place-items-center rounded-lg text-white bg-[#0A2A4E] text-sm font-bold"
+        : "h-9 w-9 grid place-items-center rounded-lg text-[#0F172A] text-sm font-medium hover:bg-[#EDF2F7]";
+    p.onclick = () => goToPage(i);
+    pagesBox.appendChild(p);
+  }
+
+  toggleBtn(btnPrev, currentPage === 1);
+  toggleBtn(btnNext, currentPage === totalPages);
+
+  btnPrev.onclick = () => goToPage(currentPage - 1);
+  btnNext.onclick = () => goToPage(currentPage + 1);
+}
+
+function goToPage(n) {
+  const totalPages = Math.ceil(transactions.length / LIMIT);
+  currentPage = Math.min(Math.max(1, n), totalPages);
+
+  const start = (currentPage - 1) * LIMIT;
+  const listItems = transactions.slice(start, start + LIMIT);
+
+  showList(listItems, transactions.length);
+  showPagination(totalPages);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   const user = load();
 
-  if (!user || !user.session?.isLoggedIn) {
+  if (!user || !user.session || !user.session.isLoggedIn) {
     window.location.href = "../../auth/login.html";
     return;
   }
 
-  const sidebarName = document.getElementById("sidebar-user-name");
-  const sidebarEmail = document.getElementById("sidebar-user-email");
-  const disconnectLink = document.getElementById("disconnect-link-sidebar");
+  const nameBox = document.getElementById("sidebar-user-name");
+  const mailBox = document.getElementById("sidebar-user-email");
+  const logoutBtn = document.getElementById("disconnect-link-sidebar");
 
-  if (sidebarName) {
-    sidebarName.textContent =
-      user.user?.fullname?.toUpperCase() || "UTILISATEUR";
-  }
+  if (nameBox) nameBox.textContent = user.user.fullname?.toUpperCase() || "UTILISATEUR";
+  if (mailBox) mailBox.textContent = user.user.email || "email@example.com";
+  if (logoutBtn) logoutBtn.onclick = e => { e.preventDefault(); disconnect(); };
 
-  if (sidebarEmail) {
-    sidebarEmail.textContent = user.user?.email || "email@example.com";
-  }
-
-  if (disconnectLink) {
-    disconnectLink.addEventListener("click", (event) => {
-      event.preventDefault();
-      disconnect();
-    });
-  }
-
-  renderTransactions(get_transactions());
+  transactions = get_transactions();
+  goToPage(1);
 });
