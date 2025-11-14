@@ -1,4 +1,4 @@
-  
+  import { makeTransfer } from "./transaction.js";
 //  SÉLECTION DES ÉLÉMENTS
 
 const btnInwi = document.getElementById("btninwi");
@@ -45,6 +45,107 @@ btnOrnge.addEventListener("click", () => {
   btnOrnge.classList.add("ring-2", "ring-indigo-500", "shadow-md");
   operateur = "orange";
 });
+
+
+
+ajouterFav.addEventListener("click", () => {
+  const numero = phoneInput.value.trim();
+
+  if (!numero.match(/^(05|06|07|08)\d{8}$/)) {
+    alert(" Numéro invalide !");
+    return;
+  }
+
+  if (favoris.includes(numero)) {
+    alert(" Ce numéro est déjà dans vos favoris !");
+    return;
+  }
+
+  favoris.push(numero);
+  alert(` Numéro ${numero} ajouté aux favoris !`);
+  console.log("Favoris actuels:", favoris);
+});
+
+//  EFFACER LE FORMULAIRE
+
+effacerBtn.addEventListener("click", () => {
+  phoneInput.value = "";
+});
+
+
+
+// SÉLECTION DE L OFFRE
+
+offers.forEach((offre) => {
+  offre.addEventListener("click", () => {
+    offers.forEach((o) => o.classList.remove("ring-2", "ring-indigo-500"));
+    offre.classList.add("ring-2", "ring-indigo-500");
+    offreChoisie = offre.querySelector(".font-semibold").textContent;
+  });
+});
+
+
+
+// ANNULER ET  RECHARGER
+
+annulerBtn.addEventListener("click", () => {
+  phoneInput.value = "";
+  offreChoisie = "";
+  resetOperateurs();
+  offers.forEach((o) => o.classList.remove("ring-2", "ring-indigo-500"));
+});
+
+rechargerBtn.addEventListener("click", () => {
+  const numero = phoneInput.value.trim();
+
+  if (!operateur) {
+    alert(" Sélectionnez un opérateur !");
+    return;
+  }
+
+  if (!numero.match(/^(05|06|07|08)\d{8}$/)) {
+    alert(" Numéro invalide !");
+    return;
+  }
+
+  if (!offreChoisie) {
+    alert(" Choisissez une offre !");
+    return;
+  }
+  
+  let prix = offreChoisie.match(/\d+/);
+  prix = prix ? Number(prix[0]) : 0;
+
+  if (!prix || prix <= 0) {
+    alert(" Montant de l'offre invalide !");
+    return;
+  }
+
+  
+  const result = makeTransfer(
+    "expense",            
+    prix,                  
+    `Recharge ${operateur} - ${numero}`,   
+    { accountType: "courant" }             
+  );
+
+     
+  if (!result) {
+    alert(" Paiement échoué ! Vérifiez votre solde.");
+    return;
+  }
+
+  alert(
+    ` Recharge réussie !\n\nOpérateur: ${operateur}\nNuméro: ${numero}\nOffre: ${offreChoisie}`
+  );
+
+
+  // Reset après recharge
+  annulerBtn.click();
+});
+
+
+ 
 
 
 
