@@ -167,28 +167,13 @@
               <input id="reason" name="reason" type="text" placeholder="Ex : Loyer, Cadeau d'anniversaire..."
                 class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white px-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
             </div>
-
-            <div>
-              <label for="date" class="block text-[14px] font-medium text-[#64748B] mb-1">Date d'exécution</label>
-              <div class="relative">
-                <input id="date" name="date" type="date"
-                  class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white pl-12 pr-3 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
-                <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-[#94A3B8]">calendar_today</span>
-              </div>
-            </div>
-
-            <div>
-              <label for="reference" class="block text-[14px] font-medium text-[#64748B] mb-1">Référence (optionnel)</label>
-              <input id="reference" name="reference" type="text" placeholder="Référence interne"
-                class="w-full h-[52px] rounded-xl border border-[#CBD5E1] bg-white px-4 text-[15px] outline-none focus:border-[#0A2A4E] focus:ring-2 focus:ring-[#0A2A4E]/20 shadow-sm transition">
-            </div>
           </div>
         </section>
 
         <!-- Actions -->
         <div class="flex flex-col sm:flex-row items-center justify-end gap-4">
           <button class="w-full sm:w-auto h-[48px] px-6 rounded-xl text-[#0A2A4E] hover:bg-[#0A2A4E0D] font-semibold transition">Annuler</button>
-          <button class="w-full sm:w-auto h-[48px] px-8 rounded-xl bg-[#0A2A4E] text-white font-bold hover:opacity-90 flex items-center gap-2 justify-center shadow-sm transition">
+          <button id="submit-transfer" type="button" class="w-full sm:w-auto h-[48px] px-8 rounded-xl bg-[#0A2A4E] text-white font-bold hover:opacity-90 flex items-center gap-2 justify-center shadow-sm transition">
             <span>Continuer</span>
             <span class="material-symbols-outlined">arrow_forward</span>
           </button>
