@@ -24,17 +24,16 @@ function getElements() {
     showCourantBtn: document.getElementById("show-courant-card"),
     toggleDetailsBtn: document.getElementById("toggle-card-details"),
     toggleDetailsText: document.getElementById("toggle-card-details-text"),
-    toggleDetailsIcon: document.getElementById("toggle-card-details-icon")
+    toggleDetailsIcon: document.getElementById("toggle-card-details-icon"),
+    exportRibBtn: document.getElementById("export-rib-pdf")
   };
 }
 
-function formatDisplayNumber(number = "") {
-  const clean = number.replace(/[^0-9]/g, "");
-  if (!clean) return "---- ---- ---- ----";
-  const padded = clean.padStart(16, "0");
-  const visible = showCardDetails
-    ? padded
-    : `**** **** **** ${padded.slice(-4)}`;
+function getMaskedNumber(number = "") {
+  const digits = number.replace(/[^0-9]/g, "");
+  if (!digits) return "---- ---- ---- ----";
+  const padded = digits.padStart(16, "0");
+  const visible = showCardDetails ? padded : `**** **** **** ${padded.slice(-4)}`;
   return visible.replace(/(.{4})/g, "$1 ").trim();
 }
 
@@ -46,22 +45,20 @@ function getCardData(user) {
 
   if (activeCardType === "epargne") {
     return {
-      number: formatDisplayNumber(epargneNumber),
+      number: getMaskedNumber(epargneNumber),
       holder,
       expiry: "12/32",
       label: "Carte épargne",
-      theme: "epargne",
-      rawNumber: epargneNumber
+      theme: "epargne"
     };
   }
 
   return {
-    number: formatDisplayNumber(principalNumber),
+    number: getMaskedNumber(principalNumber),
     holder,
     expiry: "07/31",
     label: "Carte principale",
-    theme: "courant",
-    rawNumber: principalNumber
+    theme: "courant"
   };
 }
 
@@ -175,12 +172,8 @@ function refreshCardView(user) {
   if (cardTypeLabel) cardTypeLabel.textContent = data.label;
   if (cardExpiryText) cardExpiryText.textContent = data.expiry;
   applyCardTheme(cardVisual, data.theme);
-  if (showEpargneBtn) {
-    showEpargneBtn.classList.toggle("hidden", activeCardType === "epargne");
-  }
-  if (showCourantBtn) {
-    showCourantBtn.classList.toggle("hidden", activeCardType === "courant");
-  }
+  showEpargneBtn?.classList.toggle("hidden", activeCardType === "epargne");
+  showCourantBtn?.classList.toggle("hidden", activeCardType === "courant");
   if (toggleDetailsText) {
     toggleDetailsText.textContent = showCardDetails ? "Masquer les détails" : "Afficher les détails";
   }
@@ -197,6 +190,75 @@ function setActiveCard(type) {
   }
 }
 
+function buildRibHtml(user) {
+  const name = user.user?.fullname || "Titulaire";
+  const email = user.user?.email || "";
+  const date = new Date().toLocaleDateString("fr-FR");
+  const courantRib = user.accounts?.courant?.rib || "N/A";
+  const epargneRib = user.accounts?.epargne?.rib || "N/A";
+
+  return `
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <title>RIB - ${name}</title>
+    <style>
+      body { font-family: Arial, sans-serif; margin: 32px; color: #0A2A4E; }
+      h1 { font-size: 20px; margin-bottom: 4px; }
+      h2 { font-size: 16px; margin: 20px 0 8px; }
+      p { margin: 4px 0; }
+      .block { border: 1px solid #E2E8F0; border-radius: 8px; padding: 16px; margin-top: 16px; }
+      .label { font-size: 12px; text-transform: uppercase; color: #64748B; margin-bottom: 2px; }
+      .value { font-size: 15px; font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <h1>Relevé d'Identité Bancaire</h1>
+    <p>Émis le ${date}</p>
+
+    <div class="block">
+      <div class="label">Titulaire</div>
+      <div class="value">${name}</div>
+      <p>${email}</p>
+    </div>
+
+    <div class="block">
+      <div class="label">Compte courant</div>
+      <div class="value">${courantRib}</div>
+    </div>
+
+    <div class="block">
+      <div class="label">Compte épargne</div>
+      <div class="value">${epargneRib}</div>
+    </div>
+  </body>
+</html>
+`;
+}
+
+function exportRibAsPdf() {
+  const user = load();
+  if (!user) {
+    alert("Impossible de charger vos informations.");
+    return;
+  }
+
+  const html = buildRibHtml(user);
+  const printWindow = window.open("", "_blank", "width=900,height=700");
+
+  if (!printWindow) {
+    alert("Veuillez autoriser les fenêtres contextuelles pour exporter le RIB.");
+    return;
+  }
+
+  printWindow.document.open();
+  printWindow.document.write(html);
+  printWindow.document.close();
+  printWindow.focus();
+  printWindow.print();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const {
     toggle,
@@ -208,7 +270,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cancelUnblock,
     showEpargneBtn,
     showCourantBtn,
-    toggleDetailsBtn
+    toggleDetailsBtn,
+    exportRibBtn
   } = getElements();
 
   const user = load();
@@ -218,9 +281,7 @@ document.addEventListener("DOMContentLoaded", () => {
     refreshCardView(user);
   }
 
-  if (toggle) {
-    toggle.addEventListener("change", handleToggleChange);
-  }
+  toggle?.addEventListener("change", handleToggleChange);
 
   confirmBlock?.addEventListener("click", () => {
     applyCardState(true);
@@ -251,4 +312,5 @@ document.addEventListener("DOMContentLoaded", () => {
       refreshCardView(refreshedUser);
     }
   });
+  exportRibBtn?.addEventListener("click", exportRibAsPdf);
 });
