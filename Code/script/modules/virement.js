@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
         disconnect();
     };
 
-    let selectedAccount = "courant";
+    let selectedAccount = user.card?.active === false ? "epargne" : "courant";
     const modal = document.getElementById("account-select-modal");
     const modalBtn = document.getElementById("select-account-btn");
     const modalClose = document.getElementById("close-modal-btn");
@@ -62,6 +62,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     courantBtn.onclick = () => {
+        if (user.card?.active === false) {
+            alert("Votre carte principale est bloquée, utilisez le compte épargne.");
+            selectedAccount = "epargne";
+            updateAccountDisplay();
+            return;
+        }
         selectedAccount = "courant";
         updateAccountDisplay();
         closeModal();
@@ -157,15 +163,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            if (user.card && user.card.active === false) {
-                alert("Votre carte est bloquée, impossible d'effectuer le virement.");
-                return;
-            }
-
             const reason = reasonInput.value.trim();
             const description = reason
                 ? `Virement vers ${beneficiaryName} - ${reason}`
                 : `Virement vers ${beneficiaryName}`;
+
+            if (user.card && user.card.active === false && selectedAccount !== "epargne") {
+                selectedAccount = "epargne";
+                updateAccountDisplay();
+                alert("Carte principale bloquée, le virement sera effectué depuis le compte épargne.");
+            }
 
             const transfer = makeTransfer("expense", amountValue, description, {
                 accountType: selectedAccount
