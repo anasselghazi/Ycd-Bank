@@ -11,7 +11,8 @@ function getElements() {
     cancelUnblock: document.getElementById("cancel-unblock-card"),
     rangeInput: document.getElementById("range-max"),
     rangeDisplay: document.getElementById("range-max-display"),
-    saveRangeBtn: document.getElementById("save-range-max")
+    saveRangeBtn: document.getElementById("save-range-max"),
+    cardNumberText: document.getElementById("card-number")
   };
 }
 
@@ -20,6 +21,16 @@ function syncToggleState(toggle, user) {
   const isBlocked = !user.card.active;
   toggle.checked = isBlocked;
   toggle.setAttribute("aria-checked", String(isBlocked));
+}
+
+function formatCardNumber(number = "") {
+  const clean = number.replace(/[^0-9]/g, "");
+  return clean.replace(/(.{4})/g, "$1 ").trim();
+}
+
+function updateCardNumberDisplay(element, user) {
+  if (!element || !user?.card?.number) return;
+  element.textContent = formatCardNumber(user.card.number);
 }
 
 function closeModal(modal) {
@@ -106,13 +117,14 @@ function initLimitControls(user) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const { toggle, blockModal, unblockModal, confirmBlock, confirmUnblock, cancelBlock, cancelUnblock } = getElements();
+  const { toggle, blockModal, unblockModal, confirmBlock, confirmUnblock, cancelBlock, cancelUnblock, cardNumberText } = getElements();
   if (!toggle) return;
 
   const user = load();
   if (user) {
     syncToggleState(toggle, user);
     initLimitControls(user);
+    updateCardNumberDisplay(cardNumberText, user);
   }
 
   toggle.addEventListener("change", handleToggleChange);
