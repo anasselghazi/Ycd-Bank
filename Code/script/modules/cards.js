@@ -1,6 +1,7 @@
 import { load, save } from "./storage.js";
 
 let activeCardType = "courant";
+let showCardDetails = false;
 
 function getElements() {
   return {
@@ -20,14 +21,21 @@ function getElements() {
     cardExpiryText: document.getElementById("card-expiry"),
     cardVisual: document.getElementById("card-visual"),
     showEpargneBtn: document.getElementById("show-epargne-card"),
-    showCourantBtn: document.getElementById("show-courant-card")
+    showCourantBtn: document.getElementById("show-courant-card"),
+    toggleDetailsBtn: document.getElementById("toggle-card-details"),
+    toggleDetailsText: document.getElementById("toggle-card-details-text"),
+    toggleDetailsIcon: document.getElementById("toggle-card-details-icon")
   };
 }
 
-function formatCardNumber(number = "") {
+function formatDisplayNumber(number = "") {
   const clean = number.replace(/[^0-9]/g, "");
   if (!clean) return "---- ---- ---- ----";
-  return clean.padStart(16, "0").replace(/(.{4})/g, "$1 ").trim();
+  const padded = clean.padStart(16, "0");
+  const visible = showCardDetails
+    ? padded
+    : `**** **** **** ${padded.slice(-4)}`;
+  return visible.replace(/(.{4})/g, "$1 ").trim();
 }
 
 function getCardData(user) {
@@ -38,20 +46,22 @@ function getCardData(user) {
 
   if (activeCardType === "epargne") {
     return {
-      number: formatCardNumber(epargneNumber),
+      number: formatDisplayNumber(epargneNumber),
       holder,
       expiry: "12/32",
       label: "Carte épargne",
-      theme: "epargne"
+      theme: "epargne",
+      rawNumber: epargneNumber
     };
   }
 
   return {
-    number: formatCardNumber(principalNumber),
+    number: formatDisplayNumber(principalNumber),
     holder,
     expiry: "07/31",
     label: "Carte principale",
-    theme: "courant"
+    theme: "courant",
+    rawNumber: principalNumber
   };
 }
 
@@ -154,7 +164,9 @@ function refreshCardView(user) {
     cardExpiryText,
     cardVisual,
     showEpargneBtn,
-    showCourantBtn
+    showCourantBtn,
+    toggleDetailsText,
+    toggleDetailsIcon
   } = getElements();
   const data = getCardData(user);
 
@@ -168,6 +180,12 @@ function refreshCardView(user) {
   }
   if (showCourantBtn) {
     showCourantBtn.classList.toggle("hidden", activeCardType === "courant");
+  }
+  if (toggleDetailsText) {
+    toggleDetailsText.textContent = showCardDetails ? "Masquer les détails" : "Afficher les détails";
+  }
+  if (toggleDetailsIcon) {
+    toggleDetailsIcon.textContent = showCardDetails ? "visibility_off" : "visibility";
   }
 }
 
@@ -189,7 +207,8 @@ document.addEventListener("DOMContentLoaded", () => {
     cancelBlock,
     cancelUnblock,
     showEpargneBtn,
-    showCourantBtn
+    showCourantBtn,
+    toggleDetailsBtn
   } = getElements();
 
   const user = load();
@@ -225,4 +244,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   showEpargneBtn?.addEventListener("click", () => setActiveCard("epargne"));
   showCourantBtn?.addEventListener("click", () => setActiveCard("courant"));
+  toggleDetailsBtn?.addEventListener("click", () => {
+    showCardDetails = !showCardDetails;
+    const refreshedUser = load();
+    if (refreshedUser) {
+      refreshCardView(refreshedUser);
+    }
+  });
 });
