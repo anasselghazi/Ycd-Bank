@@ -1,9 +1,10 @@
 import { load } from "./storage.js";
 import { disconnect } from "./auth.js";
+import { makeTransfer } from "./transaction.js";
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const user = load();
+    let user = load();
     if (!user || !user.session?.isLoggedIn) {
         window.location.href = "../../auth/login.html";
         return;
@@ -74,9 +75,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     updateAccountDisplay();
 
-    const beneficiaries = user.beneficiaries;
+    const beneficiaries = user.beneficiaries || [];
     const searchInput = document.getElementById("beneficiary-search");
     const list = document.getElementById("beneficiary-list");
+    const amountInput = document.getElementById("amount");
+    const reasonInput = document.getElementById("reason");
+    const dateInput = document.getElementById("date");
+    const referenceInput = document.getElementById("reference");
+    const submitBtn = document.getElementById("submit-transfer");
 
     function showBeneficiaries(items) {
         list.innerHTML = "";
@@ -129,5 +135,60 @@ document.addEventListener("DOMContentLoaded", () => {
             list.classList.add("hidden");
         }
     });
+
+    if (submitBtn) {
+        submitBtn.onclick = () => {
+            const beneficiaryName = searchInput.value.trim();
+            const amountValue = parseFloat(
+                (amountInput.value || "").replace(",", ".")
+            );
+
+            if (!beneficiaryName) {
+                alert("Veuillez choisir un bénéficiaire.");
+                return;
+            }
+
+            if (!amountValue || amountValue <= 0) {
+                alert("Veuillez saisir un montant valide.");
+                return;
+            }
+
+            const details = [];
+            if (reasonInput.value.trim()) {
+                details.push(reasonInput.value.trim());
+            }
+            if (referenceInput.value.trim()) {
+                details.push(`Ref: ${referenceInput.value.trim()}`);
+            }
+            if (dateInput.value) {
+                details.push(`Date: ${dateInput.value}`);
+            }
+
+            const description = details.length
+                ? `Virement vers ${beneficiaryName} - ${details.join(" | ")}`
+                : `Virement vers ${beneficiaryName}`;
+
+            const transfer = makeTransfer("expense", amountValue, description, {
+                accountType: selectedAccount
+            });
+
+            if (!transfer) {
+                alert("Le virement n'a pas pu être enregistré.");
+                return;
+            }
+
+            amountInput.value = "";
+            reasonInput.value = "";
+            referenceInput.value = "";
+            dateInput.value = "";
+            searchInput.value = "";
+            list.classList.add("hidden");
+
+            user = load();
+            updateAccountDisplay();
+
+            alert("Virement enregistré avec succès.");
+        };
+    }
 
 });
