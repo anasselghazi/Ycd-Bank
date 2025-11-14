@@ -1,4 +1,4 @@
-  
+  import { makeTransfer } from "./transaction.js";
 //  SÉLECTION DES ÉLÉMENTS
 
 const btnInwi = document.getElementById("btninwi");
@@ -112,10 +112,33 @@ rechargerBtn.addEventListener("click", () => {
     alert(" Choisissez une offre !");
     return;
   }
+  
+  let prix = offreChoisie.match(/\d+/);
+  prix = prix ? Number(prix[0]) : 0;
+
+  if (!prix || prix <= 0) {
+    alert(" Montant de l'offre invalide !");
+    return;
+  }
+
+  
+  const result = makeTransfer(
+    "expense",            
+    prix,                  
+    `Recharge ${operateur} - ${numero}`,   
+    { accountType: "courant" }             
+  );
+
+     
+  if (!result) {
+    alert(" Paiement échoué ! Vérifiez votre solde.");
+    return;
+  }
 
   alert(
     ` Recharge réussie !\n\nOpérateur: ${operateur}\nNuméro: ${numero}\nOffre: ${offreChoisie}`
   );
+
 
   // Reset après recharge
   annulerBtn.click();
