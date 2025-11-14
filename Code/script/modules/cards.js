@@ -1,5 +1,7 @@
 import { load, save } from "./storage.js";
 
+let activeCardType = "courant";
+
 function getElements() {
   return {
     toggle: document.getElementById("card-block-toggle"),
@@ -12,7 +14,44 @@ function getElements() {
     rangeInput: document.getElementById("range-max"),
     rangeDisplay: document.getElementById("range-max-display"),
     saveRangeBtn: document.getElementById("save-range-max"),
-    cardNumberText: document.getElementById("card-number")
+    cardNumberText: document.getElementById("card-number"),
+    cardHolderText: document.getElementById("card-holder"),
+    cardTypeLabel: document.getElementById("card-type-label"),
+    cardExpiryText: document.getElementById("card-expiry"),
+    cardVisual: document.getElementById("card-visual"),
+    showEpargneBtn: document.getElementById("show-epargne-card"),
+    showCourantBtn: document.getElementById("show-courant-card")
+  };
+}
+
+function formatCardNumber(number = "") {
+  const clean = number.replace(/[^0-9]/g, "");
+  if (!clean) return "---- ---- ---- ----";
+  return clean.padStart(16, "0").replace(/(.{4})/g, "$1 ").trim();
+}
+
+function getCardData(user) {
+  const holder = user.user?.fullname?.toUpperCase() || "UTILISATEUR";
+  const principalNumber = user.card?.number || "";
+  const epargneDigits = (user.accounts?.epargne?.rib || "").replace(/[^0-9]/g, "");
+  const epargneNumber = epargneDigits.slice(-16) || principalNumber;
+
+  if (activeCardType === "epargne") {
+    return {
+      number: formatCardNumber(epargneNumber),
+      holder,
+      expiry: "12/32",
+      label: "Carte épargne",
+      theme: "epargne"
+    };
+  }
+
+  return {
+    number: formatCardNumber(principalNumber),
+    holder,
+    expiry: "07/31",
+    label: "Carte principale",
+    theme: "courant"
   };
 }
 
@@ -21,16 +60,6 @@ function syncToggleState(toggle, user) {
   const isBlocked = !user.card.active;
   toggle.checked = isBlocked;
   toggle.setAttribute("aria-checked", String(isBlocked));
-}
-
-function formatCardNumber(number = "") {
-  const clean = number.replace(/[^0-9]/g, "");
-  return clean.replace(/(.{4})/g, "$1 ").trim();
-}
-
-function updateCardNumberDisplay(element, user) {
-  if (!element || !user?.card?.number) return;
-  element.textContent = formatCardNumber(user.card.number);
 }
 
 function closeModal(modal) {
@@ -45,23 +74,17 @@ function openModal(modal) {
   modal.classList.add("flex");
 }
 
-function handleToggleChange(event) {
+function handleToggleChange() {
   const { blockModal, unblockModal, toggle } = getElements();
   const user = load();
 
   if (!user || !user.card) {
-    if (toggle) {
-      toggle.checked = false;
-    }
+    if (toggle) toggle.checked = false;
     return;
   }
 
-  const wantsBlock = event.currentTarget.checked;
-  if (wantsBlock) {
-    openModal(blockModal);
-  } else {
-    openModal(unblockModal);
-  }
+  if (toggle.checked) openModal(blockModal);
+  else openModal(unblockModal);
 }
 
 function applyCardState(shouldBlock) {
@@ -116,44 +139,90 @@ function initLimitControls(user) {
   });
 }
 
+function applyCardTheme(cardVisual, theme) {
+  if (!cardVisual) return;
+  cardVisual.classList.remove("bg-[#0A2A4E]", "bg-black");
+  if (theme === "epargne") cardVisual.classList.add("bg-black");
+  else cardVisual.classList.add("bg-[#0A2A4E]");
+}
+
+function refreshCardView(user) {
+  const {
+    cardNumberText,
+    cardHolderText,
+    cardTypeLabel,
+    cardExpiryText,
+    cardVisual,
+    showEpargneBtn,
+    showCourantBtn
+  } = getElements();
+  const data = getCardData(user);
+
+  if (cardNumberText) cardNumberText.textContent = data.number;
+  if (cardHolderText) cardHolderText.textContent = data.holder;
+  if (cardTypeLabel) cardTypeLabel.textContent = data.label;
+  if (cardExpiryText) cardExpiryText.textContent = data.expiry;
+  applyCardTheme(cardVisual, data.theme);
+  if (showEpargneBtn) {
+    showEpargneBtn.classList.toggle("hidden", activeCardType === "epargne");
+  }
+  if (showCourantBtn) {
+    showCourantBtn.classList.toggle("hidden", activeCardType === "courant");
+  }
+}
+
+function setActiveCard(type) {
+  activeCardType = type;
+  const user = load();
+  if (user) {
+    refreshCardView(user);
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const { toggle, blockModal, unblockModal, confirmBlock, confirmUnblock, cancelBlock, cancelUnblock, cardNumberText } = getElements();
-  if (!toggle) return;
+  const {
+    toggle,
+    blockModal,
+    unblockModal,
+    confirmBlock,
+    confirmUnblock,
+    cancelBlock,
+    cancelUnblock,
+    showEpargneBtn,
+    showCourantBtn
+  } = getElements();
 
   const user = load();
   if (user) {
     syncToggleState(toggle, user);
     initLimitControls(user);
-    updateCardNumberDisplay(cardNumberText, user);
+    refreshCardView(user);
   }
 
-  toggle.addEventListener("change", handleToggleChange);
-
-  if (confirmBlock) {
-    confirmBlock.addEventListener("click", () => {
-      applyCardState(true);
-      closeModal(blockModal);
-    });
+  if (toggle) {
+    toggle.addEventListener("change", handleToggleChange);
   }
 
-  if (confirmUnblock) {
-    confirmUnblock.addEventListener("click", () => {
-      applyCardState(false);
-      closeModal(unblockModal);
-    });
-  }
+  confirmBlock?.addEventListener("click", () => {
+    applyCardState(true);
+    closeModal(blockModal);
+  });
 
-  if (cancelBlock) {
-    cancelBlock.addEventListener("click", () => {
-      applyCardState(false);
-      closeModal(blockModal);
-    });
-  }
+  confirmUnblock?.addEventListener("click", () => {
+    applyCardState(false);
+    closeModal(unblockModal);
+  });
 
-  if (cancelUnblock) {
-    cancelUnblock.addEventListener("click", () => {
-      applyCardState(true);
-      closeModal(unblockModal);
-    });
-  }
+  cancelBlock?.addEventListener("click", () => {
+    applyCardState(false);
+    closeModal(blockModal);
+  });
+
+  cancelUnblock?.addEventListener("click", () => {
+    applyCardState(true);
+    closeModal(unblockModal);
+  });
+
+  showEpargneBtn?.addEventListener("click", () => setActiveCard("epargne"));
+  showCourantBtn?.addEventListener("click", () => setActiveCard("courant"));
 });
