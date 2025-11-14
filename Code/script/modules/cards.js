@@ -1,5 +1,17 @@
 import { load, save } from "./storage.js";
 
+function getElements() {
+  return {
+    toggle: document.getElementById("card-block-toggle"),
+    blockModal: document.getElementById("card-block-modal"),
+    unblockModal: document.getElementById("card-unblock-modal"),
+    confirmBlock: document.getElementById("confirm-block-card"),
+    confirmUnblock: document.getElementById("confirm-unblock-card"),
+    cancelBlock: document.getElementById("cancel-block-card"),
+    cancelUnblock: document.getElementById("cancel-unblock-card")
+  };
+}
+
 function syncToggleState(toggle, user) {
   if (!toggle || !user?.card) return;
   const isBlocked = !user.card.active;
@@ -7,28 +19,51 @@ function syncToggleState(toggle, user) {
   toggle.setAttribute("aria-checked", String(isBlocked));
 }
 
+function closeModal(modal) {
+  if (!modal) return;
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+}
+
+function openModal(modal) {
+  if (!modal) return;
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
 function handleToggleChange(event) {
-  const toggle = event.currentTarget;
+  const { blockModal, unblockModal, toggle } = getElements();
   const user = load();
 
   if (!user || !user.card) {
-    toggle.checked = false;
+    if (toggle) {
+      toggle.checked = false;
+    }
     return;
   }
 
-  const shouldBlock = toggle.checked;
+  const wantsBlock = event.currentTarget.checked;
+  if (wantsBlock) {
+    openModal(blockModal);
+  } else {
+    openModal(unblockModal);
+  }
+}
+
+function applyCardState(shouldBlock) {
+  const user = load();
+  const { toggle } = getElements();
+
+  if (!user || !user.card || !toggle) return;
+
   user.card.active = !shouldBlock;
   save(user);
+  toggle.checked = shouldBlock;
   toggle.setAttribute("aria-checked", String(shouldBlock));
-
-  const message = shouldBlock
-    ? "Votre carte a été bloquée."
-    : "Votre carte est désormais active.";
-  alert(message);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const toggle = document.getElementById("card-block-toggle");
+  const { toggle, blockModal, unblockModal, confirmBlock, confirmUnblock, cancelBlock, cancelUnblock } = getElements();
   if (!toggle) return;
 
   const user = load();
@@ -37,5 +72,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   toggle.addEventListener("change", handleToggleChange);
-});
 
+  if (confirmBlock) {
+    confirmBlock.addEventListener("click", () => {
+      applyCardState(true);
+      closeModal(blockModal);
+    });
+  }
+
+  if (confirmUnblock) {
+    confirmUnblock.addEventListener("click", () => {
+      applyCardState(false);
+      closeModal(unblockModal);
+    });
+  }
+
+  if (cancelBlock) {
+    cancelBlock.addEventListener("click", () => {
+      applyCardState(false);
+      closeModal(blockModal);
+    });
+  }
+
+  if (cancelUnblock) {
+    cancelUnblock.addEventListener("click", () => {
+      applyCardState(true);
+      closeModal(unblockModal);
+    });
+  }
+});
