@@ -9,7 +9,9 @@ const numberFormat = new Intl.NumberFormat("fr-FR", {
 
 const LIMIT = 5;
 let transactions = [];
+let filteredTransactions = [];
 let currentPage = 1;
+let currentSearch = "";
 
 function formatMoney(value) {
   return numberFormat.format(Math.abs(Number(value) || 0));
@@ -97,6 +99,7 @@ function showList(listItems, total) {
 }
 
 function toggleBtn(btn, disabled) {
+  if (!btn) return;
   btn.disabled = disabled;
   btn.classList.toggle("opacity-40", disabled);
   btn.classList.toggle("cursor-not-allowed", disabled);
@@ -137,14 +140,49 @@ function showPagination(totalPages) {
 }
 
 function goToPage(n) {
-  const totalPages = Math.ceil(transactions.length / LIMIT);
+  if (!filteredTransactions || filteredTransactions.length === 0) {
+    currentPage = 1;
+    showList([], 0);
+    showPagination(0);
+    return;
+  }
+
+  const totalPages = Math.ceil(filteredTransactions.length / LIMIT);
   currentPage = Math.min(Math.max(1, n), totalPages);
 
   const start = (currentPage - 1) * LIMIT;
-  const listItems = transactions.slice(start, start + LIMIT);
+  const listItems = filteredTransactions.slice(start, start + LIMIT);
 
-  showList(listItems, transactions.length);
+  showList(listItems, filteredTransactions.length);
   showPagination(totalPages);
+}
+
+function filterTransactions(term) {
+  currentSearch = (term || "").trim().toLowerCase();
+
+  if (!currentSearch) {
+    filteredTransactions = [...transactions];
+    goToPage(1);
+    return;
+  }
+
+  filteredTransactions = transactions.filter((item) => {
+    const description = (item.description || "").toLowerCase();
+    const type = (item.type || "").toLowerCase();
+    const account = (item.account || "").toLowerCase();
+    const amountText = formatMoney(item.amount).toLowerCase();
+    const dateText = item.date ? String(item.date).toLowerCase() : "";
+
+    return (
+      description.includes(currentSearch) ||
+      type.includes(currentSearch) ||
+      account.includes(currentSearch) ||
+      amountText.includes(currentSearch) ||
+      dateText.includes(currentSearch)
+    );
+  });
+
+  goToPage(1);
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -164,5 +202,14 @@ document.addEventListener("DOMContentLoaded", () => {
   if (logoutBtn) logoutBtn.onclick = e => { e.preventDefault(); disconnect(); };
 
   transactions = get_transactions();
+  filteredTransactions = [...transactions];
+
+  const searchInput = document.getElementById("transactions-search");
+  if (searchInput) {
+    searchInput.addEventListener("input", (event) => {
+      filterTransactions(event.target.value);
+    });
+  }
+
   goToPage(1);
 });
