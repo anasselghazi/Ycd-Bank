@@ -46,7 +46,7 @@ btnOrnge.addEventListener("click", () => {
   operateur = "orange";
 });
 
-// NUMÉRO AUX FAVORIS
+
 
 ajouterFav.addEventListener("click", () => {
   const numero = phoneInput.value.trim();
@@ -147,6 +147,6 @@ rechargerBtn.addEventListener("click", () => {
 
  
 
- 
+
 
  

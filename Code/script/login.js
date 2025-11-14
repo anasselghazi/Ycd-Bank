@@ -27,6 +27,6 @@ if (loginForm) {
 
 if (goToSignupBtn) {
   goToSignupBtn.addEventListener("click", () => {
-    window.location.href = "./Register/crée1.html";
+    window.location.href = "./Register/register.html";
   });
 }
