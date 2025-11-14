@@ -5,6 +5,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
   <title>Mes Transactions - YCD BANK</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&display=swap" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
@@ -22,23 +23,23 @@
 
       <nav class="mt-8 space-y-2 px-3">
         <a href="dashboard.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
-          <span class="material-symbols-outlined h-6 w-6">home</span>
+          <img src="../../media/icons/home.svg" class="h-6" alt="">
           <span class="text-[14px] font-medium">ACCUEIL</span>
         </a>
         <a href="virement.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
-          <span class="material-symbols-outlined h-6 w-6">swap_horiz</span>
+          <img src="../../media/dashboard/virement.svg" class="h-6" alt="">
           <span class="text-[14px] font-medium">VIREMENT</span>
         </a>
         <a href="cartes.html" class="flex items-center gap-3 px-4 py-3 text-[#454E5D] rounded-xl hover:bg-[#F8FAFC]">
-          <span class="material-symbols-outlined h-6 w-6">credit_card</span>
+          <img src="../../media/dashboard/card.svg" class="h-6" alt="">
           <span class="text-[14px] font-medium">CARTES</span>
         </a>
-        <a href="transaction.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#1681EC] bg-[#E7F2FD]">
-          <img src="../../media/icons/wallet.svg" alt="" class="h-6">
+        <a href="transaction.html" class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E7F2FD] text-[#1681EC]">
+          <img src="../../media/icons/transaction.svg" alt="" class="h-6">
           <span class="text-[14px] font-semibold">TRANSACTION</span>
         </a>
         <a href="benif.html" class="flex items-center gap-3 px-4 py-3 rounded-xl text-[#454E5D] hover:bg-[#F8FAFC]">
-          <span class="material-symbols-outlined h-6 w-6">group</span>
+          <img src="../../media/dashboard/ben.svg" alt="" class="h-6">
           <span class="text-[14px] font-medium">BÉNÉFICIAIRES</span>
         </a>
       </nav>
@@ -122,14 +123,22 @@
       <section id="transactions-list" class="mt-4 space-y-3"></section>
       <p id="transactions-empty" class="text-center text-sm text-[#64748B] mt-8 hidden">Aucune transaction n'a encore ete enregistree.</p>
 
-      <div id="transactions-pagination" class="flex items-center justify-center gap-2 p-4 mt-2 hidden">
-        <button id="transactions-prev" class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#EDF2F7]">
-          <span class="material-symbols-outlined text-[18px] text-[#64748B]">chevron_left</span>
-        </button>
-        <div id="transactions-pages" class="flex items-center gap-2"></div>
-        <button id="transactions-next" class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#EDF2F7]">
-          <span class="material-symbols-outlined text-[18px] text-[#64748B]">chevron_right</span>
-        </button>
+      <div id="transactions-pagination" class="flex items-center justify-center gap-2 p-4 mt-2 hidden">
+
+        <button id="transactions-prev" class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#EDF2F7]">
+
+          <span class="material-symbols-outlined text-[18px] text-[#64748B]">chevron_left</span>
+
+        </button>
+
+        <div id="transactions-pages" class="flex items-center gap-2"></div>
+
+        <button id="transactions-next" class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#EDF2F7]">
+
+          <span class="material-symbols-outlined text-[18px] text-[#64748B]">chevron_right</span>
+
+        </button>
+
       </div>
     </main>
 
