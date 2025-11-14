@@ -215,3 +215,36 @@
   <script type="module" src="../../script/modules/cards.js"></script>
 </body>
 </html>
+      <!-- Block card modal -->
+      <div id="card-block-modal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden">
+          <div class="p-6 text-center space-y-3">
+            <div class="mx-auto h-12 w-12 rounded-full bg-red-100 text-red-500 grid place-items-center">
+              <span class="material-symbols-outlined text-[26px]">report</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Bloquer votre carte ?</h3>
+            <p class="text-sm text-gray-600">Votre carte ne pourra plus être utilisée tant que vous ne la débloquez pas.</p>
+          </div>
+          <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+            <button id="cancel-block-card" type="button" class="h-10 rounded-lg border text-sm font-semibold hover:bg-gray-100">Annuler</button>
+            <button id="confirm-block-card" type="button" class="h-10 rounded-lg bg-red-600 text-white text-sm font-bold">Confirmer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unblock card modal -->
+      <div id="card-unblock-modal" class="hidden fixed inset-0 z-50 items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm overflow-hidden">
+          <div class="p-6 text-center space-y-3">
+            <div class="mx-auto h-12 w-12 rounded-full bg-emerald-100 text-emerald-500 grid place-items-center">
+              <span class="material-symbols-outlined text-[26px]">lock_open</span>
+            </div>
+            <h3 class="text-lg font-bold text-gray-900">Débloquer votre carte ?</h3>
+            <p class="text-sm text-gray-600">Vous pourrez immédiatement régler vos achats avec cette carte.</p>
+          </div>
+          <div class="p-4 bg-gray-50 grid grid-cols-2 gap-3">
+            <button id="cancel-unblock-card" type="button" class="h-10 rounded-lg border text-sm font-semibold hover:bg-gray-100">Annuler</button>
+            <button id="confirm-unblock-card" type="button" class="h-10 rounded-lg bg-emerald-600 text-white text-sm font-bold">Confirmer</button>
+          </div>
+        </div>
+      </div>
