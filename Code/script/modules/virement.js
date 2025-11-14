@@ -157,6 +157,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            if (user.card && user.card.active === false) {
+                alert("Votre carte est bloquée, impossible d'effectuer le virement.");
+                return;
+            }
+
             const reason = reasonInput.value.trim();
             const description = reason
                 ? `Virement vers ${beneficiaryName} - ${reason}`
