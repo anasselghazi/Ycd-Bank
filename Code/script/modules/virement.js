@@ -80,8 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const list = document.getElementById("beneficiary-list");
     const amountInput = document.getElementById("amount");
     const reasonInput = document.getElementById("reason");
-    const dateInput = document.getElementById("date");
-    const referenceInput = document.getElementById("reference");
     const submitBtn = document.getElementById("submit-transfer");
 
     function showBeneficiaries(items) {
@@ -153,19 +151,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            const details = [];
-            if (reasonInput.value.trim()) {
-                details.push(reasonInput.value.trim());
-            }
-            if (referenceInput.value.trim()) {
-                details.push(`Ref: ${referenceInput.value.trim()}`);
-            }
-            if (dateInput.value) {
-                details.push(`Date: ${dateInput.value}`);
-            }
-
-            const description = details.length
-                ? `Virement vers ${beneficiaryName} - ${details.join(" | ")}`
+            const reason = reasonInput.value.trim();
+            const description = reason
+                ? `Virement vers ${beneficiaryName} - ${reason}`
                 : `Virement vers ${beneficiaryName}`;
 
             const transfer = makeTransfer("expense", amountValue, description, {
@@ -179,8 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             amountInput.value = "";
             reasonInput.value = "";
-            referenceInput.value = "";
-            dateInput.value = "";
             searchInput.value = "";
             list.classList.add("hidden");
 
