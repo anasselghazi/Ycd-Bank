@@ -1,4 +1,4 @@
- 
+ import { makeTransfer } from "./transaction.js";
 // les variables
 
 const lydec = document.getElementById("lydec");
@@ -64,18 +64,34 @@ m500.addEventListener("click", () => setMontant(500));
 // annuler 
 annuler.addEventListener("click", resetForm);
 
-//  vérifier les champs
+ 
+//  AJOUT DE makeTransfer DANS "payer"
 payer.addEventListener("click", () => {
   const fournisseur = getFournisseur();
+  const montant = Number(montantInput.value);
 
-  if (!fournisseur || !refClient.value || !montantInput.value) {
+  if (!fournisseur || !refClient.value || !montant) {
     alert("Veuillez remplir tous les champs avant de payer !");
     return;
   }
 
-  alert(`Paiement de ${montantInput.value}$ à ${fournisseur} effectué !`);
+  // --- Utilisation de makeTransfer ici ---
+  const t = makeTransfer(
+    "expense",                     
+    montant,                     
+    `Facture ${fournisseur}`,      
+    { accountType: "courant" }     
+  );
+
+  if (!t) {
+    alert("Paiement échoué ! Vérifiez votre solde.");
+    return;
+  }
+
+  alert(`Paiement de ${montant}$ à ${fournisseur} effectué !`);
   resetForm();
 });
+
 
 // Ajouter aux favoris
 ajouterFav.addEventListener("click", () => {
