@@ -1,3 +1,5 @@
+import { register } from "./auth.js";
+
 const nameRegex = /^[a-zA-Z\s]{2,50}$/;
 const cinRegex = /^[A-Z]{1,2}\d{6,8}$/;
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -8,6 +10,7 @@ const ribRegex = /^[A-Z0-9]{10,34}$/;
 let selectedCivilite = '';
 let selectedCard = null;
 let tempUserData = {};
+const DASHBOARD_PATH = "../../pages/dashboard/dashboard.html";
 
 function isFieldRequired(value) {
   return typeof value === 'string' && value.trim().length > 0;
@@ -49,6 +52,26 @@ function navigateTo(pageId) {
   if (target) {
     target.classList.remove('hidden');
   }
+}
+
+function completeRegistration(password) {
+  const { email, name, phone, cin } = tempUserData || {};
+
+  if (!email || !name || !phone || !cin) {
+    alert("Veuillez remplir les étapes précédentes avant de créer le compte.");
+    navigateTo('signupPage');
+    return false;
+  }
+
+  const created = register(email, password, name, phone, cin);
+
+  if (created) {
+    window.location.href = DASHBOARD_PATH;
+    return true;
+  }
+
+  alert("Un compte existe déjà avec cet email.");
+  return false;
 }
 
 function validateSingleSignupField(input) {
@@ -303,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
       const isMatchValid = validatePasswordMatch();
 
       if (isPasswordValid && isMatchValid) {
-        navigateTo('signupPage');
+        completeRegistration(passwordInput.value);
       }
     });
   }
