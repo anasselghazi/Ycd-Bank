@@ -52,8 +52,8 @@
         <div id="user-profile" class="flex items-center gap-3">
           <div class="h-[40px] w-[40px] bg-[#E2E8F0] rounded-full"></div>
           <div>
-            <p class="text-[13px] font-semibold leading-tight">DOUGHMI ILYAS</p>
-            <p class="text-[11px] text-[#94A3B8]">doughmi000@gmail.com</p>
+            <p id="sidebar-user-name" class="text-[13px] font-semibold leading-tight">UTILISATEUR</p>
+            <p id="sidebar-user-email" class="text-[11px] text-[#94A3B8]">email@example.com</p>
           </div>
         </div>
 
@@ -62,7 +62,7 @@
             <span class="material-symbols-outlined h-[18px] w-[18px]">person</span>
             <span class="text-[13px] font-medium">PROFILE</span>
           </a>
-          <a href="../../index.html" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
+          <a id="disconnect-link-sidebar" href="#" class="flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-[#F8FAFC]">
             <span class="material-symbols-outlined h-[18px] w-[18px]">logout</span>
             <span class="text-[13px] font-medium">DISCONNECT</span>
           </a>
@@ -119,87 +119,8 @@
         </div>
       </section>
 
-      <section class="mt-4 space-y-3">
-        <article class="flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]">
-          <div class="flex items-center gap-3 flex-1">
-            <div class="w-14 shrink-0">
-              <div class="rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none">
-                <p class="text-[10px] font-bold text-[#0A2A4E] tracking-wide">JAN</p>
-                <p class="text-2xl font-black">26</p>
-              </div>
-            </div>
-            <div class="flex-1">
-              <p class="text-[15px] font-semibold leading-snug break-words">Dépôt de bourse - YOUCODE</p>
-              <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-[11px] font-medium mt-1">Revenu</span>
-            </div>
-          </div>
-          <p class="text-emerald-600 font-bold text-[18px] whitespace-nowrap">+100,00 $</p>
-        </article>
-
-        <article class="flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]">
-          <div class="flex items-center gap-3 flex-1">
-            <div class="w-14 shrink-0">
-              <div class="rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none">
-                <p class="text-[10px] font-bold text-[#0A2A4E] tracking-wide">JAN</p>
-                <p class="text-2xl font-black">23</p>
-              </div>
-            </div>
-            <div class="flex-1">
-              <p class="text-[15px] font-semibold leading-snug break-words">100 Diamonds - FREE FIRE</p>
-              <span class="inline-flex items-center rounded-full bg-[#F3F4F6] text-[#424B57] px-2.5 py-0.5 text-[11px] font-medium mt-1">Expense</span>
-            </div>
-          </div>
-          <p class="font-bold text-[18px] whitespace-nowrap">-1,00 $</p>
-        </article>
-
-        <article class="flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]">
-          <div class="flex items-center gap-3 flex-1">
-            <div class="w-14 shrink-0">
-              <div class="rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none">
-                <p class="text-[10px] font-bold text-[#0A2A4E] tracking-wide">JAN</p>
-                <p class="text-2xl font-black">02</p>
-              </div>
-            </div>
-            <div class="flex-1">
-              <p class="text-[15px] font-semibold leading-snug break-words">Dépôt de bourse - YOUCODE</p>
-              <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-[11px] font-medium mt-1">Revenu</span>
-            </div>
-          </div>
-          <p class="text-emerald-600 font-bold text-[18px] whitespace-nowrap">+100,00 $</p>
-        </article>
-
-        <article class="flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]">
-          <div class="flex items-center gap-3 flex-1">
-            <div class="w-14 shrink-0">
-              <div class="rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none">
-                <p class="text-[10px] font-bold text-[#0A2A4E] tracking-wide">JAN</p>
-                <p class="text-2xl font-black">29</p>
-              </div>
-            </div>
-            <div class="flex-1">
-              <p class="text-[15px] font-semibold leading-snug break-words">100 Diamonds - FREE FIRE</p>
-              <span class="inline-flex items-center rounded-full bg-[#F3F4F6] text-[#424B57] px-2.5 py-0.5 text-[11px] font-medium mt-1">Expense</span>
-            </div>
-          </div>
-          <p class="font-bold text-[18px] whitespace-nowrap">-1,00 $</p>
-        </article>
-
-        <article class="flex items-center justify-between gap-3 p-4 bg-white rounded-xl shadow-sm border border-[#E2E8F0]">
-          <div class="flex items-center gap-3 flex-1">
-            <div class="w-14 shrink-0">
-              <div class="rounded-lg bg-[#F1F5F9] border border-[#E2E8F0] text-center py-2 leading-none">
-                <p class="text-[10px] font-bold text-[#0A2A4E] tracking-wide">JAN</p>
-                <p class="text-2xl font-black">05</p>
-              </div>
-            </div>
-            <div class="flex-1">
-              <p class="text-[15px] font-semibold leading-snug break-words">Dépôt de bourse - YOUCODE</p>
-              <span class="inline-flex items-center rounded-full bg-emerald-100 text-emerald-700 px-2.5 py-0.5 text-[11px] font-medium mt-1">Revenu</span>
-            </div>
-          </div>
-          <p class="text-emerald-600 font-bold text-[18px] whitespace-nowrap">+100,00 $</p>
-        </article>
-      </section>
+      <section id="transactions-list" class="mt-4 space-y-3"></section>
+      <p id="transactions-empty" class="text-center text-sm text-[#64748B] mt-8 hidden">Aucune transaction n'a encore ete enregistree.</p>
 
       <div class="flex items-center justify-center gap-2 p-4 mt-2">
         <button class="h-9 w-9 grid place-items-center rounded-lg hover:bg-[#EDF2F7]">
@@ -239,5 +160,7 @@
       </a>
     </nav>
   </div>
+  <script type="module" src="../../script/modules/transaction_page.js"></script>
 </body>
 </html>
+
