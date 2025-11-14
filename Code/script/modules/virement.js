@@ -151,6 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            const cardLimit = Number(user.card?.limit) || 0;
+            if (cardLimit && amountValue > cardLimit) {
+                alert(`Le montant dépasse votre plafond autorisé ($${cardLimit}).`);
+                return;
+            }
+
             const reason = reasonInput.value.trim();
             const description = reason
                 ? `Virement vers ${beneficiaryName} - ${reason}`

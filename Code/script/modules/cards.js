@@ -8,7 +8,10 @@ function getElements() {
     confirmBlock: document.getElementById("confirm-block-card"),
     confirmUnblock: document.getElementById("confirm-unblock-card"),
     cancelBlock: document.getElementById("cancel-block-card"),
-    cancelUnblock: document.getElementById("cancel-unblock-card")
+    cancelUnblock: document.getElementById("cancel-unblock-card"),
+    rangeInput: document.getElementById("range-max"),
+    rangeDisplay: document.getElementById("range-max-display"),
+    saveRangeBtn: document.getElementById("save-range-max")
   };
 }
 
@@ -62,6 +65,46 @@ function applyCardState(shouldBlock) {
   toggle.setAttribute("aria-checked", String(shouldBlock));
 }
 
+function updateRangeDisplay(display, value, max) {
+  if (!display) return;
+  const current = Number(value) || 0;
+  display.textContent = `$${current} / $${max}`;
+}
+
+function initLimitControls(user) {
+  const { rangeInput, rangeDisplay, saveRangeBtn } = getElements();
+  if (!rangeInput || !rangeDisplay || !saveRangeBtn) return;
+
+  const sliderMax = Number(rangeInput.max) || user.card?.limit || 5000;
+  const currentLimit = Number(user.card?.limit) || sliderMax;
+
+  rangeInput.max = sliderMax;
+  rangeInput.value = currentLimit;
+  updateRangeDisplay(rangeDisplay, currentLimit, sliderMax);
+
+  rangeInput.addEventListener("input", () => {
+    updateRangeDisplay(rangeDisplay, rangeInput.value, sliderMax);
+  });
+
+  saveRangeBtn.addEventListener("click", () => {
+    const newLimit = Number(rangeInput.value);
+    if (!Number.isFinite(newLimit) || newLimit <= 0) {
+      alert("Veuillez sélectionner un plafond valide.");
+      return;
+    }
+
+    const latest = load();
+    if (!latest || !latest.card) {
+      alert("Impossible de sauvegarder le plafond.");
+      return;
+    }
+
+    latest.card.limit = newLimit;
+    save(latest);
+    alert("Plafond enregistré.");
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const { toggle, blockModal, unblockModal, confirmBlock, confirmUnblock, cancelBlock, cancelUnblock } = getElements();
   if (!toggle) return;
@@ -69,6 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const user = load();
   if (user) {
     syncToggleState(toggle, user);
+    initLimitControls(user);
   }
 
   toggle.addEventListener("change", handleToggleChange);
